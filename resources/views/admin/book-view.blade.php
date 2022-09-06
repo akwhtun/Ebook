@@ -13,7 +13,8 @@
         </div>
         <div class="d-flex justify-content-center mt-1">
             <p class="bg-dark text-white rounded p-2">Price : {{ $viewBook->price }} Kyats</p>
-            <p class="bg-dark text-white ms-3 rounded p-2">Category : {{ $viewBook->category->name }}</p>
+            <p class="bg-dark text-white mx-3 rounded p-2">Category : {{ $viewBook->category->name }}</p>
+            <p class="bg-dark text-white rounded p-2">Date : {{ $viewBook->created_at->format('j-F-Y | h:m:s:a') }}</p>
         </div>
         <div class="text-center">
             @if ($viewBook->photo == null)

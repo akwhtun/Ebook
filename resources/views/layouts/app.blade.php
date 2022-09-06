@@ -13,6 +13,8 @@
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
 
+    <link rel="stylesheet" href="{{ asset('js/bootstrap.bundle.min.js') }}">
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -28,6 +30,12 @@
         .slide-img>img {
             width: 120px;
             height: 180px;
+        }
+
+        .register,
+        .login {
+            max-width: 500px;
+            margin: 0px auto;
         }
     </style>
 </head>
@@ -57,13 +65,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('loginPage') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('registerPage') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else

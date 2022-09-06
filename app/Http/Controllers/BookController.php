@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     //get all books
     public function getAllBooks()
     {
@@ -41,7 +48,7 @@ class BookController extends Controller
     //create book
     public function createBook(Request $request)
     {
-        $this->validation($request);
+        $this->validation($request, 'create');
         $data = $this->getData($request);
 
         if ($request->hasFile('bookPhoto')) {
@@ -114,7 +121,7 @@ class BookController extends Controller
     //update Book
     public function updateBook(Request $request)
     {
-        $this->validation($request);
+        $this->validation($request, 'update');
         $updateData = $this->getData($request);
         $updateId = $request->bookId;
         if ($request->hasFile('bookPhoto')) {
@@ -153,16 +160,26 @@ class BookController extends Controller
     }
 
     //private validate
-    private function validation($request)
+    private function validation($request, $status)
     {
-        $validationRules = [
-            'bookTitle' => 'required',
-            'authorName' => 'required',
-            'summary' => 'required|min:15',
-            'bookPrice' => 'required',
-            'bookPhoto' => 'mimes:jpg,png,jpeg',
-            'pdf' => 'required',
-        ];
+        if ($status == 'create') {
+            $validationRules = [
+                'bookTitle' => 'required|unique:books,title',
+                'authorName' => 'required',
+                'summary' => 'required|min:15',
+                'bookPrice' => 'required',
+                'bookPhoto' => 'mimes:jpg,png,jpeg',
+                'pdf' => 'required',
+            ];
+        } else {
+            $validationRules = [
+                'bookTitle' => 'required|unique:books,title,' . $request->bookId,
+                'authorName' => 'required',
+                'summary' => 'required|min:15',
+                'bookPrice' => 'required',
+                'bookPhoto' => 'mimes:jpg,png,jpeg',
+            ];
+        }
         Validator::make($request->all(), $validationRules)->validate();
     }
 }
