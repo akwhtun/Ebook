@@ -12,9 +12,12 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/registerPage', [AuthController::class, 'registerPage'])->name('registerPage');
+Route::middleware('auth_check')->group(function () {
 
-Route::get('/loginPage', [AuthController::class, 'loginPage'])->name('loginPage');
+    Route::get('/registerPage', [AuthController::class, 'registerPage'])->name('registerPage');
+
+    Route::get('/loginPage', [AuthController::class, 'loginPage'])->name('loginPage');
+});
 
 Route::middleware('auth')->group(function () {
 
