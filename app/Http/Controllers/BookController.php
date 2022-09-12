@@ -10,16 +10,10 @@ use Illuminate\Support\Facades\Validator;
 class BookController extends Controller
 {
 
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     //get all books
     public function getAllBooks()
     {
-        $books = Book::latest()->paginate(10);
+        $books = Book::orderBy('id', 'desc')->paginate(6);
         $latestBooks = Book::latest()->paginate(6);
         return view('books', compact('books', 'latestBooks'));
     }

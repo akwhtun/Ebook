@@ -18,8 +18,8 @@ class AuthAdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         $role = Auth::user()->role;
-        if ($role == "user") {
-            abort(403);
+        if ($role != "admin") {
+            return back();
         }
         return $next($request);
     }

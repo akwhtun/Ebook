@@ -17,9 +17,12 @@ class AuthUserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+
         $role = Auth::user()->role;
-        if ($role == "admin" || $role == "user") {
+        if ($role == "user" || $role == "admin") {
             return $next($request);
+        } else {
+            return back();
         }
     }
 }

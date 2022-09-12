@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
+@section('title', 'add book')
 @section('content')
-    <div class="container">
-        <div class="d-flex justify-content-between">
+    <div class="container p-3">
+        <div class="d-flex justify-content-between mb-1">
             <h3>Add Book</h3>
             <div>
-                <a href="{{ route('book#all') }}" class="btn btn-secondary me-2">Go Home</a>
                 <a href="{{ route('book#list') }}" class="btn btn-success">Books List</a>
             </div>
         </div>

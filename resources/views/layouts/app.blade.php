@@ -1,37 +1,22 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ebook</title>
+    {{-- Bootstrap css --}}
+    <link rel="stylesheet" href="{{ asset('admin/css/bootstrap.min.css') }}">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- Font awesome --}}
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- Custom css --}}
+    <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
 
-    <!-- Scripts -->
-    @vite(['resources/js/app.js'])
-
-    <link rel="stylesheet" href="{{ asset('js/bootstrap.bundle.min.js') }}">
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
-
-    <!-- Styles -->
+    {{-- custom css --}}
     <style>
-        .book>img {
-            width: 150px;
-            height: 230px;
-        }
-
-        .slide-img>img {
-            width: 120px;
-            height: 180px;
-        }
-
         .register,
         .login {
             max-width: 500px;
@@ -41,68 +26,24 @@
 </head>
 
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('loginPage') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('registerPage') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+    <nav class="navbar text-dark bg-light d-flex justify-content-around flex-wrap shadow-sm">
+        <a href="#" class="navbar-brand" style="width:55%;">
+            <img src="{{ asset('admin/images/logo.png') }}" class="ms-5" alt="logo" width="60px">
+        </a>
+        <div class="navbar nav ms-5 justify-content-end" style="width:20%;">
+            <div class="nav-item d-flex align-items-center">
+                <a class="nav-link text-dark" href="{{ route('loginPage') }}">Login</a>
+                <a class="nav-link text-dark" href="{{ route('registerPage') }}">Register</a>
             </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+        </div>
+        <div class="pe-3 py-3 text-end" style="width:17%;">
+            <i class="far fa-moon fs-4 me-2"></i>
+            <i class="fas fa-sun fs-4  me-2 d-none"></i>
+        </div>
+    </nav>
+    @yield('content')
+    {{-- Bootstrap js --}}
+    <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 
 </html>

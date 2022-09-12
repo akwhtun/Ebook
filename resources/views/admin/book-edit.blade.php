@@ -1,7 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
+@section('title', 'edit book')
 @section('content')
-    <div class="container">
+    <div class="container p-3">
+        <div>
+            <a href="{{ route('book#list') }}" class="text-decoration-none text-dark"><i
+                    class="fas fa-arrow-left fs-5">&nbsp;Back</i></a>
+        </div>
+        <div>
+            <h3>Book Edit</h3>
+        </div>
         <form action="{{ route('book#update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="bookId" value="{{ $editBook->id }}">

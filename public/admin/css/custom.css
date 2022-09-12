@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.left-col {
+    background-image: url('../images/left-side.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.dropdown-icon {
+    cursor: pointer;
+}
+
+.list {
+    border-radius: 22px;
+    background-color: #f3f7fa4a;
+    cursor: pointer;
+}
+
+.list:hover {
+    background-color: #daecfc75;
+}
+
+.searchBar {
+    width: 38%;
+}
+
+.book,.book-btn{
+    transform: translateY(-40px);
+}
+
+.book-info{
+    width: 32%;
+    height: 330px;
+    background-color: #e7e7e7;
+}
+
+.book > img{
+     height:250px;
+}
+.detail{
+    height: 210px;
+}
+@media (max-width : 1000px) {
+    .searchBar {
+        width: 92%;
+    }
+}

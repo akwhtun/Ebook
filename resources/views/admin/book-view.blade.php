@@ -1,5 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
+@section('title', 'view')
 @section('content')
     <div class="container p-3 border border-5">
         <div>

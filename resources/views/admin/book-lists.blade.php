@@ -1,12 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
+@section('title', 'list')
 @section('content')
-    <div class="container">
-        <div class="d-flex justify-content-between mb-1">
+    <div class="container p-3">
+        <div class="d-flex justify-content-between mb-2">
             <h3>Books List - {{ $books->total() }}</h3>
             <div>
                 <a href="{{ route('book#add') }}" class="btn btn-primary me-2">Add Book</a>
-                <a href="{{ route('book#all') }}" class="btn btn-secondary">Go Home</a>
+                {{-- <a href="{{ route('book#all') }}" class="btn btn-secondary">Go Home</a> --}}
             </div>
         </div>
         @if (session('deleteSuccess'))
@@ -29,14 +30,14 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Photo</th>
-                    <th scope="col" style="width:100px">Title</th>
-                    <th scope="col"style="width:150px">Author</th>
-                    <th scope="col">Summary</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">PDF File</th>
+                    <th scope="col" style="width: 4%">ID</th>
+                    <th scope="col" style="width: 13%">Photo</th>
+                    <th scope="col" style="width: 13%">Title</th>
+                    <th scope="col"style="width: 18%">Author</th>
+                    <th scope="col" style="width: 25%">Summary</th>
+                    <th scope="col" style="width: 6%">Price</th>
+                    <th scope="col" style="width: 8%">Category</th>
+                    <th scope="col" style="width: 8%">PDF File</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
