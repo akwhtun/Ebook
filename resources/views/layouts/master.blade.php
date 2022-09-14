@@ -19,7 +19,7 @@
 
 <body>
 
-    <div class="row g-0">
+    <div class="row g-0 con">
         <div class="col-3 bg-warning min-vh-100 left-col">
             <div class="text-center p-3">
                 <img src="{{ asset('admin/images/logo.png') }}" alt="logo" width="80px">

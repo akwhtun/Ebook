@@ -53,8 +53,8 @@
                     </div>
                     <div class="detail" style="flex-basis: 46%">
                         <p class="m-0 p-0 text-dark">{{ $book->title }}</p>
-                        <p class="m-0 p-0 text-muted">{{ $book->author }}</p>
-                        <p class="mt-2">{{ Str::words($book->summary, 6, '...') }}</p>
+                        <p class="m-0 p-0 text-muted">{{ $book->author_name }}</p>
+                        <p class="mt-2" style="margin-left: 1px">{{ Str::words($book->summary, 6, '...') }}</p>
                         <div class="ratign mt-2 text-warning">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -13,7 +15,10 @@ class BookController extends Controller
     //get all books
     public function getAllBooks()
     {
-        $books = Book::orderBy('id', 'desc')->paginate(6);
+        $books = Book::select('books.*', 'categories.name as category_name', 'authors.name as author_name')
+            ->leftJoin('categories', 'books.category_id', 'categories.id')
+            ->leftJoin('authors', 'books.author_id', 'authors.id')
+            ->orderBy('books.id', 'desc')->paginate(6);
         $latestBooks = Book::latest()->paginate(6);
         return view('books', compact('books', 'latestBooks'));
     }
@@ -21,22 +26,9 @@ class BookController extends Controller
     //add book
     public function addBook()
     {
-        $categories = [
-            ['id' => 1, 'name' => 'Helath'],
-            ['id' => 2, 'name' => 'Business'],
-            ['id' => 3, 'name' => 'Agricultural'],
-            ['id' => 4, 'name' => 'Technical'],
-            ['id' => 5, 'name' => 'Language'],
-            ['id' => 6, 'name' => 'Religion'],
-            ['id' => 7, 'name' => 'Magazine'],
-            ['id' => 8, 'name' => 'Knowledge'],
-            ['id' => 9, 'name' => 'Comic'],
-            ['id' => 10, 'name' => 'History'],
-            ['id' => 11, 'name' => 'Journal'],
-            ['id' => 12, 'name' => 'Lyrics'],
-            ['id' => 13, 'name' => 'Comedy'],
-        ];
-        return view('admin.book-add', compact('categories'));
+        $categories = Category::get();
+        $authors = Author::get();
+        return view('admin.book-add', compact('categories', 'authors'));
     }
 
     //create book
@@ -63,14 +55,20 @@ class BookController extends Controller
     //show book list
     public function showBookList()
     {
-        $books = Book::latest()->paginate(7);
+        $books = Book::select('books.*', 'categories.name as category_name', 'authors.name as author_name')
+            ->leftJoin('categories', 'books.category_id', 'categories.id')
+            ->leftJoin('authors', 'books.author_id', 'authors.id')
+            ->orderBy('books.id', 'desc')->paginate(7);
         return view('admin.book-lists', compact('books'));
     }
 
     //view book detail
     public function viewBook($id)
     {
-        $viewBook = Book::where('id', $id)->first();
+        $viewBook = Book::select('books.*', 'categories.name as category_name', 'authors.name as author_name')
+            ->leftJoin('categories', 'books.category_id', 'categories.id')
+            ->leftJoin('authors', 'books.author_id', 'authors.id')
+            ->where('books.id', $id)->first();
         return view('admin.book-view', compact('viewBook'));
     }
 
@@ -93,23 +91,10 @@ class BookController extends Controller
     //edit book
     public function editBook($id)
     {
-        $categories = [
-            ['id' => 1, 'name' => 'Helath'],
-            ['id' => 2, 'name' => 'Business'],
-            ['id' => 3, 'name' => 'Agricultural'],
-            ['id' => 4, 'name' => 'Technical'],
-            ['id' => 5, 'name' => 'Language'],
-            ['id' => 6, 'name' => 'Religion'],
-            ['id' => 7, 'name' => 'Magazine'],
-            ['id' => 8, 'name' => 'Knowledge'],
-            ['id' => 9, 'name' => 'Comic'],
-            ['id' => 10, 'name' => 'History'],
-            ['id' => 11, 'name' => 'Journal'],
-            ['id' => 12, 'name' => 'Lyrics'],
-            ['id' => 13, 'name' => 'Comedy'],
-        ];
+        $categories = Category::get();
+        $authors = Author::get();
         $editBook = Book::where('id', $id)->first();
-        return view('admin.book-edit', compact('editBook', 'categories'));
+        return view('admin.book-edit', compact('editBook', 'categories', 'authors'));
     }
 
     //update Book
@@ -145,10 +130,10 @@ class BookController extends Controller
     {
         $data = [
             'title' => $request->bookTitle,
-            'author' => $request->authorName,
+            'author_id' => $request->authorId,
             'summary' => $request->summary,
             'price' => $request->bookPrice,
-            'category_id' => $request->category_id
+            'category_id' => $request->categoryId
         ];
         return $data;
     }
@@ -159,16 +144,16 @@ class BookController extends Controller
         if ($status == 'create') {
             $validationRules = [
                 'bookTitle' => 'required|unique:books,title',
-                'authorName' => 'required',
+                'authorId' => 'required',
                 'summary' => 'required|min:15',
                 'bookPrice' => 'required',
+                'categoryId' => 'required',
                 'bookPhoto' => 'mimes:jpg,png,jpeg',
                 'pdf' => 'required',
             ];
         } else {
             $validationRules = [
                 'bookTitle' => 'required|unique:books,title,' . $request->bookId,
-                'authorName' => 'required',
                 'summary' => 'required|min:15',
                 'bookPrice' => 'required',
                 'bookPhoto' => 'mimes:jpg,png,jpeg',
