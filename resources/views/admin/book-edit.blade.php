@@ -71,7 +71,7 @@
                                 style="width: 400px;height:420px">
                         @endif
                     </div>
-                    <input type="file" name="bookPhoto" class="form-control mt-1" placeholder="Enter update book cover">
+                    <input type="file" name="bookPhoto" class="form-control mt-1">
                 </div>
                 <div class="mb-2">
                     <label for="pdf">PDF</label>

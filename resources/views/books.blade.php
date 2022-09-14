@@ -39,9 +39,8 @@
 
     {{-- all books start --}}
     <div>
-        <h3 class="text-dark px-5 pt-2 pe-3 col-3 m-0">All Books</h3>
-        <div class="mt-1 px-3">{{ $books->links() }}</div>
-        <div class="d-flex flex-wrap justify-content-evenly align-items-center gap-2 mb-3 p-1">
+        {{-- <h3 class="text-dark px-5 pt-2 pe-3 col-3 m-0">All Books</h3> --}}
+        <div class="d-flex flex-wrap justify-content-evenly align-items-center gap-2 mb-3 p-2">
             @foreach ($books as $book)
                 <div class="text-center rounded shadow-sm border-0 p-3 mt-4 d-flex flex-wrap book-info">
                     <div class="book" style="flex-basis:53%">
@@ -76,6 +75,7 @@
                 </div>
             @endforeach
         </div>
+        <div class="mt-1 px-3">{{ $books->links() }}</div>
     </div>
     {{-- </div>
         </div>

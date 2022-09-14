@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
@@ -22,7 +23,23 @@ Route::middleware('auth_check')->group(function () {
 Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => 'auth_admin'], function () {
-        //Admin CRUD
+
+         //Admin CRUD Author
+        Route::get('/authors/list', [AuthorController::class, 'showAuthorList'])->name('author#list');
+
+        Route::get('/authors/add', [AuthorController::class, 'addAuthor'])->name('author#add');
+
+        Route::post('/authors/create', [AuthorController::class, 'createAuthor'])->name('author#create');
+
+        Route::get('/authors/delete/{id}', [AuthorController::class, 'deleteAuthor'])->name('author#delete');
+
+        Route::get('/authors/view/{id}', [AuthorController::class, 'viewAuthor'])->name('author#view');
+
+        Route::get('/authors/edit/{id}', [AuthorController::class, 'editAuthor'])->name('author#edit');
+
+        Route::post('/authors/update', [AuthorController::class, 'updateAuthor'])->name('author#update');
+        
+        //Admin CRUD Book
         Route::get('/books/list', [BookController::class, 'showBookList'])->name('book#list');
 
         Route::get('/books/add', [BookController::class, 'addBook'])->name('book#add');
@@ -36,6 +53,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/books/edit/{id}', [BookController::class, 'editBook'])->name('book#edit');
 
         Route::post('/books/update', [BookController::class, 'updateBook'])->name('book#update');
+
     });
 
     Route::group(['middleware' => 'auth_user'], function () {

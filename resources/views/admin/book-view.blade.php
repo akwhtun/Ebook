@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'view')
+@section('title', 'view book')
 @section('content')
     <div class="container pt-2 px-3 pb-3">
         <div class="bg-light shadow-sm rounded border border-3  p-4">
@@ -13,31 +13,53 @@
                 <p class="mx-3 mt-2">By</p>
                 <h3>{{ $viewBook->author_name }}</h3>
             </div>
-            <div class="d-flex justify-content-center mt-1">
-                <p class="bg-dark text-white rounded p-2">Price : {{ $viewBook->price }} Kyats</p>
-                <p class="bg-dark text-white mx-3 rounded p-2">Category : {{ $viewBook->category_name }}</p>
-                <p class="bg-dark text-white rounded p-2">Date : {{ $viewBook->created_at->format('j-F-Y | h:m:s:a') }}</p>
-            </div>
-            <div class="text-center">
-                @if ($viewBook->photo == null)
-                    <img src="{{ asset('storage/default.jpg') }}" class="img-thumbnail" style="width: 370px;height:430px">
-                @else
-                    <img src="{{ asset('storage/cover/' . $viewBook->photo) }}" class="img-thumbnail"
-                        style="width: 400px;height:420px">
-                @endif
-                </divbg-light>
-                <div class="d-flex justify-content-center mt-2">
-                    <strong>PDF File : </strong>
-                    <p class="ms-2">{{ $viewBook->pdf }}</p>
+            <div class="row g-0">
+                <div class="col-5 ps-5 mx-auto">
+                    @if ($viewBook->photo == null)
+                        <img src="{{ asset('storage/default.jpg') }}" class="img-thumbnail"
+                            style="width: 340px;height:410px">
+                    @else
+                        <img src="{{ asset('storage/cover/' . $viewBook->photo) }}" class="img-thumbnail"
+                            style="width: 400px;height:420px">
+                    @endif
                 </div>
-                <div class="my-2 text-center">
-                    <p>{{ $viewBook->summary }}</p>
+                <div class="col-7 mx-auto">
+                    <div class="text-dark p-2 ms-2 fs-5 list-group">
+                        <p class="list-group-item"><i class="me-1 fas fa-calendar-day"></i> Date :
+                            {{ $viewBook->created_at->format('j-F-Y') }}
+                        </p>
+                        <p class="list-group-item"><i class="me-1 fas fa-book"></i> Name : {{ $viewBook->title }}</p>
+                        <p class="list-group-item"><i class="me-1 fas fa-pen-alt"></i> Author :
+                            {{ $viewBook->author_name }}
+                            Kyats
+                        </p>
+                        <p class="list-group-item"><i class="me-1 fas fa-money-bill"></i> Price :
+                            {{ $viewBook->price }}
+                            Kyats</p>
+                        <p class="list-group-item"><i class="me-1 fas fa-clone"></i> Category :
+                            {{ $viewBook->category_name }}
+                        </p>
+
+                        <p class="list-group-item"><i class="me-1 fas fa-file-pdf"></i> PDF File : {{ $viewBook->pdf }}
+                        </p>
+
+                    </div>
                 </div>
             </div>
-            <div class="text-end">
+            <div class="mt-2 p-2 ms-5">
+                <p><i class="fas fa-file-alt fs-5"></i>
+                    <span class="ms-3" style="font-size: 17px;">{{ $viewBook->summary }} Lorem ipsum dolor, sit amet
+                        consectetur
+                        adipisicing elit. Animi illum enim tenetur tempore odit architecto repellendus sed praesentium,
+                        harum
+                        similique repudiandae ducimus quam voluptas saepe et nulla porro rerum doloribus.</span>
+                </p>
+            </div>
+            <div class="text-end mt-2">
                 <a href="{{ route('book#edit', $viewBook->id) }}" class="btn btn-dark">
                     Edit Book
                 </a>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'list')
+@section('title', 'book list')
 @section('content')
     <div class="container p-2">
         <div class=" bg-light shadow-sm rounded border border-3  p-4">
@@ -53,7 +53,7 @@
                                         height="230px"></td>
                             @else
                                 <td><img src="{{ asset('storage/cover/' . $book->photo) }}" class="img-thumbnail"
-                                        width="150px" height="250px"></td>
+                                        width="140px" height="230px"></td>
                             @endif
                             <td>{{ $book->title }}</td>
                             <td>{{ $book->author_name }}</td>
