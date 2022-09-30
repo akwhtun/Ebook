@@ -45,13 +45,20 @@
                     <tbody>
                         <tr>
                             <th scope="row">{{ $author->id }}</th>
-                            @if ($author->photo == null)
-                                <td><img src="{{ asset('storage/default_author.jpg') }}" class="img-thumbnail"
-                                        width="140px" height="230px"></td>
-                            @else
-                                <td><img src="{{ asset('storage/author/' . $author->photo) }}" class="img-thumbnail"
-                                        width="140px" height="230px"></td>
-                            @endif
+                            <td>
+                                @if ($author->photo == null)
+                                    @if ($author->gender == 'Male')
+                                        <img src="{{ asset('storage/author/default_male_author.jpg') }}"
+                                            class="img-thumbnail" style="width: 130px;height:130px">
+                                    @else
+                                        <img src="{{ asset('storage/author/default_female_author.jpg') }}"
+                                            class="img-thumbnail" style="width: 130px;height:130px">
+                                    @endif
+                                @else
+                                    <img src="{{ asset('storage/author/' . $author->photo) }}" class="img-thumbnail"
+                                        style="width: 130px;height:130px">
+                                @endif
+                            </td>
                             <td>{{ $author->name }}</td>
                             <td class="ms-1">{{ $author->age }} years</td>
                             <td class="ms-1">{{ $author->gender }}</td>

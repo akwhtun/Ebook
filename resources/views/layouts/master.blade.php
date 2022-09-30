@@ -121,6 +121,12 @@
 
     {{-- Bootstrap js --}}
     <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
+
+    {{-- JQuery --}}
+    <script src="{{ asset('jquery/jquery.js') }}"></script>
+
+    {{-- Custom Js --}}
+    <script src="{{ asset('admin/js/custom.js') }}"></script>
 </body>
 
 </html>

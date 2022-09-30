@@ -52,8 +52,13 @@
                     <label for="authorPhoto">Photo</label>
                     <div>
                         @if ($author->photo == null)
-                            <img src="{{ asset('storage/default_author.jpg') }}" class="img-thumbnail"
-                                style="width: 360px;height:360px">
+                            @if ($author->gender == 'Male')
+                                <img src="{{ asset('storage/author/default_male_author.jpg') }}" class="img-thumbnail"
+                                    style="width: 360px;height:360px">
+                            @else
+                                <img src="{{ asset('storage/author/default_female_author.jpg') }}" class="img-thumbnail"
+                                    style="width: 360px;height:360px">
+                            @endif
                         @else
                             <img src="{{ asset('storage/author/' . $author->photo) }}" class="img-thumbnail"
                                 style="width: 360px;height:360px">

@@ -45,6 +45,28 @@ body {
 .detail{
     height: 210px;
 }
+
+.cat .editCat{
+    display: none;
+}
+
+.editBtn{
+    display: none;
+}
+
+.cat.edit .editBtn, .cat.edit .editCat{
+    display: inline;
+}
+
+.cat.edit .button{
+    display: none;
+}
+
+.cat.edit .notEditCat{
+    display: none;
+}
+
+
 @media (max-width : 1000px) {
     .searchBar {
         width: 92%;

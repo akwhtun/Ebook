@@ -11,11 +11,16 @@
             <div class="row g-0 mt-2">
                 <div class="col-5 ps-5 mx-auto">
                     @if ($author->photo == null)
-                        <td><img src="{{ asset('storage/default_author.jpg') }}" class="img-thumbnail"
-                                style="width: 340px;height:340px"></td>
+                        @if ($author->gender == 'Male')
+                            <img src="{{ asset('storage/author/default_male_author.jpg') }}" class="img-thumbnail"
+                                style="width: 360px;height:360px">
+                        @else
+                            <img src="{{ asset('storage/author/default_female_author.jpg') }}" class="img-thumbnail"
+                                style="width: 360px;height:360px">
+                        @endif
                     @else
-                        <td><img src="{{ asset('storage/author/' . $author->photo) }}" class="img-thumbnail" width="140px"
-                                height="230px"></td>
+                        <img src="{{ asset('storage/author/' . $author->photo) }}" class="img-thumbnail"
+                            style="width: 360px;height:360px">
                     @endif
                 </div>
                 <div class="col-7 mx-auto">
