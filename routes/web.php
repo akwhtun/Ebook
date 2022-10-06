@@ -67,8 +67,20 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'auth_user'], function () {
         //User
     });
+
+    //Account Profile Detail
+    Route::prefix('account')->group(function () {
+
+        Route::get('/viewDetail', [AuthController::class, 'viewDetail'])->name('account#detail');
+
+        Route::get('editDetail', [AuthController::class, 'editDetail'])->name('account#edit');
+
+        Route::post('/updateDetail', [AuthController::class, 'updateDetail'])->name('account#update');
+    });
 });
 
 Route::get('/', [BookController::class, 'getAllBooks'])->name('book#all');
 
 Route::get('/books/all', [BookController::class, 'getAllBooks'])->name('book#all');
+
+Route::get('/download', [BookController::class, 'download'])->name('download#book');

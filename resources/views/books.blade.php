@@ -39,6 +39,7 @@
 
     {{-- all books start --}}
     <div>
+        <a href="{{ route('download#book') }}" class="btn btn-danger">Download</a>
         {{-- <h3 class="text-dark px-5 pt-2 pe-3 col-3 m-0">All Books</h3> --}}
         <div class="d-flex flex-wrap justify-content-evenly align-items-center gap-2 mb-3 p-2">
             @foreach ($books as $book)

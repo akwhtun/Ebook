@@ -148,7 +148,7 @@ class BookController extends Controller
                 'summary' => 'required|min:15',
                 'bookPrice' => 'required',
                 'categoryId' => 'required',
-                'bookPhoto' => 'mimes:jpg,png,jpeg',
+                'bookPhoto' => 'mimes:jpg,png,jpeg,webp',
                 'pdf' => 'required',
             ];
         } else {
@@ -160,5 +160,10 @@ class BookController extends Controller
             ];
         }
         Validator::make($request->all(), $validationRules)->validate();
+    }
+
+    public function download()
+    {
+        return Storage::download("public/pdf/dd.txt");
     }
 }

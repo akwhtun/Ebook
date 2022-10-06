@@ -2,7 +2,7 @@
 
 @section('title', 'category list')
 @section('content')
-    <div class="container p-2">
+    <div class="container p-2 mt-1">
         <div class=" bg-light shadow-sm rounded border border-3  p-4">
             <div class="d-flex justify-content-between mb-2">
                 <h3>Category List - {{ $categories->total() }}</h3>
