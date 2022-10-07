@@ -86,4 +86,4 @@ Route::get('/', [BookController::class, 'getAllBooks'])->name('book#all');
 
 Route::get('/books/all', [BookController::class, 'getAllBooks'])->name('book#all');
 
-Route::get('/download', [BookController::class, 'download'])->name('download#book');
+Route::get('/downloadBook/{id}', [BookController::class, 'download'])->name('download#book');

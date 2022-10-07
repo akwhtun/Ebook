@@ -39,7 +39,7 @@
 
     {{-- all books start --}}
     <div>
-        <a href="{{ route('download#book') }}" class="btn btn-danger">Download</a>
+        {{-- <a href="{{ route('download#book') }}" class="btn btn-danger">Download</a> --}}
         {{-- <h3 class="text-dark px-5 pt-2 pe-3 col-3 m-0">All Books</h3> --}}
         <div class="d-flex flex-wrap justify-content-evenly align-items-center gap-2 mb-3 p-2">
             @foreach ($books as $book)
@@ -66,7 +66,7 @@
                     <div class="book-btn d-flex flex-wrap justify-content-around mt-3" style="flex-basis: 100%">
                         <a href="#" class=" py-1 mb-1 col-8 text-decoration-none text-primary text-start">See More
                             &nbsp;<i class=" fs-5 fas fa-angle-double-right"></i> </a>
-                        <a href="#" class=" py-1 btn btn-danger col-5">
+                        <a href="{{ route('download#book', $book->id) }}" class=" py-1 btn btn-danger col-5">
                             Download &nbsp;<i class="fas fa-file-download"></i>
                         </a>
                         <a href="#" class=" py-1 btn btn-success col-6">

@@ -13,7 +13,7 @@
             @if (session('createAuthorSuccess'))
                 <div class="alert-message mt-1">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <p>{{ session('createAuthorSuccess') }}</p>
+                        <span>{{ session('createAuthorSuccess') }}</span>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>

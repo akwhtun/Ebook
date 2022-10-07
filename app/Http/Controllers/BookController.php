@@ -149,7 +149,7 @@ class BookController extends Controller
                 'bookPrice' => 'required',
                 'categoryId' => 'required',
                 'bookPhoto' => 'mimes:jpg,png,jpeg,webp',
-                'pdf' => 'required',
+                'pdf' => 'required|mimes:pdf',
             ];
         } else {
             $validationRules = [
@@ -162,8 +162,10 @@ class BookController extends Controller
         Validator::make($request->all(), $validationRules)->validate();
     }
 
-    public function download()
+    public function download($id)
     {
-        return Storage::download("public/pdf/dd.txt");
+        $book = Book::where('id', $id)->first();
+        $pdf = $book->pdf;
+        return Storage::download("public/pdf/" . $pdf);
     }
 }

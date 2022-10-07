@@ -65,10 +65,10 @@
                     <div>
                         @if ($editBook->photo == null)
                             <img src="{{ asset('storage/default.jpg') }}" class="img-thumbnail"
-                                style="width: 380px;height:420px">
+                                style="width: 320px;height:380px">
                         @else
                             <img src="{{ asset('storage/cover/' . $editBook->photo) }}" class="img-thumbnail"
-                                style="width: 400px;height:420px">
+                                style="width: 320px;height:380px">
                         @endif
                     </div>
                     <input type="file" name="bookPhoto" class="form-control mt-1">

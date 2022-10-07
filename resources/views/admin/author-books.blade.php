@@ -13,22 +13,6 @@
 
                 <h3>Total Books - {{ $books->total() }}</h3>
             </div>
-            {{-- @if (session('deleteSuccess'))
-                <div class="alert-message">
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{ session('deleteSuccess') }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            @endif
-            @if (session('updateSuccess'))
-                <div class="alert-message">
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{ session('updateSuccess') }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            @endif --}}
             {{ $books->links() }}
             <table class="table">
                 <thead>

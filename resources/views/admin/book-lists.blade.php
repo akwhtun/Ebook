@@ -14,7 +14,7 @@
             @if (session('deleteSuccess'))
                 <div class="alert-message">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{ session('deleteSuccess') }}</strong>
+                        <span>{{ session('deleteSuccess') }}</span>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
             @if (session('updateSuccess'))
                 <div class="alert-message">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{ session('updateSuccess') }}</strong>
+                        <span>{{ session('updateSuccess') }}</span>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -35,10 +35,10 @@
                         <th scope="col" style="width: 13%">Photo</th>
                         <th scope="col" style="width: 13%">Title</th>
                         <th scope="col"style="width: 18%">Author</th>
-                        <th scope="col" style="width: 25%">Summary</th>
-                        <th scope="col" style="width: 6%">Price</th>
+                        <th scope="col" style="width: 26%">Summary</th>
+                        <th scope="col" style="width: 8%">Price</th>
                         <th scope="col" style="width: 8%">Category</th>
-                        <th scope="col" style="width: 8%">PDF File</th>
+                        <th scope="col" style="width: 5%">PDF File</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
