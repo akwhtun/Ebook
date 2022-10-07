@@ -1,20 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="login shadow-sm  p-5">
-        <h3 class="text-center text-primary">Login</h3>
+    <div class="login shadow-sm px-5 pt-4 pb-5 border border-1 mt-5">
+        <h3 class="text-center text-primary">
+            <img src="{{ asset('admin/images/logo.png') }}" alt="" width="70px">
+        </h3>
         <form action="{{ route('login') }}" method="POST">
             @csrf
             <div class="mt-4">
                 <label for="email">Email</label>
-                <input type="email" name="email" class="form-control">
+                <input type="email" name="email" class="form-control py-1">
                 @error('email')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
             <div class="mt-4">
                 <label for="password">Password</label>
-                <input type="password" name="password" class="form-control">
+                <input type="password" name="password" class="form-control py-1">
                 @error('password')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -31,8 +33,6 @@
             </div>
             <a href="{{ route('registerPage') }}" class="d-block btn btn-primary py-2 mt-4 rounded-pill">Create new
                 account</a>
-    </div>
-    </div>
-    </form>
+        </form>
     </div>
 @endsection

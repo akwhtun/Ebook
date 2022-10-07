@@ -25,9 +25,6 @@
                 </div>
                 <div class="col-7 mx-auto">
                     <div class="text-dark p-2 ms-2 fs-5 list-group">
-                        <p class="list-group-item"><i class="me-1 fas fa-calendar-day"></i> Date :
-                            {{ $author->created_at->format('j-F-Y') }}
-                        </p>
                         <p class="list-group-item"><i class="me-1 fas fa-user-circle"></i> Name : {{ $author->name }}</p>
                         <p class="list-group-item"><i class="me-1 fas fa-sort-amount-up"></i> Age :
                             {{ $author->age }}
@@ -39,7 +36,17 @@
                             <p class="list-group-item"><i class="me-1 fas fa-female"></i> Gender : {{ $author->gender }}
                             </p>
                         @endif
-
+                        <p class="list-group-item"><i class="me-1 fas fa-book-open"></i> Books : @foreach ($books as $book)
+                                @if ($book->author_id == $author->id)
+                                    <a href="{{ route('author#viewBooks', $author->id) }}"
+                                        class="text-decoration-none text-info" title="view books">{{ $book->book_count }}
+                                        books</a>
+                                @endif
+                            @endforeach
+                        </p>
+                        <p class="list-group-item"><i class="me-1 fas fa-calendar-day"></i> Date :
+                            {{ $author->created_at->format('j-F-Y') }}
+                        </p>
                     </div>
                 </div>
             </div>

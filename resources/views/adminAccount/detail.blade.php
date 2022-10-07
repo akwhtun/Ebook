@@ -36,18 +36,21 @@
                 </div>
                 <div class="col-7 mx-auto">
                     <div class="text-dark p-2 ms-2 fs-5 list-group">
-                        <p class="list-group-item"><i class="me-1 fas fa-user-circle"></i> Name :
+                        <p class="list-group-item mt-2"><i class="me-1 fas fa-user-circle"></i> Name :
                             {{ Auth::user()->name }}
                         </p>
-                        <p class="list-group-item"><i class="me-1 fas fa-envelope"></i> Email :
+                        <p class="list-group-item mt-2"><i class="me-1 fas fa-envelope"></i> Email :
                             {{ Auth::user()->email }}</p>
-                        <p class="list-group-item"><i class="me-1 fas fa-phone"></i> Phone :
-                            {{ Auth::user()->phone }}
-                        </p>
-                        <p class="list-group-item"><i class="me-1 fas fa-map-marker"></i> Address :
-                            {{ Auth::user()->address }}
-                        </p>
-                        <p class="list-group-item"><i class="me-1 fas fa-user-clock"></i> Join Date :
+                        @if (Auth::user()->gender == 'Male')
+                            <p class="list-group-item mt-2"><i class="me-1 fas fa-male"></i> Gender :
+                                {{ Auth::user()->gender }}
+                            </p>
+                        @else
+                            <p class="list-group-item mt-2"><i class="me-1 fas fa-female"></i> Gender :
+                                {{ Auth::user()->gender }}
+                            </p>
+                        @endif
+                        <p class="list-group-item mt-2"><i class="me-1 fas fa-user-clock"></i> Join Date :
                             {{ Auth::user()->created_at }}
                         </p>
 

@@ -18,10 +18,9 @@ class DatabaseSeeder extends Seeder
 
         //Create Default User
         User::create([
-            'name' => 'Aung Kyaw Wai Htun(Admin)',
+            'name' => 'Aung Kyaw Wai Htun',
             'email' => 'aung955910@gmail.com',
-            'phone' => '09891082064',
-            'address' => 'Mandalay',
+            'gender' => 'Male',
             'role' => 'admin',
             'password' => Hash::make('admin123'),
         ]);
@@ -45,7 +44,7 @@ class DatabaseSeeder extends Seeder
             Author::create([
                 'name' => $author,
                 'age' => rand(40, 55),
-                'gender' => 'male',
+                'gender' => 'Male',
             ]);
         }
     }

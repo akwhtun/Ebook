@@ -27,13 +27,13 @@ class AuthController extends Controller
     //View Account Detail
     public function viewDetail()
     {
-        return view('account.detail');
+        return view('adminAccount.detail');
     }
 
     //Edit Account Detail
     public function editDetail()
     {
-        return view('account.edit');
+        return view('adminAccount.edit');
     }
 
     //Update Account Detail
@@ -61,9 +61,7 @@ class AuthController extends Controller
     {
         return [
             'name' => $request->name,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            // 'gender' => $request->gender,
+            'gender' => $request->gender,
         ];
     }
 
@@ -73,9 +71,7 @@ class AuthController extends Controller
         $validation = [
             'profile' => 'mimes:jpg,png,jpeg,webp',
             'name' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            // 'gender' => 'required',
+            'gender' => 'required',
         ];
         Validator::make($request->all(), $validation)->validate();
     }

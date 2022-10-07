@@ -41,38 +41,18 @@
                     <input type="text" name="email" value="{{ Auth::user()->email }}" class="form-control" readonly>
                 </div>
                 <div class="mb-3 w-75 mx-auto">
-                    <label for="phone">Phone</label>
-                    <input type="text" name="phone" value="{{ old('phone', Auth::user()->phone) }}"
-                        class="form-control @error('phone') is-invalid @enderror" placeholder="Enter update phone">
-                    @error('phone')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="mb-3 w-75 mx-auto">
-                    <label for="address">Address</label>
-                    <input type="text" name="address" value="{{ old('address', Auth::user()->address) }}"
-                        class="form-control @error('address') is-invalid @enderror" placeholder="Enter update address">
-                    @error('address')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                {{-- <div class="mb-3 w-75 mx-auto">
                     <label for="gender">Gender</label>
                     <select name="gender" class="form-select @error('gender') is-invalid @enderror">
                         <option value="">Choose Gender</option>
-                        <option value="Male" selected>Male</option>
-                        <option value="Female" selected>Female</option>
+                        <option value="Male" @if (Auth::user()->gender == 'Male') selected @endif>Male</option>
+                        <option value="Female" @if (Auth::user()->gender == 'Female') selected @endif>Female</option>
                     </select>
                     @error('gender')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
-                </div> --}}
+                </div>
                 <div class="mb-3 w-75 mx-auto">
                     <label for="date">Join Date</label>
                     <input type="text" name="date" value="{{ Auth::user()->created_at }}" class="form-control"

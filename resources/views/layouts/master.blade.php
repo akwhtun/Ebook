@@ -29,28 +29,37 @@
                     <i class="fas fa-user-cog mx-1 text-info"></i>
                     <span class="text-info d-none d-md-inline">Admin Control</span>
                 </p>
-                <p class="list p-2 m-0 mt-2 text-center text-md-start">
+                <a href=""
+                    class="text-decoration-none text-white list d-block p-2 m-0 mt-2 text-center text-md-start">
                     <i class="fas fa-home mx-1"></i>
                     <span class="d-none d-md-inline">Dashboard</span>
-                </p>
-                <p class="list p-2 m-0 mt-2 text-center text-md-start">
+                </a>
+                <a href=""
+                    class="text-decoration-none text-white list d-block p-2 m-0 mt-2 text-center text-md-start">
+                    <i class="fas fa-user-secret mx-1"></i>
+                    <span class="d-none d-md-inline text-decoration-none text-white">Admins</span>
+                </a>
+                {{-- <a href="" class="text-decoration-none text-white list d-block p-2 m-0 mt-2 text-center text-md-start">
                     <i class="fas fa-users mx-1"></i>
-                    <span class="d-none d-md-inline">Users</span>
+                    <span class="d-none d-md-inline text-decoration-none text-white">Users</span>
                     <span class="badge
                     rounded-pill ms-1">20</span>
-                </p>
-                <p class="list p-2 m-0 mt-2 text-center text-md-start">
+                </a> --}}
+                <a href="{{ route('book#list') }}"
+                    class="text-decoration-none text-white list d-block p-2 m-0 mt-2 text-center text-md-start">
                     <i class="fas fa-book mx-1"></i>
-                    <span class="d-none d-md-inline">Book</span>
-                </p>
-                <p class="list p-2 m-0 mt-2 text-center text-md-start">
+                    <span class="d-none d-md-inline">Books</span>
+                </a>
+                <a href="{{ route('author#list') }}"
+                    class="text-decoration-none text-white list d-block p-2 m-0 mt-2 text-center text-md-start">
                     <i class="fas fa-pen-alt mx-1"></i>
-                    <span class="d-none d-md-inline">Author</span>
-                </p>
-                <p class="list p-2 m-0 mt-2 text-center text-md-start">
+                    <span class="d-none d-md-inline">Authors</span>
+                </a>
+                <a href="{{ route('category#list') }}"
+                    class="text-decoration-none text-white list d-block p-2 m-0 mt-2 text-center text-md-start">
                     <i class="fas fa-chart-bar mx-1"></i>
-                    <span class="d-none d-md-inline">Category</span>
-                </p>
+                    <span class="d-none d-md-inline">Categories</span>
+                </a>
                 @if (!empty(Auth::user()))
                     <p class="list p-2 m-0 mt-2 text-center text-md-start">
                         <i class="fab fa-first-order mx-1"></i>

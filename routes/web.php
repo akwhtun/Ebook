@@ -25,6 +25,16 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => 'auth_admin'], function () {
 
+        //Admin Account Profile Detail
+        Route::prefix('account')->group(function () {
+
+            Route::get('/viewDetail', [AuthController::class, 'viewDetail'])->name('account#detail');
+
+            Route::get('editDetail', [AuthController::class, 'editDetail'])->name('account#edit');
+
+            Route::post('/updateDetail', [AuthController::class, 'updateDetail'])->name('account#update');
+        });
+
         //Admin CRUD Author
         Route::get('/authors/list', [AuthorController::class, 'showAuthorList'])->name('author#list');
 
@@ -40,6 +50,8 @@ Route::middleware('auth')->group(function () {
 
         Route::post('/authors/update', [AuthorController::class, 'updateAuthor'])->name('author#update');
 
+        Route::get('/authors/viewBooks/{id}', [AuthorController::class, 'viewBooks'])->name('author#viewBooks');
+
         //Admin CRUD Category
         Route::get('/categories/list', [CategoryController::class, 'showCategoryList'])->name('category#list');
 
@@ -48,6 +60,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/categories/delete/{id}', [CategoryController::class, 'deleteCategory'])->name('category#delete');
 
         Route::post('/categories/update', [CategoryController::class, 'updateCategory'])->name('category#update');
+
         //Admin CRUD Book
         Route::get('/books/list', [BookController::class, 'showBookList'])->name('book#list');
 
@@ -66,16 +79,6 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => 'auth_user'], function () {
         //User
-    });
-
-    //Account Profile Detail
-    Route::prefix('account')->group(function () {
-
-        Route::get('/viewDetail', [AuthController::class, 'viewDetail'])->name('account#detail');
-
-        Route::get('editDetail', [AuthController::class, 'editDetail'])->name('account#edit');
-
-        Route::post('/updateDetail', [AuthController::class, 'updateDetail'])->name('account#update');
     });
 });
 

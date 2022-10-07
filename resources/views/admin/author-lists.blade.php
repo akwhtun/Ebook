@@ -62,7 +62,16 @@
                             <td>{{ $author->name }}</td>
                             <td class="ms-1">{{ $author->age }} years</td>
                             <td class="ms-1">{{ $author->gender }}</td>
-                            <td class="ms-1">{{ $author->age }} years</td>
+                            <td class="ms-2">
+                                @foreach ($books as $book)
+                                    @if ($book->author_id == $author->id)
+                                        <a href="{{ route('author#viewBooks', $author->id) }}"
+                                            class="text-decoration-none text-info"
+                                            title="view books">{{ $book->book_count }}
+                                            books</a>
+                                    @endif
+                                @endforeach
+                            </td>
                             <td>
                                 <a href="{{ route('author#view', $author->id) }}" class="btn btn-success">View</a>
                             </td>
