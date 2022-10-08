@@ -27,13 +27,13 @@ class AuthController extends Controller
     //View Account Detail
     public function viewDetail()
     {
-        return view('adminAccount.detail');
+        return view('account.detail');
     }
 
     //Edit Account Detail
     public function editDetail()
     {
-        return view('adminAccount.edit');
+        return view('account.edit');
     }
 
     //Update Account Detail
@@ -54,6 +54,59 @@ class AuthController extends Controller
         }
         User::where('id', $id)->update($updateData);
         return redirect()->route('account#detail')->with(['updateSuccess' => 'Account Update Success']);
+    }
+
+    //view admin list
+    public function viewAdminList()
+    {
+        $admins = User::where('role', 'admin')->orderBy('id', 'desc')->paginate(5);
+        return view('adminAccount.list', compact('admins'));
+    }
+
+    //view user list
+    public function viewUserList()
+    {
+        $users = User::where('role', 'user')->orderBy('id', 'desc')->paginate(5);
+        return view('userAccount.list', compact('users'));
+    }
+
+    //change role
+    public function changeRole($role, $id)
+    {
+        User::where('id', $id)->update([
+            'role' => $role
+        ]);
+        return back();
+    }
+
+    //delete account
+    public function deleteAccount($id)
+    {
+        $userImage = User::select('image')->where('id', $id)->first();
+        $userImageName = $userImage->image;
+        if ($userImageName != null) {
+            Storage::delete('public/userProfile/' . $userImageName);
+        }
+        User::where('id', $id)->delete();
+        return back()->with(['deleteAccSuccess' => 'Account Deleted!']);
+    }
+
+    //suspended account
+    public function suspend($id)
+    {
+        User::where('id', $id)->update([
+            'suspend' => '1'
+        ]);
+        return back();
+    }
+
+    //unsuspended account
+    public function unsuspend($id)
+    {
+        User::where('id', $id)->update([
+            'suspend' => '0'
+        ]);
+        return back();
     }
 
     //get account info data

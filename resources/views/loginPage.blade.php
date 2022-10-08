@@ -5,6 +5,14 @@
         <h3 class="text-center text-primary">
             <img src="{{ asset('admin/images/logo.png') }}" alt="" width="70px">
         </h3>
+        @if (session('accountSuspend'))
+            <div class="alert-message">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <span>{{ session('accountSuspend') }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
         <form action="{{ route('login') }}" method="POST">
             @csrf
             <div class="mt-4">

@@ -55,7 +55,7 @@
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
-            <input type="submit" value="Register" class="btn btn-primary py-2 mt-4 rounded-pill w-100">
+            <input type="submit" value="Create Account" class="btn btn-primary py-2 mt-4 rounded-pill w-100">
             <p class="text-center mt-3">Already have any account? <a href="{{ route('loginPage') }}"
                     class="text-black text-decoration-none">Sign
                     In</a></p>

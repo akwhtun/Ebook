@@ -24,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->suspend == '1') {
+            Auth::logout();
+            return back()->with(['accountSuspend' => 'Your account is suspended!']);
+        }
         return redirect()->route('book#all');
     }
 }

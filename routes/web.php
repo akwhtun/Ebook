@@ -26,59 +26,79 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'auth_admin'], function () {
 
         //Admin Account Profile Detail
-        Route::prefix('account')->group(function () {
+        Route::prefix('admins')->group(function () {
 
-            Route::get('/viewDetail', [AuthController::class, 'viewDetail'])->name('account#detail');
+            Route::get('/viewAdminList', [AuthController::class, 'viewAdminList'])->name('account#adminList');
 
-            Route::get('editDetail', [AuthController::class, 'editDetail'])->name('account#edit');
+            Route::get('/viewUserList', [AuthController::class, 'viewUserList'])->name('account#userList');
 
-            Route::post('/updateDetail', [AuthController::class, 'updateDetail'])->name('account#update');
+            Route::get('/changeRole/{role}/{id}', [AuthController::class, 'changeRole'])->name('account#changeRole');
+
+            Route::get('/suspend/{id}', [AuthController::class, 'suspend'])->name('account#suspend');
+
+            Route::get('/unsuspend/{id}', [AuthController::class, 'unsuspend'])->name('account#unsuspend');
+
+            Route::get('/delete/{id}', [AuthController::class, 'deleteAccount'])->name('account#delete');
         });
 
         //Admin CRUD Author
-        Route::get('/authors/list', [AuthorController::class, 'showAuthorList'])->name('author#list');
+        Route::prefix('authors')->group(function () {
+            Route::get('/list', [AuthorController::class, 'showAuthorList'])->name('author#list');
 
-        Route::get('/authors/add', [AuthorController::class, 'addAuthor'])->name('author#add');
+            Route::get('/add', [AuthorController::class, 'addAuthor'])->name('author#add');
 
-        Route::post('/authors/create', [AuthorController::class, 'createAuthor'])->name('author#create');
+            Route::post('/create', [AuthorController::class, 'createAuthor'])->name('author#create');
 
-        Route::get('/authors/delete/{id}', [AuthorController::class, 'deleteAuthor'])->name('author#delete');
+            Route::get('/delete/{id}', [AuthorController::class, 'deleteAuthor'])->name('author#delete');
 
-        Route::get('/authors/view/{id}', [AuthorController::class, 'viewAuthor'])->name('author#view');
+            Route::get('/view/{id}', [AuthorController::class, 'viewAuthor'])->name('author#view');
 
-        Route::get('/authors/edit/{id}', [AuthorController::class, 'editAuthor'])->name('author#edit');
+            Route::get('/edit/{id}', [AuthorController::class, 'editAuthor'])->name('author#edit');
 
-        Route::post('/authors/update', [AuthorController::class, 'updateAuthor'])->name('author#update');
+            Route::post('/update', [AuthorController::class, 'updateAuthor'])->name('author#update');
 
-        Route::get('/authors/viewBooks/{id}', [AuthorController::class, 'viewBooks'])->name('author#viewBooks');
+            Route::get('/viewBooks/{id}', [AuthorController::class, 'viewBooks'])->name('author#viewBooks');
+        });
 
         //Admin CRUD Category
-        Route::get('/categories/list', [CategoryController::class, 'showCategoryList'])->name('category#list');
+        Route::prefix('categories')->group(function () {
+            Route::get('/list', [CategoryController::class, 'showCategoryList'])->name('category#list');
 
-        Route::post('/categories/create', [CategoryController::class, 'createCategory'])->name('category#create');
+            Route::post('/create', [CategoryController::class, 'createCategory'])->name('category#create');
 
-        Route::get('/categories/delete/{id}', [CategoryController::class, 'deleteCategory'])->name('category#delete');
+            Route::get('/delete/{id}', [CategoryController::class, 'deleteCategory'])->name('category#delete');
 
-        Route::post('/categories/update', [CategoryController::class, 'updateCategory'])->name('category#update');
+            Route::post('/update', [CategoryController::class, 'updateCategory'])->name('category#update');
+        });
 
         //Admin CRUD Book
-        Route::get('/books/list', [BookController::class, 'showBookList'])->name('book#list');
+        Route::prefix('books')->group(function () {
+            Route::get('/list', [BookController::class, 'showBookList'])->name('book#list');
 
-        Route::get('/books/add', [BookController::class, 'addBook'])->name('book#add');
+            Route::get('/add', [BookController::class, 'addBook'])->name('book#add');
 
-        Route::post('/books/create', [BookController::class, 'createBook'])->name('book#create');
+            Route::post('/create', [BookController::class, 'createBook'])->name('book#create');
 
-        Route::get('/books/view/{id}', [BookController::class, 'viewBook'])->name('book#view');
+            Route::get('/view/{id}', [BookController::class, 'viewBook'])->name('book#view');
 
-        Route::get('/books/delete/{id}', [BookController::class, 'deleteBook'])->name('book#delete');
+            Route::get('/delete/{id}', [BookController::class, 'deleteBook'])->name('book#delete');
 
-        Route::get('/books/edit/{id}', [BookController::class, 'editBook'])->name('book#edit');
+            Route::get('/edit/{id}', [BookController::class, 'editBook'])->name('book#edit');
 
-        Route::post('/books/update', [BookController::class, 'updateBook'])->name('book#update');
+            Route::post('/update', [BookController::class, 'updateBook'])->name('book#update');
+        });
     });
 
     Route::group(['middleware' => 'auth_user'], function () {
         //User
+    });
+
+    Route::prefix('account')->group(function () {
+        Route::get('/viewDetail', [AuthController::class, 'viewDetail'])->name('account#detail');
+
+        Route::get('/editDetail', [AuthController::class, 'editDetail'])->name('account#edit');
+
+        Route::post('/updateDetail', [AuthController::class, 'updateDetail'])->name('account#update');
     });
 });
 

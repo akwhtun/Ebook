@@ -24,14 +24,14 @@
                     @if (Auth::user()->image == null)
                         @if (Auth::user()->gender == 'Female')
                             <img src="{{ asset('storage/default_female.jpg') }}" class="img-thumbnail"
-                                style="width: 350px;height:360px">
+                                style="width: 340px;height:350px">
                         @else
                             <img src="{{ asset('storage/default_male.jpg') }}" class="img-thumbnail"
-                                style="width: 350px;height:360px">
+                                style="width: 340px;height:350px">
                         @endif
                     @else
                         <img src="{{ asset('storage/userProfile/' . Auth::user()->image) }}" class="img-thumbnail"
-                            style="width: 350px;height:360px">
+                            style="width: 330px;height:350px">
                     @endif
                 </div>
                 <div class="col-7 mx-auto">
