@@ -1,6 +1,17 @@
 @extends('layouts.master')
 
 @section('title', 'category list')
+
+@section('searchBar')
+    <form method="get">
+        <div class="input-group">
+            <input type="search" name="searchKey" value="{{ request('searchKey') }}" class="form-control"
+                placeholder="Search Categories...">
+            <button class="btn btn-dark"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+@endsection
+
 @section('content')
     <div class="container p-2 mt-1">
         <div class=" bg-light shadow-sm rounded border border-3  p-4">
@@ -40,41 +51,48 @@
                 </div>
             @endif
             {{ $categories->links() }}
-            <table class="table">
-                <thead>
-                    <tr class="d-flex justify-content-around">
-                        <th class="text-center" style="flex-basis: 10%">ID</th>
-                        <th class="text-center" style="flex-basis: 40%">Category</th>
-                        <th class="text-center" style="flex-basis: 40%"></th>
-                    </tr>
-                </thead>
-                @foreach ($categories as $category)
-                    <tbody class="cat">
+            @if (count($categories) > 0)
+                <table class="table">
+                    <thead>
                         <tr class="d-flex justify-content-around">
-                            <th class="text-center" style="flex-basis: 10%">{{ $category->id }}</th>
-                            <td class="text-center notEditCat" style="flex-basis: 40%">{{ $category->name }}</td>
-                            <td class="text-center editCat" style="flex-basis: 83%">
-                                <form action="{{ route('category#update') }}" method="POST"
-                                    class="d-flex justify-content-around">
-                                    @csrf
-                                    <input type="hidden" name="categoryId" value="{{ $category->id }}">
-                                    <input type="text" name="categoryUpdateName"
-                                        value="{{ old('categoryName', $category->name) }}" class="form-control w-50">
-                                    <div class="me-5">
-                                        <button type="submit" class="editBtn btn btn-success me-2">Update</button>
-                                        <button type="button" class="editBtn btn btn-info cancelBtn me-4">Cancel</button>
-                                    </div>
-                                </form>
-                            </td>
-                            <td class="text-center button" style="flex-basis: 40%">
-                                <button type="button" class="btn btn-warning me-3 editButton notEditBtn">Edit</button>
-                                <a href="{{ route('category#delete', $category->id) }}"
-                                    class="btn btn-danger notEditBtn">Delete</a>
-                            </td>
+                            <th class="text-center" style="flex-basis: 10%">ID</th>
+                            <th class="text-center" style="flex-basis: 40%">Category</th>
+                            <th class="text-center" style="flex-basis: 40%"></th>
                         </tr>
-                    </tbody>
-                @endforeach
-            </table>
+                    </thead>
+                    @foreach ($categories as $category)
+                        <tbody class="cat">
+                            <tr class="d-flex justify-content-around">
+                                <th class="text-center" style="flex-basis: 10%">{{ $category->id }}</th>
+                                <td class="text-center notEditCat" style="flex-basis: 40%">{{ $category->name }}</td>
+                                <td class="text-center editCat" style="flex-basis: 83%">
+                                    <form action="{{ route('category#update') }}" method="POST"
+                                        class="d-flex justify-content-around">
+                                        @csrf
+                                        <input type="hidden" name="categoryId" value="{{ $category->id }}">
+                                        <input type="text" name="categoryUpdateName" value="{{ $category->name }}"
+                                            class="form-control w-50">
+                                        <div class="me-5">
+                                            <button type="submit" class="editBtn btn btn-success me-2">Update</button>
+                                            <button type="button"
+                                                class="editBtn btn btn-info cancelBtn me-4">Cancel</button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td class="text-center button" style="flex-basis: 40%">
+                                    <button type="button" class="btn btn-warning me-3 editButton notEditBtn">Edit</button>
+                                    <a href="{{ route('category#delete', $category->id) }}"
+                                        class="btn btn-danger notEditBtn">Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    @endforeach
+                </table>
+            @else
+                <div class="mt-5">
+                    <p class="fs-4 text-muted text-center">There is no Category...</p>
+                </div>
+            @endif
             <div class="mt-5 w-75 mx-auto">
                 <form action="{{ route('category#create') }}" method="POST" class="input-group d-flex">
                     @csrf

@@ -72,9 +72,8 @@
                 <a href="#" class="navbar-brand" style="width:8%;">
                     <!-- <img src="./logo.png" alt="logo" width="60px">  -->
                 </a>
-                <div class="input-group searchBar">
-                    <input type="search" class="form-control">
-                    <button class="btn btn-dark"><i class="fas fa-search"></i></button>
+                <div class="searchBar">
+                    @yield('searchBar')
                 </div>
                 <div class="navbar nav justify-content-end m-0 p-0" style="width:32%;">
                     <div class="nav-item d-flex align-items-center m-0 p-0">

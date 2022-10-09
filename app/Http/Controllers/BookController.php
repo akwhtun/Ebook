@@ -58,7 +58,11 @@ class BookController extends Controller
         $books = Book::select('books.*', 'categories.name as category_name', 'authors.name as author_name')
             ->leftJoin('categories', 'books.category_id', 'categories.id')
             ->leftJoin('authors', 'books.author_id', 'authors.id')
+            ->when(request('searchKey'), function ($query) {
+                $query->where('books.title', 'like', '%' . request('searchKey') . '%');
+            })
             ->orderBy('books.id', 'desc')->paginate(5);
+        $books->appends(request()->all());
         return view('admin.book-lists', compact('books'));
     }
 

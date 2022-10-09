@@ -59,14 +59,20 @@ class AuthController extends Controller
     //view admin list
     public function viewAdminList()
     {
-        $admins = User::where('role', 'admin')->orderBy('id', 'desc')->paginate(5);
+        $admins = User::where('role', 'admin')->when(request('searchKey'), function ($query) {
+            $query->where('name', 'like', '%' . request('searchKey') . '%');
+        })->orderBy('id', 'desc')->paginate(5);
+        $admins->appends(request()->all());
         return view('adminAccount.list', compact('admins'));
     }
 
     //view user list
     public function viewUserList()
     {
-        $users = User::where('role', 'user')->orderBy('id', 'desc')->paginate(5);
+        $users = User::where('role', 'user')->when(request('searchKey'), function ($query) {
+            $query->where('name', 'like', '%' . request('searchKey') . '%');
+        })->orderBy('id', 'desc')->paginate(5);
+        $users->appends(request()->all());
         return view('userAccount.list', compact('users'));
     }
 

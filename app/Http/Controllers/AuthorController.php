@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -14,14 +15,11 @@ class AuthorController extends Controller
     //Author Lists
     public function showAuthorList()
     {
-        // $authors = Author::select('books.author_id',  DB::raw('count(books.author_id) as book_count'))->leftJoin('books', 'books.author_id', 'authors.id')->groupBy('books.author_id')->get();
-        // dd($authors->toArray());
-        // $authors = Author::orderBy('id', 'desc')->paginate(4);
-        // $books = Book::select('author_id', DB::raw('count(author_id) as book_count'))->groupBy('author_id')->get();
-        // dd($authors->toArray());
-        // $books = Book::groupBy('id')->get();
         $books = Book::select('author_id',  DB::raw('count(author_id) as book_count'))->groupBy('author_id')->get();
-        $authors = Author::orderBy('id', 'desc')->paginate(4);
+        $authors = Author::when(request('searchKey'), function ($query) {
+            $query->where('name', 'like', '%' . request('searchKey') . '%');
+        })->orderBy('id', 'desc')->paginate(4);
+        $authors->appends(request()->all());
         return view('admin.author-lists', compact('authors', 'books'));
     }
 
@@ -97,8 +95,9 @@ class AuthorController extends Controller
     public function viewBooks($id)
     {
         $author = Author::where('id', $id)->first();
-        $books = Book::where('author_id', $id)->orderBy('books.id', 'desc')->paginate(5);
-        return view('admin.author-books', compact('author', 'books'));
+        $books = Book::where('author_id', $id)->orderBy('id', 'desc')->paginate(5);
+        $categories = Category::get();
+        return view('admin.author-books', compact('author', 'books', 'categories'));
     }
 
     //get Data

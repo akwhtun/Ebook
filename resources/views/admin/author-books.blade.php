@@ -43,7 +43,13 @@
                             <td>{{ $book->title }}</td>
                             <td> {{ Str::words($book->summary, 8, '...') }}</td>
                             <td>{{ $book->price }} kyats</td>
-                            <td>{{ $book->category_name }}</td>
+                            <td>
+                                @foreach ($categories as $category)
+                                    @if ($book->category_id == $category->id)
+                                        {{ $category->name }}
+                                    @endif
+                                @endforeach
+                            </td>
                             <td>{{ $book->pdf }}</td>
                             <td>
                                 <a href="{{ route('book#view', $book->id) }}" class="btn btn-success">View</a>

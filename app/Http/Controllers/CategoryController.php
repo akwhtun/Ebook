@@ -11,8 +11,10 @@ class CategoryController extends Controller
     //category list
     public function showCategoryList()
     {
-        $categories = Category::orderBy('id', 'desc')->paginate('7');
-
+        $categories = Category::when(request('searchKey'), function ($query) {
+            $query->where('name', 'like', '%' . request('searchKey') . '%');
+        })->orderBy('id', 'desc')->paginate('7');
+        $categories->appends(request()->all());
         return view('admin.category-lists', compact('categories'));
     }
 
