@@ -15,4 +15,14 @@ class Book extends Model
     {
         return $this->belongsTo('App\Models\Category');
     }
+
+    public function author()
+    {
+        return $this->belongsTo('App\Models\Author');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
 }

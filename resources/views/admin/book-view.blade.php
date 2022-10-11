@@ -5,8 +5,8 @@
     <div class="container pt-2 px-3 pb-3">
         <div class="bg-light shadow-sm rounded border border-3  p-4">
             <div>
-                <p class="text-dark" onclick="history.back()" style="cursor: pointer"><i
-                        class="fas fa-arrow-circle-left fs-5">&nbsp;<small>Back</small></i></p>
+                <a href="{{ route('book#list') }}" class="text-dark"><i
+                        class="fas fa-arrow-circle-left fs-5">&nbsp;<small>Back</small></i></a>
             </div>
             <div class="d-flex justify-content-center align-items-center">
                 <h5>{{ $viewBook->title }}</h5>

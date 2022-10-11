@@ -5,7 +5,7 @@
     <div class="container pt-2 px-3 pb-3">
         <div class="bg-light shadow-sm rounded border border-3  p-4">
             <div>
-                <a href="{{ route('author#list') }}" class="text-decoration-none text-dark"><i
+                <a href="{{ route('author#list') }}" class="text-dark" style="cursor: pointer"><i
                         class="fas fa-arrow-circle-left fs-5">&nbsp;<small>Back</small></i></a>
             </div>
             <div class="row g-0 mt-2">

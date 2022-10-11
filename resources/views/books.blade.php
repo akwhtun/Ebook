@@ -54,7 +54,9 @@
                     <div class="detail" style="flex-basis: 46%">
                         <p class="m-0 p-0 text-dark">{{ $book->title }}</p>
                         <p class="m-0 p-0 text-muted">{{ $book->author_name }}</p>
-                        <p class="mt-2" style="margin-left: 1px">{{ Str::words($book->summary, 6, '...') }}</p>
+                        {{-- <p class="mt-2" style="margin-left: 1px">{{ Str::words($book->summary, 6, '...') }}</p> --}}
+                        <p class="mt-2 p-0 text-success">{{ $book->price }} kyats</p>
+                        <p class="mt-2 p-0 text-dark"> <i class="fas fa-eye"></i> 0</p>
                         <div class="ratign mt-2 text-warning">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -63,15 +65,24 @@
                             <i class="fas fa-star"></i>
                         </div>
                     </div>
-                    <div class="book-btn d-flex flex-wrap justify-content-around mt-3" style="flex-basis: 100%">
-                        <a href="#" class=" py-1 mb-1 col-8 text-decoration-none text-primary text-start">See More
-                            &nbsp;<i class=" fs-5 fas fa-angle-double-right"></i> </a>
-                        <a href="{{ route('download#book', $book->id) }}" class=" py-1 btn btn-danger col-5">
-                            Download &nbsp;<i class="fas fa-file-download"></i>
-                        </a>
-                        <a href="#" class=" py-1 btn btn-success col-6">
-                            Add To Cart &nbsp;<i class="fas fa-shopping-cart"></i>
-                        </a>
+                    <div class="book-btn mt-3">
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class=" py-1 btn btn-outline-primary">
+                                <span class="m-0 p-0">{{ count($book->comments) }} Comments</span> &nbsp;<i
+                                    class="fas fa-comment-alt"></i>
+                            </a>
+                            <a href="{{ route('book#detail', $book->id) }}"
+                                class=" py-1 text-decoration-none text-primary">See More
+                                &nbsp;<i class=" fs-5 fas fa-angle-double-right"></i> </a>
+                        </div>
+                        <div class="mt-2 d-flex justify-content-between">
+                            <a href="{{ route('download#book', $book->id) }}" class=" py-1 btn btn-danger ">
+                                Download &nbsp;<i class="fas fa-file-download"></i>
+                            </a>
+                            <a href="#" class=" py-1 btn btn-success d-block ms-4">
+                                Add To Cart &nbsp;<i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             @endforeach

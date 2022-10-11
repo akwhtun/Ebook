@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('photo')->nullable(true);
             $table->string('pdf')->nullable(true);
             $table->integer('category_id');
+            $table->bigInteger('view')->default(0);
             $table->timestamps();
         });
     }

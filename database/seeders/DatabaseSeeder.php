@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -27,6 +28,9 @@ class DatabaseSeeder extends Seeder
 
         //Create Default Book
         Book::factory(10)->create();
+
+        //Create Default Comment
+        Comment::factory(30)->create();
 
         //Crate Default Category
         $categories = ['Helath', 'Business', 'Agricultural', 'Technical', 'Language', 'Religion', 'Magazine', 'Knowledge', 'Comic', 'History', 'Journal', 'Lyrics', 'Comedy'];

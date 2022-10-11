@@ -91,6 +91,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => 'auth_user'], function () {
         //User
+
     });
 
     Route::prefix('account')->group(function () {
@@ -107,3 +108,5 @@ Route::get('/', [BookController::class, 'getAllBooks'])->name('book#all');
 Route::get('/books/all', [BookController::class, 'getAllBooks'])->name('book#all');
 
 Route::get('/downloadBook/{id}', [BookController::class, 'download'])->name('download#book');
+
+Route::get('/books/detail/{id}', [BookController::class, 'viewBookDetail'])->name('book#detail');

@@ -5,8 +5,10 @@
     <div class="container pt-2 px-3 pb-3">
         <div class="bg-light shadow-sm rounded border border-3  p-4">
             <div class="d-flex justify-content-between align-items-start">
-                <a href="#" onclick="history.back()" class="text-decoration-none text-dark"><i
-                        class="fas fa-arrow-circle-left fs-5">&nbsp;<small>Back</small></i></a>
+                <div>
+                    <a href="{{ route('book#all') }}" class="text-dark" style="cursor: pointer"><i
+                            class="fas fa-arrow-circle-left fs-5">&nbsp;<small>Back</small></i></a>
+                </div>
                 @if (session('updateSuccess'))
                     <div class="alert-message col-5">
                         <div class="alert alert-success alert-dismissible fade show" role="alert">

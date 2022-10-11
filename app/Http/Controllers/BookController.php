@@ -166,10 +166,18 @@ class BookController extends Controller
         Validator::make($request->all(), $validationRules)->validate();
     }
 
+    //download book
     public function download($id)
     {
         $book = Book::where('id', $id)->first();
         $pdf = $book->pdf;
         return Storage::download("public/pdf/" . $pdf);
+    }
+
+    //view book
+    public function viewBookDetail($id)
+    {
+        $bookDetail = Book::where('id', $id)->first();
+        return view('bookDetail', compact('bookDetail'));
     }
 }

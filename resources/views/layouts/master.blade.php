@@ -22,7 +22,9 @@
     <div class="row g-0 con">
         <div class="col-3 min-vh-100 left-col">
             <div class="text-center p-3">
-                <img src="{{ asset('admin/images/logo.png') }}" alt="logo" width="80px">
+                <a href="{{ route('book#all') }}">
+                    <img src="{{ asset('admin/images/logo.png') }}" alt="logo" width="80px">
+                </a>
             </div>
             <div class="text-light" style="font-size:18px;">
                 <p class="p-2 m-0 border-1 border-bottom border-secondary text-center text-md-start">
