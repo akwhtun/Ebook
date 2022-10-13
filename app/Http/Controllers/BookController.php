@@ -20,7 +20,7 @@ class BookController extends Controller
             ->leftJoin('authors', 'books.author_id', 'authors.id')
             ->orderBy('books.id', 'desc')->paginate(6);
         $latestBooks = Book::latest()->paginate(6);
-        return view('books', compact('books', 'latestBooks'));
+        return view('user.books', compact('books', 'latestBooks'));
     }
 
     //add book
@@ -178,6 +178,13 @@ class BookController extends Controller
     public function viewBookDetail($id)
     {
         $bookDetail = Book::where('id', $id)->first();
-        return view('bookDetail', compact('bookDetail'));
+
+        // $books = [];
+        // for ($i = 0; $i < 6; $i++) {
+        //     $book = Book::all()->random()->toArray();
+        //     $books .= $book;
+        // }
+        // dd($books);
+        return view('user.bookDetail', compact('bookDetail'));
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,6 +101,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/editDetail', [AuthController::class, 'editDetail'])->name('account#edit');
 
         Route::post('/updateDetail', [AuthController::class, 'updateDetail'])->name('account#update');
+    });
+
+    Route::prefix('comments')->group(function () {
+
+        Route::post('/create', [CommentController::class, 'createComment'])->name('comment#create');
+
+        Route::get('/edit/{id}', [CommentController::class, 'editComment'])->name('comment#edit');
+
+        Route::post('/update/{id}', [CommentController::class, 'updateComment'])->name('comment#update');
+
+        Route::get('/delete/{id}', [CommentController::class, 'deleteComment'])->name('comment#delete');
     });
 });
 

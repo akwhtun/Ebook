@@ -21,7 +21,20 @@ body {
     cursor: pointer;
 }
 
-.list:hover {
+.ano-list{
+    background-color: #f3f7fa4a;
+    cursor: pointer;
+}
+
+.header-list{
+    background-color: #eaf6ff63;
+}
+
+.li-group{
+    border:1px solid  #eaf6ff63;
+}
+
+.list:hover, .ano-list:hover {
     background-color: #daecfc75;
 }
 
