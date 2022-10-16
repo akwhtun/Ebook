@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
@@ -113,6 +114,14 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/delete/{id}', [CommentController::class, 'deleteComment'])->name('comment#delete');
     });
+
+    Route::get('/carts/add', [CartController::class, 'addCart'])->name('cart#add');
+
+    Route::get('/carts/view/{userName}', [CartController::class, 'viewCart'])->name('cart#view');
+
+    Route::get('/carts/deleteList', [CartController::class, 'deleteCart'])->name('cart#delete');
+
+    Route::get('/carts/clear', [CartController::class, 'clearCart'])->name('cart#clear');
 });
 
 Route::get('/', [BookController::class, 'getAllBooks'])->name('book#all');
@@ -122,3 +131,9 @@ Route::get('/books/all', [BookController::class, 'getAllBooks'])->name('book#all
 Route::get('/downloadBook/{id}', [BookController::class, 'download'])->name('download#book');
 
 Route::get('/books/detail/{id}', [BookController::class, 'viewBookDetail'])->name('book#detail');
+
+Route::get('/categories/filter/{id}', [BookController::class, 'catFilter'])->name('category#filter');
+
+Route::get('/authors/filter/{id}', [BookController::class, 'autFilter'])->name('author#filter');
+
+Route::get('/prices/filter/{amount}', [BookController::class, 'priceFilter'])->name('price#filter');

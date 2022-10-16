@@ -37,7 +37,6 @@ class CommentController extends Controller
         $comment = Comment::where('id', $id)->first();
 
         if (Gate::allows('comment-edit', $comment)) {
-            // dd($comment->toArray());
             return view('user.comment-edit', compact('comment'));
         }
     }

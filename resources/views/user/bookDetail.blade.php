@@ -1,8 +1,23 @@
 @extends('layouts.user')
 
+@if (Auth::user() != null)
+    @section('cart')
+        <form action="{{ route('cart#view', Auth::user()->name) }}" method="GET">
+            <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+            <button type="submit" class="border-0 bg-light text-dark">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-shopping-cart cart"></i>
+                    <span
+                        class="badge rounded-circle border border-secondary text-dark ms-1 cart-qty cart-count">{{ count($carts) }}</span>
+                </div>
+            </button>
+        </form>
+    @endsection
+@endif
+
 @section('content')
     <div class="py-3  m-1 min-vh-100">
-        <div class="px-3">
+        <div class="px-5">
             <a href="{{ route('book#all') }}" class="text-dark" style="cursor: pointer"><i
                     class="fas fa-arrow-circle-left fs-5">&nbsp;<small>Back</small></i></a>
         </div>
@@ -21,14 +36,17 @@
                 <p>{{ $bookDetail->view }} <i class="fas fa-eye ms-1"></i></p>
                 <p class="fs-4">{{ $bookDetail->price }} kyats</p>
                 <p class="">{{ $bookDetail->summary }}</p>
-                <div class="d-flex align-items-center">
-                    <button class="btn btn-sm btn-success"><i class="fas fa-minus"></i></button>
-                    <span class="py-1 text-center" style="width:40px">0</span>
-                    <button class="btn btn-sm btn-success"><i class="fas fa-plus"></i></button>
+                <div class="d-flex align-items-center quantity">
+                    <button class="btn btn-sm btn-success minus-btn"><i class="fas fa-minus"></i></button>
+                    <span class="py-1 text-center qty-val" style="width:40px">1</span>
+                    <button class="btn btn-sm btn-success plus-btn"><i class="fas fa-plus"></i></button>
                     <div class="ms-1">
-                        <a href="#" class=" py-1 btn btn-success d-block ms-4">
+                        @if (Auth::user() != null)
+                            <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
+                        @endif
+                        <input type="hidden" id="bookId" value="{{ $bookDetail->id }}">
+                        <span class="py-1 btn btn-success d-block ms-4 add-cart" style="cursor: pointer">
                             Add To Cart &nbsp;<i class="fas fa-shopping-cart"></i>
-                        </a>
                     </div>
                 </div>
                 <div class="mt-4 d-flex justify-content-between">
@@ -130,4 +148,71 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('.plus-btn').on('click', function() {
+                $qty = $(this).closest('.quantity').find('.qty-val');
+                $value = parseInt($qty.html());
+                $value += 1;
+                $qty.html($value);
+            });
+
+            $('.minus-btn').on('click', function() {
+                $qty = $(this).closest('.quantity').find('.qty-val');
+                $value = parseInt($qty.html());
+                if ($value > 1) {
+                    $value -= 1;
+                    $qty.html($value);
+
+                } else {
+                    return;
+                }
+            });
+        })
+    </script>
+@endsection
+
+@section('ajax')
+    <script>
+        //add to cart
+        $(document).ready(function() {
+            $('.add-cart').on('click', function() {
+                $cart = $('.cart');
+                $count = $('.cart-qty');
+                $cart.removeClass('shopping-cart');
+                $count.removeClass('cart-count');
+
+                $cartQty = parseInt($('.cart-qty').html());
+                $userId = $('#userId').val();
+                $bookId = $('#bookId').val();
+                $qty = $('.qty-val').html();
+                $data = {
+                    'userId': $userId,
+                    'bookId': $bookId,
+                    'qty': $qty
+                };
+                $.ajax({
+                    type: 'get',
+                    url: '/carts/add',
+                    data: $data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status == 'true') {
+                            $cart.addClass('shopping-cart');
+                            $count.addClass('cart-count');
+
+                            $cartQty += 1;
+                            $('.cart-qty').html($cartQty);
+                        }
+                    },
+                    // error: function() {
+                    //     window.location.href = '/loginPage';
+                    // }
+                })
+            });
+        })
+    </script>
 @endsection

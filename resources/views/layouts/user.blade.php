@@ -19,14 +19,21 @@
 
 <body>
 
-    <nav class="navbar text-dark bg-light d-flex justify-content-around flex-wrap shadow-sm m-0 p-0">
-        <a href="#" class="navbar-brand text-center m-0 p-0 py-1" style="width:8%;">
+    <nav class="navbar text-dark bg-light d-flex justify-content-around align-items-center flex-wrap shadow-sm m-0 p-0">
+        <a href="{{ route('book#all') }}" class="navbar-brand text-end m-0 p-0 py-1" style="width:8%;">
             <img src="{{ asset('admin/images/logo.png') }}" alt="logo" width="60px">
         </a>
-        <div class="searchBar">
+        <div style="width: 22%">
+            <ul class="d-flex  justify-content-end m-0 p-0" style="list-style-type: none">
+                <li class="p-2 ms-2">Home</li>
+                <li class="p-2 ms-2">About</li>
+                <li class="p-2 ms-2">Contact Us</li>
+            </ul>
+        </div>
+        <div class="searchBar w-25">
             @yield('searchBar')
         </div>
-        <div class="navbar nav justify-content-end m-0 p-0" style="width:32%;">
+        <div class="navbar nav justify-content-end m-0 p-0" style="width:27%;">
             <div class="nav-item d-flex align-items-center m-0 p-0">
                 @guest
                     @if (Route::has('login'))
@@ -59,7 +66,7 @@
                                 <a id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-angle-down fs-4 text-dark" style="cursor: pointer"></i>
                                 </a>
-                                <div class="dropdown-menu m-0 p-0" aria-labelledby="triggerId">
+                                <div class="dropdown-menu m-0 p-2" aria-labelledby="triggerId" style="width: 250px;">
                                     <div class="d-flex p-2 border border-0 border-bottom align-items-center">
                                         @if (Auth::user()->image == null)
                                             @if (Auth::user()->gender == 'Female')
@@ -99,16 +106,18 @@
                             </div>
                         </div>
                     </div>
+
+                    @yield('cart')
+
                 @endguest
             </div>
         </div>
-        <div class="pe-3 py-3 text-center" style="width:10%;">
+        <div class="pe-3 py-3 text-center" style="width:7%;">
             <i class="far fa-moon fs-4 me-2"></i>
             <i class="fas fa-sun fs-4  me-2"></i>
         </div>
     </nav>
     @yield('content')
-
     {{-- Bootstrap js --}}
     <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -117,6 +126,8 @@
 
     {{-- Custom Js --}}
     <script src="{{ asset('admin/js/custom.js') }}"></script>
+    @yield('script')
+    @yield('ajax')
 </body>
 
 </html>

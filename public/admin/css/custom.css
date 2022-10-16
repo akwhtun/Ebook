@@ -38,6 +38,10 @@ body {
     background-color: #daecfc75;
 }
 
+.ano-list.active{
+    background-color:#6869698e;
+}
+
 .searchBar {
     width: 35%;
 }
@@ -79,6 +83,51 @@ body {
     display: none;
 }
 
+table{
+    border-collapse: separate;
+}
+th{
+    color:#fff;
+    background: #121212;
+}
+
+td{
+    padding:5px;
+    background-color:snow;
+    border-top: 1px solid #fff;
+}
+.cart{
+     font-size: 25px;
+}
+.shopping-cart{
+    animation: cart 0.7s 0.3s;
+}
+
+.cart-count{
+     animation: count 0.7s 0.3s;
+}
+
+@keyframes cart {
+     50%{
+      font-size: 35px;
+      color:#008c52;
+    }
+    100%{
+      font-size: 25px;
+      color:black;
+    }
+}
+
+@keyframes count {
+     50%{
+         color:snow;
+        background:#008c52;
+        padding:3px;
+    }
+    100%{
+      color:black;
+    }
+}
 
 @media (max-width : 1000px) {
     .searchBar {

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Cart;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,7 +22,16 @@ class BookController extends Controller
             ->leftJoin('authors', 'books.author_id', 'authors.id')
             ->orderBy('books.id', 'desc')->paginate(6);
         $latestBooks = Book::latest()->paginate(6);
-        return view('user.books', compact('books', 'latestBooks'));
+        $categories = Category::all();
+        $authors = Author::all();
+        // $oneTwo =
+
+        if (Auth::user() != null) {
+            $carts = Cart::where('user_id', Auth::user()->id)->get();
+            return view('user.books', compact('books', 'latestBooks', 'categories', 'authors', 'carts'));
+        } else {
+            return view('user.books', compact('books', 'latestBooks', 'categories', 'authors'));
+        }
     }
 
     //add book
@@ -129,6 +140,27 @@ class BookController extends Controller
         return redirect()->route('book#list')->with(['updateSuccess' => 'Book update successfully']);
     }
 
+    //Filter By Category
+    public function catFilter($id)
+    {
+        $books = Book::where('category_id', $id)->paginate(6);
+        $categories = Category::all();
+        $authors = Author::all();
+        return view('user.books', compact('books', 'categories', 'authors'));
+    }
+
+    //Filter By Author
+    public function autFilter($id)
+    {
+        $books = Book::where('author_id', $id)->paginate(6);
+        $categories = Category::all();
+        $authors = Author::all();
+        return view('user.books', compact('books', 'categories', 'authors'));
+    }
+
+    //Filter By Price
+
+
     //private get data
     private function getData($request)
     {
@@ -179,12 +211,11 @@ class BookController extends Controller
     {
         $bookDetail = Book::where('id', $id)->first();
 
-        // $books = [];
-        // for ($i = 0; $i < 6; $i++) {
-        //     $book = Book::all()->random()->toArray();
-        //     $books .= $book;
-        // }
-        // dd($books);
-        return view('user.bookDetail', compact('bookDetail'));
+        if (Auth::user() != null) {
+            $carts = Cart::where('user_id', Auth::user()->id)->get();
+            return view('user.bookDetail', compact('bookDetail', 'carts'));
+        } else {
+            return view('user.bookDetail', compact('bookDetail'));
+        }
     }
 }
