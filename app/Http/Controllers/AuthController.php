@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Mime\MimeTypes;
@@ -113,6 +114,14 @@ class AuthController extends Controller
             'suspend' => '0'
         ]);
         return back();
+    }
+
+    //go Admin
+    public function goAdmin($role)
+    {
+        if (Gate::allows('admin-auth', $role)) {
+            return redirect()->route('book#list');
+        }
     }
 
     //get account info data

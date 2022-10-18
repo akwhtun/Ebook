@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Comment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,6 +19,18 @@ class CommentController extends Controller
         $data = $this->getData($request);
         Comment::create($data);
         return back();
+    }
+
+    //view all Comment
+    public function viewComment($bookId)
+    {
+        $comments = Comment::where('book_id', $bookId)->get();
+        if (Auth::user() != null) {
+            $carts = Cart::where('user_id', Auth::user()->id)->get();
+            return view('user.comment-view', compact('comments', 'carts', 'bookId'));
+        } else {
+            return view('user.comment-view', compact('comments', 'bookId'));
+        }
     }
 
 

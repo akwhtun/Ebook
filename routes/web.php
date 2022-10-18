@@ -137,6 +137,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/success', [OrderItemController::class, 'orderSuccess'])->name('order#success');
     });
+
+    Route::get('/admin/manage/{role}', [AuthController::class, 'goAdmin'])->name('admin');
 });
 
 Route::get('/', [BookController::class, 'getAllBooks'])->name('book#all');
@@ -146,6 +148,8 @@ Route::get('/books/all', [BookController::class, 'getAllBooks'])->name('book#all
 Route::get('/downloadBook/{id}', [BookController::class, 'download'])->name('download#book');
 
 Route::get('/books/detail/{id}', [BookController::class, 'viewBookDetail'])->name('book#detail');
+
+Route::get('/view/{bookId}', [CommentController::class, 'viewComment'])->name('comment#view');
 
 Route::get('/categories/filter/{id}', [BookController::class, 'catFilter'])->name('category#filter');
 

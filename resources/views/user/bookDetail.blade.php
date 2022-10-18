@@ -46,8 +46,11 @@
                         @endif
                         <input type="hidden" id="bookId" value="{{ $bookDetail->id }}">
                         <span class="py-1 btn btn-success d-block ms-4 add-cart" style="cursor: pointer">
-                            Add To Cart &nbsp;<i class="fas fa-shopping-cart"></i>
+                            Add To Cart &nbsp;<i class="fas fa-shopping-cart"></i> </span>
                     </div>
+                    <a href="{{ route('download#book', $bookDetail->id) }}" class=" py-1 btn btn-primary ms-5 ">
+                        Download &nbsp;<i class="fas fa-file-download"></i>
+                    </a>
                 </div>
                 <div class="mt-4 d-flex justify-content-between">
                     <p><i class="fas fa-user fs-5 me-1"></i> {{ $bookDetail->author->name }}</p>
@@ -124,6 +127,8 @@
                         </div>
                     @endforeach
                 </div>
+                <a href="{{ route('comment#view', $bookDetail->id) }}" class="btn btn-sm btn-outline-info my-1"
+                    style="width: 200px">All Comments <i class="fas fa-angle-double-down ms-1"></i></a>
             @else
                 <div class="card-body text-start">
                     <p class="text-muted ms-2">No Comment Yet!</p>
