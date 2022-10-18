@@ -208,9 +208,9 @@
                             $('.cart-qty').html($cartQty);
                         }
                     },
-                    // error: function() {
-                    //     window.location.href = '/loginPage';
-                    // }
+                    error: function() {
+                        window.location.href = '/loginPage';
+                    }
                 })
             });
         })

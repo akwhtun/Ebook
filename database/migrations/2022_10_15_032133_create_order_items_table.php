@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('qty');
             $table->bigInteger('total_price');
             $table->string('order_code');
+            $table->string('address');
             $table->timestamps();
         });
     }

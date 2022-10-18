@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->bigInteger('total_price');
             $table->string('order_code');
+            $table->string('address');
             $table->integer('status')->default(0);
             $table->timestamps();
         });

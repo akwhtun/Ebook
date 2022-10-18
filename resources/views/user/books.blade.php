@@ -68,6 +68,14 @@
     <div class="row g-0 con min-vh-100 ">
         <div class="col-2 left-col">
             <div class="text-light" style="font-size:18px;">
+                @if (Auth::user() != null)
+                    <a href="{{ route('order#history', Auth::user()->id) }}"
+                        class="d-flex justify-content-between align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
+                        <span class="d-none d-md-inline ms-3"><i class="fas fa-history me-1"></i>Order History
+                        </span>
+                        <small class="text-white bg-danger rounded-circle p-1 me-4 badge">{{ count($history) }}</small>
+                    </a>
+                @endif
                 <p class="p-2 m-0 border-1 border-bottom border-secondary text-center text-md-start">
                     <span class="text-info d-none d-md-inline text-uppercase">Filter By Price</span>
                 </p>
@@ -122,7 +130,7 @@
                     <span
                         class="d-flex justify-content-between align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
                         <span class="d-none d-md-inline ms-3"><i class="fas fa-pen-alt me-1"></i> Authors
-                            <small class="text-white bg-dark rounded-circle p-1">{{ count($authors) }}</small></span>
+                            <small class="text-white bg-dark rounded-circle p-1 badge">{{ count($authors) }}</small></span>
                         <i class="fas fa-angle-down me-4 down-arrow" style="cursor: pointer"></i>
                     </span>
                     <p class="li-group">
@@ -143,7 +151,8 @@
                     <span
                         class="d-flex justify-content-between align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
                         <span class="d-none d-md-inline ms-3"><i class="fas fa-list-alt me-1"></i> Categories
-                            <small class="text-white bg-dark rounded-circle p-1">{{ count($categories) }}</small></span>
+                            <small
+                                class="text-white bg-dark rounded-circle p-1 badge">{{ count($categories) }}</small></span>
                         <i class="fas fa-angle-down me-4 down-arrow" style="cursor: pointer"></i>
                     </span>
                     <p class="li-group">

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('pdf')->nullable(true);
             $table->integer('category_id');
             $table->bigInteger('view')->default(0);
+            $table->integer('favourite')->default(0);
             $table->timestamps();
         });
     }

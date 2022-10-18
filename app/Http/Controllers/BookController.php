@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Book;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\OrderList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -27,8 +28,9 @@ class BookController extends Controller
         // $oneTwo =
 
         if (Auth::user() != null) {
+            $history = OrderList::where('user_id', Auth::user()->id)->get();
             $carts = Cart::where('user_id', Auth::user()->id)->get();
-            return view('user.books', compact('books', 'latestBooks', 'categories', 'authors', 'carts'));
+            return view('user.books', compact('books', 'latestBooks', 'categories', 'authors', 'carts', 'history'));
         } else {
             return view('user.books', compact('books', 'latestBooks', 'categories', 'authors'));
         }

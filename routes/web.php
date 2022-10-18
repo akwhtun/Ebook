@@ -7,6 +7,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderItemController;
+use App\Http\Controllers\OrderListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -115,13 +117,26 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/{id}', [CommentController::class, 'deleteComment'])->name('comment#delete');
     });
 
-    Route::get('/carts/add', [CartController::class, 'addCart'])->name('cart#add');
+    Route::prefix('carts')->group(function () {
+        Route::get('/add', [CartController::class, 'addCart'])->name('cart#add');
 
-    Route::get('/carts/view/{userName}', [CartController::class, 'viewCart'])->name('cart#view');
+        Route::get('/view/{userName}', [CartController::class, 'viewCart'])->name('cart#view');
 
-    Route::get('/carts/deleteList', [CartController::class, 'deleteCart'])->name('cart#delete');
+        Route::get('/deleteList', [CartController::class, 'deleteCart'])->name('cart#delete');
 
-    Route::get('/carts/clear', [CartController::class, 'clearCart'])->name('cart#clear');
+        Route::get('/clear', [CartController::class, 'clearCart'])->name('cart#clear');
+
+        Route::get('/order', [CartController::class, 'order'])->name('cart#order');
+    });
+
+    Route::prefix('orders')->group(function () {
+
+        Route::get('/history/{userId}', [OrderListController::class, 'orderHistory'])->name('order#history');
+
+        Route::get('/list/{orderCode}', [OrderItemController::class, 'historyList'])->name('order#list');
+
+        Route::get('/success', [OrderItemController::class, 'orderSuccess'])->name('order#success');
+    });
 });
 
 Route::get('/', [BookController::class, 'getAllBooks'])->name('book#all');

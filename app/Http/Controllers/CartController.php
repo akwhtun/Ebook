@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\OrderItem;
+use App\Models\OrderList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -47,6 +50,39 @@ class CartController extends Controller
     public function clearCart()
     {
         Cart::where('user_id', Auth::user()->id)->delete();
+        return response()->json(200);
+    }
+
+    //order cart
+    public function order(Request $request)
+    {
+        $totalPrice = 3000;
+        $userId = $request[0]['user_id'];
+        $code = $request[0]['order_code'];
+        $address = $request[0]['address'];
+
+        foreach ($request->all() as $order) {
+            // OrderItem::create([
+            //     'user_id' => $order['userId'],
+            //     'book_id' => $order['bookId'],
+            //     'qty' => $order['qty'],
+            //     'total_price' => $order['totalPrice'],
+            //     'order_code' => $order['orderCode'],
+            //     'address' => $order['address'],
+            // ]);
+            OrderItem::create($order);
+            $totalPrice += $order['total_price'];
+        }
+
+        Cart::where('user_id', Auth::user()->id)->delete();
+
+        OrderList::create([
+            'user_id' => $userId,
+            'total_price' => $totalPrice,
+            'order_code' => $code,
+            'address' => $address
+        ]);
+
         return response()->json(200);
     }
 

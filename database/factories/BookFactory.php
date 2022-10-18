@@ -12,7 +12,7 @@ class BookFactory extends Factory
             'title' => $this->faker->title,
             'author_id' => rand(1, 5),
             'summary' => $this->faker->paragraph,
-            'price' => rand(2, 10),
+            'price' => rand(2000, 10000),
             'category_id' => rand(1, 6)
         ];
     }

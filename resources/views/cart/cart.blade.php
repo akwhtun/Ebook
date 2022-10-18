@@ -2,12 +2,12 @@
 
 @section('cart')
     <form action="{{ route('cart#view', Auth::user()->name) }}" method="GET">
-        <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+        <input type="hidden" name="userId" value="{{ Auth::user()->id }}" class="userIdCode">
         <button type="submit" class="border-0 bg-light text-dark">
             <div class="d-flex align-items-center">
                 <i class="fas fa-shopping-cart cart"></i>
                 <span
-                    class="badge rounded-circle border border-secondary text-dark ms-1 cart-qty cart-count">{{ count($carts) }}</span>
+                    class="badge rounded-circle border border-secondary text-dark ms-1 cart-qty">{{ count($carts) }}</span>
             </div>
         </button>
     </form>
@@ -16,7 +16,7 @@
 @section('content')
     <div class="mt-1 px-5 py-3 row g-0 data">
         @if (count($carts) > 0)
-            <div class="col-9">
+            <div class="col-8">
                 <table class="w-100">
                     <tr class="text-center">
                         <th class="col-2">Book</th>
@@ -36,6 +36,7 @@
                                     <img src="{{ asset('storage/cover/' . $list->book->photo) }}" class=" rounded"
                                         alt="book cover" style="width:60px;height:80px">
                                 @endif
+                                <input type="hidden" value="{{ $list->book->id }}" class="bookId">
                             </td>
                             <td>{{ $list->book->title }}</td>
                             <td class=""><span class="price">{{ $list->book->price }} </span> Ks</td>
@@ -56,9 +57,9 @@
                     @endforeach
                 </table>
             </div>
-            <div class="col-3 px-3">
+            <div class="col-4 px-3">
                 <h4><span>Cart Summary</span> <i class="fas fa-cart-arrow-down ms-3"></i></h4>
-                <div class="bg-white mt-3">
+                <div class="bg-white mt-2">
                     <p class="fs-4 d-flex justify-content-between">
                         <span>Total Price</span>
                         <span class="sub-total">{{ $subTotal }} Ks</span>
@@ -74,7 +75,24 @@
                     </p>
                 </div>
                 <div>
-                    <button class="w-100 mt-3 btn btn-lg btn-success">Order Now</button>
+                    <div class="mt-2">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" value="{{ Auth::user()->name }}" readonly>
+                    </div>
+                    <div class="mt-2">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" value="{{ Auth::user()->email }}" readonly>
+                    </div>
+                    <div class="mt-2">
+                        <label for="address">Address</label>
+                        <textarea id="address" name="address" cols="10" rows="5" class="form-control"
+                            placeholder="Enter full address"></textarea>
+                        <small class="text-danger addressField d-none">The address field is required</small>
+                    </div>
+                    <button type="submit" class="w-100 mt-3 btn btn-lg btn-success orderBtn">Order Now</button>
+
+                </div>
+                <div>
                     <a href="{{ route('book#all') }}" class="w-100 mt-3 btn btn-lg btn-primary">Continue Shopping</a>
                     <button class="w-100 mt-3 btn btn-lg btn-danger text-white cart-clear">Clear Cart</button>
                 </div>
@@ -133,8 +151,8 @@
 
 @section('ajax')
     <script>
-        //remove cart list
         $(document).ready(function() {
+            //remove cart list
             $('.remove').on('click', function() {
                 $cartQty = parseInt($('.cart-qty').html());
                 $list = $(this).closest('.cart-list');
@@ -177,6 +195,7 @@
                 });
             });
 
+            //clear cart list
             $('.cart-clear').on('click', function() {
                 $.ajax({
                     type: 'get',
@@ -199,7 +218,47 @@
                         alert('error')
                     }
                 });
-            })
+            });
+
+            //submit order
+            $('.orderBtn').on('click', function() {
+                $orders = [];
+
+                $id = $('.userIdCode').val();
+                $code = 'ebook' + $id + Math.floor(Math.random(1, 9) * 1000000);
+                $address = $('#address').val();
+
+                if ($address == '') {
+                    $('.addressField').removeClass('d-none');
+                    return;
+                } else {
+                    $('.addressField').addClass('d-none');
+                }
+
+                $('.cart-list').each(function(index, row) {
+                    $orders.push({
+                        'user_id': $id,
+                        'book_id': $(row).find('.bookId').val(),
+                        'qty': $(row).find('.qty-val').html(),
+                        'total_price': $(row).find('.total-price').html(),
+                        'order_code': $code,
+                        'address': $address
+                    });
+                });
+
+                $.ajax({
+                    type: 'get',
+                    url: '/carts/order',
+                    data: Object.assign({}, $orders),
+                    dataType: 'json',
+                    success: function() {
+                        $('.cart-qty').html(0);
+                        window.location.href = '/orders/success';
+                    }
+                })
+
+
+            });
         })
     </script>
 @endsection
