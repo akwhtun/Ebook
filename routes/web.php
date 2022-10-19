@@ -104,6 +104,16 @@ Route::middleware('auth')->group(function () {
 
             Route::get('/viewListDetail/{code}/{status}', [OrderItemController::class, 'orderListDetail'])->name('order#detail');
         });
+
+        //Admin View Comment
+        Route::prefix('comments')->group(function () {
+
+            Route::get('/list', [CommentController::class, 'showCommentList'])->name('comment#list');
+
+            Route::get('/ban/{id}', [CommentController::class, 'deleteCommentByAdmin'])->name('comment#ban');
+
+            Route::get('/check/{id}', [CommentController::class, 'checkComment'])->name('comment#check');
+        });
     });
 
     Route::group(['middleware' => 'auth_user'], function () {

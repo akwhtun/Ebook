@@ -61,6 +61,11 @@
                     <i class="fas fa-chart-bar mx-1"></i>
                     <span class="d-none d-md-inline">Categories</span>
                 </a>
+                <a href="{{ route('comment#list') }}"
+                    class="text-decoration-none text-white list d-block p-2 m-0 mt-2 text-center text-md-start">
+                    <i class="fas fa-comment-alt mx-1"></i>
+                    <span class="d-none d-md-inline">Comments</span>
+                </a>
                 <div class="lists">
                     <span
                         class="d-flex justify-content-between align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">

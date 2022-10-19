@@ -12,6 +12,33 @@ use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
+
+    //show comment by admin
+    public function showCommentList()
+    {
+        $comments = Comment::select('comments.*', 'books.title as book_title', 'books.photo as book_photo')
+            ->leftJoin('books', 'comments.book_id', 'books.id')
+            ->when(request('searchKey'), function ($query) {
+                $query->where('comments.content', 'like', '%' . request('searchKey') . '%');
+            })->orderBy('comments.id', 'desc')->paginate('8');
+        $comments->appends(request()->all());
+        return view('admin.comment-lists', compact('comments'));
+    }
+
+    //delete comment by admin
+    public function deleteCommentByAdmin($id)
+    {
+        Comment::where('id', $id)->delete();
+        return redirect()->route('comment#list')->with(['deleteComment' => 'Comment Deleted!']);
+    }
+
+    //view comment by admin
+    public function checkComment($id)
+    {
+        $comment = Comment::where('id', $id)->first();
+        return view('admin.comment-view', compact('comment'));
+    }
+
     //create Comment
     public function createComment(Request $request)
     {
