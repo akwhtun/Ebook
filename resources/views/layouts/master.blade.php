@@ -61,12 +61,37 @@
                     <i class="fas fa-chart-bar mx-1"></i>
                     <span class="d-none d-md-inline">Categories</span>
                 </a>
-                @if (!empty(Auth::user()))
-                    <p class="list p-2 m-0 mt-2 text-center text-md-start">
-                        <i class="fab fa-first-order mx-1"></i>
-                        <span class="d-none d-md-inline">Order</span>
+                <div class="lists">
+                    <span
+                        class="d-flex justify-content-between align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
+                        <span class="d-none d-md-inline"><i class="fab fa-first-order me-1"></i> Orders
+                        </span>
+                        <i class="fas fa-angle-down me-4 down-arrow" style="cursor: pointer"></i>
+                    </span>
+                    <p class="li-group">
+                        <a href="{{ route('order#viewList') }}"
+                            class="text-decoration-none text-dark ano-list d-block p-2 m-0 text-center text-md-start">
+                            <i class="fas fa-list-alt"></i>
+                            <span class="d-none d-md-inline ms-2">All Orders</span>
+                        </a>
+                        <a href="{{ route('order#statusChoose', 0) }}"
+                            class="text-decoration-none text-warning ano-list d-block p-2 m-0 text-center text-md-start">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span class="d-none d-md-inline ms-2">Pending Orders</span>
+                        </a>
+                        <a href="{{ route('order#statusChoose', 1) }}"
+                            class="text-decoration-none text-success ano-list d-block p-2 m-0 text-center text-md-start">
+                            <i class="fas fa-check"></i>
+                            <span class="d-none d-md-inline ms-2">Success Orders</span>
+                        </a>
+                        <a href="{{ route('order#statusChoose', 2) }}"
+                            class="text-decoration-none text-danger ano-list d-block p-2 m-0 text-center text-md-start">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span class="d-none d-md-inline ms-2">Reject Orders</span>
+                        </a>
                     </p>
-                @endif
+                </div>
+
             </div>
         </div>
         <div class="col-9">
@@ -174,6 +199,8 @@
 
     {{-- Custom Js --}}
     <script src="{{ asset('admin/js/custom.js') }}"></script>
+
+    @yield('ajax')
 </body>
 
 </html>

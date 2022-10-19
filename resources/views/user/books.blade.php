@@ -71,7 +71,7 @@
                 @if (Auth::user() != null)
                     <a href="{{ route('order#history', Auth::user()->id) }}"
                         class="d-flex justify-content-between align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
-                        <span class="d-none d-md-inline ms-3"><i class="fas fa-history me-1"></i>Order History
+                        <span class="d-none d-md-inline ms-3"><i class="fas fa-history me-2"></i>Order History
                         </span>
                         <small class="text-white bg-danger rounded-circle p-1 me-4 badge">{{ count($history) }}</small>
                     </a>
@@ -80,7 +80,7 @@
                     @if (Auth::user()->role == 'admin')
                         <a href="{{ route('admin', Auth::user()->role) }}"
                             class="text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
-                            <span class="d-none d-md-inline ms-3"><i class="fas fa-user-secret me-1"></i>Admin Mode
+                            <span class="d-none d-md-inline ms-3"><i class="fas fa-user-secret me-2"></i>Go Admin
                             </span>
                         </a>
                     @endif

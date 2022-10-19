@@ -9,6 +9,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\OrderListController;
+use App\Models\OrderList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -90,6 +91,18 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/{id}', [BookController::class, 'editBook'])->name('book#edit');
 
             Route::post('/update', [BookController::class, 'updateBook'])->name('book#update');
+        });
+
+        //Admin Manage Order
+        Route::prefix('orders')->group(function () {
+
+            Route::get('/viewList', [OrderListController::class, 'orderList'])->name('order#viewList');
+
+            Route::get('chooseStatus/{status}', [OrderListController::class, 'orderStatus'])->name('order#statusChoose');
+
+            Route::get('/changeStatus/{id}/{status}', [OrderListController::class, 'changeStatus'])->name('order#status');
+
+            Route::get('/viewListDetail/{code}/{status}', [OrderItemController::class, 'orderListDetail'])->name('order#detail');
         });
     });
 

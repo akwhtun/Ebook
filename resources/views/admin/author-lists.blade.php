@@ -40,7 +40,7 @@
             {{ $authors->links() }}
 
             @if (count($authors) > 0)
-                <table class="table">
+                <table class="table bg-dark">
                     <thead>
                         <tr>
                             <th scope="col" style="width: 5%">ID</th>

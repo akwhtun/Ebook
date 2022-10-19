@@ -10,4 +10,9 @@ class OrderList extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'total_price', 'order_code', 'address', 'status'];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

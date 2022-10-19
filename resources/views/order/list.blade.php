@@ -32,13 +32,16 @@
                 @foreach ($lists as $list)
                     <tr class="text-center">
                         <td>
-                            @if ($list->book->photo == null)
-                                <img src="{{ asset('storage/default.jpg') }}" class="rounded" alt="default"
-                                    style="width:60px;height:80px">
-                            @else
-                                <img src="{{ asset('storage/cover/' . $list->book->photo) }}" class=" rounded"
-                                    alt="book cover" style="width:60px;height:80px">
-                            @endif
+                            <div class="d-flex justify-content-around">
+                                @if ($list->book->photo == null)
+                                    <img src="{{ asset('storage/default.jpg') }}" class="rounded" alt="default"
+                                        style="width:60px;height:80px">
+                                @else
+                                    <img src="{{ asset('storage/cover/' . $list->book->photo) }}" class=" rounded"
+                                        alt="book cover" style="width:60px;height:80px">
+                                @endif
+                                <span>{{ $list->book->title }}</span>
+                            </div>
                         </td>
                         <td>{{ $list->qty }}</td>
                         <td>{{ $list->total_price }} Ks</td>

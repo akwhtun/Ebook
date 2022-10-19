@@ -15,4 +15,9 @@ class OrderItem extends Model
     {
         return $this->belongsTo('App\Models\book');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }
