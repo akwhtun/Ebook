@@ -20,7 +20,7 @@
 <body>
 
     <div class="row g-0 con">
-        <div class="col-3 min-vh-100 left-col">
+        <div class="col-3 left-col" style="height:100vh;overflow: scroll">
             <div class="text-center p-3">
                 <a href="{{ route('book#all') }}">
                     <img src="{{ asset('admin/images/logo.png') }}" alt="logo" width="80px">
@@ -96,7 +96,31 @@
                         </a>
                     </p>
                 </div>
-
+                <div class="lists">
+                    <span
+                        class="d-flex justify-content-between align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
+                        <span class="d-none d-md-inline"><i class="fas fa-list me-1"></i> Contacts
+                        </span>
+                        <i class="fas fa-angle-down me-4 down-arrow" style="cursor: pointer"></i>
+                    </span>
+                    <p class="li-group">
+                        <a href="{{ route('contact#list') }}"
+                            class="text-decoration-none text-dark ano-list d-block p-2 m-0 text-center text-md-start">
+                            <i class="fas fa-th-list"></i>
+                            <span class="d-none d-md-inline ms-2">All Contacts</span>
+                        </a>
+                        <a href="{{ route('contact#chooseList', 1) }}"
+                            class="text-decoration-none text-success ano-list d-block p-2 m-0 text-center text-md-start">
+                            <i class="fas fa-check-circle"></i>
+                            <span class="d-none d-md-inline ms-2">Finish Contact</span>
+                        </a>
+                        <a href="{{ route('contact#chooseList', 0) }}"
+                            class="text-decoration-none text-warning ano-list d-block p-2 m-0 text-center text-md-start">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span class="d-none d-md-inline ms-2">UnFinish Contact</span>
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
         <div class="col-9">

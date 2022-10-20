@@ -6,9 +6,11 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\OrderListController;
+use App\Models\Contact;
 use App\Models\OrderList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -105,7 +107,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/viewListDetail/{code}/{status}', [OrderItemController::class, 'orderListDetail'])->name('order#detail');
         });
 
-        //Admin View Comment
+        //Admin Manage Comment
         Route::prefix('comments')->group(function () {
 
             Route::get('/list', [CommentController::class, 'showCommentList'])->name('comment#list');
@@ -113,6 +115,18 @@ Route::middleware('auth')->group(function () {
             Route::get('/ban/{id}', [CommentController::class, 'deleteCommentByAdmin'])->name('comment#ban');
 
             Route::get('/check/{id}', [CommentController::class, 'checkComment'])->name('comment#check');
+        });
+
+        //Admin Manage Contacts
+        Route::prefix('contacts')->group(function () {
+
+            Route::get('/list', [ContactController::class, 'list'])->name('contact#list');
+
+            Route::get('/chooseList/{status}', [ContactController::class, 'chooseList'])->name('contact#chooseList');
+
+            Route::get('/changeStatus/{id}/{status}', [ContactController::class, 'changeStatus'])->name('contact#status');
+
+            Route::get('/view/{id}', [ContactController::class, 'view'])->name('contact#view');
         });
     });
 
@@ -159,6 +173,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/list/{orderCode}', [OrderItemController::class, 'historyList'])->name('order#list');
 
         Route::get('/success', [OrderItemController::class, 'orderSuccess'])->name('order#success');
+    });
+
+    Route::prefix('contacts')->group(function () {
+
+        Route::get('/page', [ContactController::class, 'contact'])->name('contact#page');
+
+        Route::post('/send', [ContactController::class, 'send'])->name('contact#send');
+
+        Route::get('/success', [ContactController::class, 'success'])->name('contact#success');
     });
 
     Route::get('/admin/manage/{role}', [AuthController::class, 'goAdmin'])->name('admin');

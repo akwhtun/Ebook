@@ -27,7 +27,9 @@
             <ul class="d-flex  justify-content-end m-0 p-0" style="list-style-type: none">
                 <li class="p-2 ms-2">Home</li>
                 <li class="p-2 ms-2">About</li>
-                <li class="p-2 ms-2">Contact Us</li>
+                <li class="p-2 ms-2">
+                    <a href="{{ route('contact#page') }}">contact</a>
+                </li>
             </ul>
         </div>
         <div class="searchBar w-25">

@@ -107,6 +107,14 @@ td{
      animation: count 0.7s 0.3s;
 }
 
+.bg-image{
+    margin-top: 3px;
+    background-image: url('../images/bg-image.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 91vh;
+}
+
 @keyframes cart {
      50%{
       font-size: 35px;
