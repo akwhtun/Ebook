@@ -20,7 +20,7 @@
 <body>
 
     <div class="row g-0 con">
-        <div class="col-3 left-col" style="min-height:100vh">
+        <div class="col-3 left-col min-vh-100">
             <div class="text-center p-3">
                 <a href="{{ route('book#all') }}">
                     <img src="{{ asset('admin/images/logo.png') }}" alt="logo" width="80px">

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row flex-column flex-lg-row py-3 px-5">
-        <h2 class="h5 text-info">QUICK STATS</h2>
+        <h2 class="h5 text-info py-2">QUICK STATS</h2>
         <div class="col-4">
             <div class="card mb-3 px-3 py-4 shadow-sm rounded border-0 text-white"
                 style="background: linear-gradient(#dd1568, #624fe1);">

@@ -123,6 +123,92 @@
         </div>
     </nav>
     @yield('content')
+
+    <footer>
+        <div class="text-dark px-5 pt-5 pb-3 bg-super-light">
+            <div class="row fs-5">
+                <div class="col-3">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled mt-4">
+                        <li class="mt-2"><a class="text-decoration-none text-dark"
+                                href="{{ route('book#all') }}">Home</a>
+                        </li>
+                        <li class="mt-2"><a class="text-decoration-none text-dark"
+                                href="{{ route('contact#page') }}">Contact</a></li>
+                        @if (Auth::user() != null)
+                            <li class="mt-2"><a class="text-decoration-none text-dark"
+                                    href="{{ route('cart#view', Auth::user()->id) }}">Cart</a>
+                            </li>
+                        @endif
+                        <li class="mt-2"><a class="text-decoration-none text-dark"
+                                href="{{ route('registerPage') }}">
+                                Sign In</a></;>
+                        <li class="mt-2"><a class="text-decoration-none text-dark"
+                                href="{{ route('registerPage') }}">Create
+                                Account</a></;>
+                    </ul>
+                </div>
+                <div class="col-3">
+                    <h3>My Account</h3>
+                    <ul class="list-unstyled mt-4">
+                        <li class="mt-2">
+                            <a class="text-decoration-none text-dark"
+                                href="{{ route('account#detail') }}">Profile</a>
+                        </li>
+                        <li class="mt-2">
+                            <a class="text-decoration-none text-dark" href="">Change Password</a>
+                        </li>
+                        <li class="mt-2">
+                            <a class="text-decoration-none text-dark" href="{{ route('logout') }}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-3">
+                    <h3>Follow Us</h3>
+                    <ul class="list-unstyled mt-4">
+                        <li class="mt-2">
+                            <i class="fab fa-facebook"></i>
+                            Facebook
+                        </li>
+                        <li class="mt-2">
+                            <i class="fab fa-twitter"></i>
+                            Twitter
+                        </li>
+                        <li class="mt-2">
+                            <i class="fab fa-youtube"></i>
+                            Youtube
+                        </li>
+
+                        <li class="mt-2">
+                            <i class="fab fa-instagram"></i>
+                            Instragram
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-3">
+                    <h3>Contacts</h3>
+                    <ul class="list-unstyled mt-4">
+                        <li class="mt-2">
+                            <i class="fas fa-phone"></i>
+                            09-890182064
+                        </li>
+                        <li class="mt-2">
+                            <i class="fas fa-envelope"></i>
+                            akwhtun@gmail.com
+                        </li>
+                        <li class="mt-2">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Myanmar,Mandalay,Myingyan
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-3 border-top border-dark border-2 text-center">
+                Created by <i class="fas fa-heart text-danger"></i> <span>A.K.W.H</span> | All right reserved
+            </div>
+        </div>
+    </footer>
+
     {{-- Bootstrap js --}}
     <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
 
