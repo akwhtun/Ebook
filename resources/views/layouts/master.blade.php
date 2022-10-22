@@ -20,7 +20,7 @@
 <body>
 
     <div class="row g-0 con">
-        <div class="col-3 left-col" style="height:100vh;overflow: scroll">
+        <div class="col-3 left-col" style="min-height:100vh">
             <div class="text-center p-3">
                 <a href="{{ route('book#all') }}">
                     <img src="{{ asset('admin/images/logo.png') }}" alt="logo" width="80px">
@@ -31,7 +31,7 @@
                     <i class="fas fa-user-cog mx-1 text-info"></i>
                     <span class="text-info d-none d-md-inline">Admin Control</span>
                 </p>
-                <a href=""
+                <a href="{{ route('admin#dashboard') }}"
                     class="text-decoration-none text-white list d-block p-2 m-0 mt-2 text-center text-md-start">
                     <i class="fas fa-home mx-1"></i>
                     <span class="d-none d-md-inline">Dashboard</span>

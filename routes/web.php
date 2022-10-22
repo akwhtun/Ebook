@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => 'auth_admin'], function () {
 
+        //Admin Dashboard
+        Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('admin#dashboard');
+
         //Admin Account Profile Detail
         Route::prefix('admins')->group(function () {
 

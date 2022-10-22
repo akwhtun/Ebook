@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
+use App\Models\Book;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Contact;
+use App\Models\OrderList;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +29,19 @@ class AuthController extends Controller
     public function loginPage()
     {
         return view('loginPage');
+    }
+
+    //dashboard
+    public function dashboard()
+    {
+        $users = User::all();
+        $books = Book::all();
+        $authors = Author::all();
+        $categories = Category::all();
+        $comments = Comment::all();
+        $orders = OrderList::all();
+        $contacts = Contact::all();
+        return view('admin.dashboard', compact('users', 'books', 'authors', 'categories', 'comments', 'orders', 'contacts'));
     }
 
     //View Account Detail
@@ -120,7 +139,7 @@ class AuthController extends Controller
     public function goAdmin($role)
     {
         if (Gate::allows('admin-auth', $role)) {
-            return redirect()->route('book#list');
+            return redirect()->route('admin#dashboard');
         }
     }
 
