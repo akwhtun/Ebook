@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\OrderListController;
+use App\Http\Controllers\ViewController;
 use App\Models\Contact;
 use App\Models\OrderList;
 use Illuminate\Http\Request;
@@ -205,3 +206,5 @@ Route::get('/categories/filter/{id}', [BookController::class, 'catFilter'])->nam
 Route::get('/authors/filter/{id}', [BookController::class, 'autFilter'])->name('author#filter');
 
 Route::get('/prices/filter/{amount}', [BookController::class, 'priceFilter'])->name('price#filter');
+
+Route::get('/mode/changeMode', [ViewController::class, 'changeMode'])->name('mode#changeMode');

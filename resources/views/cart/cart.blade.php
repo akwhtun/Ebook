@@ -14,11 +14,12 @@
 @endsection
 
 @section('content')
-    <div class="mt-1 px-5 py-3 row g-0 data">
+    <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
+    <div class="px-5 py-3 row g-0 data ch-bg" style="min-height: 80vh;">
         @if (count($carts) > 0)
             <div class="col-8">
                 <table class="w-100">
-                    <tr class="text-center">
+                    <tr class="text-center bg-dark text-white">
                         <th class="col-2">Book</th>
                         <th class="col-2">Title</th>
                         <th class="col-2">Price</th>
@@ -27,7 +28,7 @@
                         <th class="col-2">Remove</th>
                     </tr>
                     @foreach ($cartLists as $list)
-                        <tr class="text-center cart-list">
+                        <tr class="text-center cart-list text-dark">
                             <td class="">
                                 @if ($list->book->photo == null)
                                     <img src="{{ asset('storage/default.jpg') }}" class="rounded" alt="default"
@@ -58,8 +59,8 @@
                 </table>
             </div>
             <div class="col-4 px-3">
-                <h4><span>Cart Summary</span> <i class="fas fa-cart-arrow-down ms-3"></i></h4>
-                <div class="bg-white mt-2">
+                <h4 class="text-dark"><span>Cart Summary</span> <i class="fas fa-cart-arrow-down ms-3"></i></h4>
+                <div class="mt-2 text-dark">
                     <p class="fs-4 d-flex justify-content-between">
                         <span>Total Price</span>
                         <span class="sub-total">{{ $subTotal }} Ks</span>
@@ -74,7 +75,7 @@
                         <span class="sub-deli">{{ $subTotal + 3000 }} Ks</span>
                     </p>
                 </div>
-                <div>
+                <div class="text-dark">
                     <div class="mt-2">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" value="{{ Auth::user()->name }}" readonly>
@@ -147,6 +148,7 @@
             }
         })
     </script>
+    <script src="{{ asset('admin/js/light-dark.js') }}"></script>
 @endsection
 
 @section('ajax')

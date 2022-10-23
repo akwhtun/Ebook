@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\OrderItem;
 use App\Models\OrderList;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -29,13 +30,14 @@ class CartController extends Controller
         $userId = $request->userId;
         $cartLists = Cart::where('user_id', $userId)->get();
         $carts = Cart::where('user_id', Auth::user()->id)->get();
+        $mode = View::where('id', 1)->first();
 
         $subTotal = 0;
         foreach ($cartLists as $list) {
             $subTotal += $list->book->price * $list->qty;
         }
 
-        return view('cart.cart', compact('cartLists', 'carts', 'subTotal'));
+        return view('cart.cart', compact('cartLists', 'carts', 'subTotal', 'mode'));
     }
 
     //delete cart

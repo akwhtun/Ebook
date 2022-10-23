@@ -5,7 +5,7 @@
         <div class="input-group">
             <input type="search" name="searchKey" value="{{ request('searchKey') }}" class="form-control"
                 placeholder="Search By Book Name...">
-            <button class="btn btn-dark"><i class="fas fa-search"></i></button>
+            <button class="btn bg-black text-light"><i class="fas fa-search"></i></button>
         </div>
     </form>
 @endsection
@@ -14,7 +14,7 @@
     @section('cart')
         <form action="{{ route('cart#view', Auth::user()->name) }}" method="GET">
             <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
-            <button type="submit" class="border-0 bg-light text-dark">
+            <button type="submit" class="border-0  bg-light text-dark">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-shopping-cart cart"></i>
                     <span
@@ -65,9 +65,10 @@
     {{-- <h3 class="text-dark px-5 pt-2 pe-3 col-3 m-0">All Books</h3> --}}
 
     {{-- all books start --}}
-    <div class="row g-0 con min-vh-100 ">
-        <div class="col-2 left-col">
-            <div class="text-light" style="font-size:18px;">
+    <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
+    <div class="row g-0 con ">
+        <div class="col-2 col-left left-col" style="height: 165vh">
+            <div class="text-light mt-4" style="font-size:18px;">
                 @if (Auth::user() != null)
                     <a href="{{ route('order#history', Auth::user()->id) }}"
                         class="d-flex justify-content-between align-items-center text-decoration-none text-white ano-list d-block p-2 m-0 mt-2 text-center text-md-start">
@@ -86,7 +87,7 @@
                     @endif
                 @endif
                 <p class="p-2 m-0 border-1 border-bottom border-secondary text-center text-md-start">
-                    <span class="text-info d-none d-md-inline text-uppercase">Filter By Price</span>
+                    <span class="text-dark d-none d-md-inline text-uppercase">Filter By Price</span>
                 </p>
                 <div class="lists">
                     <span
@@ -133,7 +134,7 @@
             </div>
             <div class="text-light" style="font-size:18px;">
                 <p class="p-2 m-0 border-1 border-bottom border-secondary text-center text-md-start">
-                    <span class="text-info d-none d-md-inline text-uppercase">Filter By Author</span>
+                    <span class="text-dark d-none d-md-inline text-uppercase">Filter By Author</span>
                 </p>
                 <div class="lists">
                     <span
@@ -154,7 +155,7 @@
             </div>
             <div class="text-light" style="font-size:18px;">
                 <p class="p-2 m-0 border-1 border-bottom border-secondary text-center text-md-start">
-                    <span class="text-info d-none d-md-inline text-uppercase">Filter By Category</span>
+                    <span class="text-dark d-none d-md-inline text-uppercase">Filter By Category</span>
                 </p>
                 <div class="lists">
                     <span
@@ -175,11 +176,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-10">
+        <div class=" col-10 con ch-bg">
             @if (count($books) > 0)
                 <div class="d-flex flex-wrap justify-content-start align-items-center gap-3 mb-3 p-2">
                     @foreach ($books as $book)
-                        <div class="text-center rounded shadow-sm border-0 p-3 mt-4 d-flex flex-wrap book-info">
+                        <div
+                            class="text-center rounded shadow border-0 p-3 mt-5 d-flex flex-wrap book-info  bg-light text-dark">
                             <div class="book" style="flex-basis:53%">
                                 @if ($book->photo == null)
                                     <img src="{{ asset('storage/default.jpg') }}" class="rounded w-100" alt="default">
@@ -239,44 +241,51 @@
     </div>
 @endsection
 
+@section('script')
+    <script src="{{ asset('admin/js/light-dark.js') }}"></script>
+@endsection
+
 @section('ajax')
     <script>
         //add to cart
         $(document).ready(function() {
-            $('.add-cart').on('click', function() {
-                $cart = $('.cart');
-                $count = $('.cart-qty');
-                $cart.removeClass('shopping-cart');
-                $count.removeClass('cart-count');
+                $('.add-cart').on('click', function() {
+                    alert('hi');
+                });
+                $('.book-info').delegate('.add-cart', 'click', function() {
+                    $cart = $('.cart');
+                    $count = $('.cart-qty');
+                    $cart.removeClass('shopping-cart');
+                    $count.removeClass('cart-count');
 
-                $cartQty = parseInt($('.cart-qty').html());
-                $userId = $(this).closest('.cart-Buttons').find('#userId').val();
-                $bookId = $(this).closest('.cart-Buttons').find('#bookId').val();
-                $qty = 1;
-                $data = {
-                    'userId': $userId,
-                    'bookId': $bookId,
-                    'qty': $qty
-                };
-                $.ajax({
-                    type: 'get',
-                    url: '/carts/add',
-                    data: $data,
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.status == 'true') {
-                            $cart.addClass('shopping-cart');
-                            $count.addClass('cart-count');
+                    $cartQty = parseInt($('.cart-qty').html());
+                    $userId = $(this).closest('.cart-Buttons').find('#userId').val();
+                    $bookId = $(this).closest('.cart-Buttons').find('#bookId').val();
+                    $qty = 1;
+                    $data = {
+                        'userId': $userId,
+                        'bookId': $bookId,
+                        'qty': $qty
+                    };
+                    $.ajax({
+                        type: 'get',
+                        url: '/carts/add',
+                        data: $data,
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status == 'true') {
+                                $cart.addClass('shopping-cart');
+                                $count.addClass('cart-count');
 
-                            $cartQty += 1;
-                            $('.cart-qty').html($cartQty);
-                        }
-                    },
-                    // error: function() {
-                    //     window.location.href = '/loginPage';
-                    // }
-                })
-            });
-        })
-    </script>
-@endsection
+                                $cartQty += 1;
+                                $('.cart-qty').html($cartQty);
+                            }
+                        },
+                        // error: function() {
+                        //     window.location.href = '/loginPage';
+                        // }
+                    })
+                });
+            }) <
+            />
+    @endsection

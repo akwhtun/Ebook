@@ -16,7 +16,8 @@
 @endif
 
 @section('content')
-    <div class="py-3  m-1 min-vh-100">
+    <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
+    <div class="py-3 min-vh-100 ch-bg">
         <div class="px-5">
             <a href="{{ route('book#all') }}" class="text-dark" style="cursor: pointer"><i
                     class="fas fa-arrow-circle-left fs-5">&nbsp;<small>Back</small></i></a>
@@ -31,7 +32,7 @@
                         alt="book cover" style="width:230px;height:320px">
                 @endif
             </div>
-            <div class=" p-2" style="width: 65%">
+            <div class=" p-2 text-dark" style="width: 65%">
                 <p class="fs-4">{{ $bookDetail->title }}</p>
                 <p>{{ $bookDetail->view }} <i class="fas fa-eye ms-1"></i></p>
                 <p class="fs-4">{{ $bookDetail->price }} kyats</p>
@@ -59,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="m-3 px-3 card">
+        <div class="m-3 px-3 card bg-light text-dark">
             @if (count($bookDetail->comments) > 0)
                 <div
                     class="d-flex justify-content-between align-items-center py-1 ms-2 border border-0 border-bottom border-bottom-3 border-white">
@@ -178,6 +179,7 @@
             });
         })
     </script>
+    <script src="{{ asset('admin/js/light-dark.js') }}"></script>
 @endsection
 
 @section('ajax')

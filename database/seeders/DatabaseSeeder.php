@@ -9,6 +9,7 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
+use App\Models\View;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,13 +18,27 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        //Create Default User
+        //Create Default Users
         User::create([
             'name' => 'Aung Kyaw Wai Htun',
             'email' => 'aung955910@gmail.com',
             'gender' => 'Male',
             'role' => 'admin',
             'password' => Hash::make('admin123'),
+        ]);
+
+        User::create([
+            'name' => 'Taylor',
+            'email' => 'taylor@gmail.com',
+            'gender' => 'Female',
+            'password' => Hash::make('taylorteam'),
+        ]);
+
+        User::create([
+            'name' => 'Harry',
+            'email' => 'harry@gmail.com',
+            'gender' => 'Male',
+            'password' => Hash::make('harryteam'),
         ]);
 
         //Create Default Book
@@ -51,5 +66,10 @@ class DatabaseSeeder extends Seeder
                 'gender' => 'Male',
             ]);
         }
+
+        //Create view mode
+        View::create([
+            'mode' => 0
+        ]);
     }
 }

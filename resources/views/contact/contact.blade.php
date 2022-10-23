@@ -13,7 +13,8 @@
 @endsection
 
 @section('content')
-    <div class="bg-image d-flex justify-content-end">
+    <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
+    <div class="bg-image d-flex justify-content-end bg-light">
         <div class="col-5 me-4 p-4">
             <p class="text-dark fs-5">Contact Us</p>
             <form action="{{ route('contact#send') }}" method="POST">
@@ -69,4 +70,8 @@
 
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('admin/js/light-dark.js') }}"></script>
 @endsection

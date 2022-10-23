@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Contact;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -45,8 +46,9 @@ class ContactController extends Controller
     //contact us
     public function contact()
     {
+        $mode = View::where('id', 1)->first();
         $carts = Cart::where('user_id', Auth::user()->id)->get();
-        return view('contact.contact', compact('carts'));
+        return view('contact.contact', compact('carts', 'mode'));
     }
 
 
@@ -69,6 +71,7 @@ class ContactController extends Controller
     public function success()
     {
         $carts = Cart::where('user_id', Auth::user()->id)->get();
-        return view('contact.success', compact('carts'));
+        $mode = View::where('id', 1)->first();
+        return view('contact.success', compact('carts', 'mode'));
     }
 }

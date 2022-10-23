@@ -15,4 +15,47 @@ $(document).ready(function () {
     $('.ano-list').on('click', function () {
         $(this).addClass('active');
     })
+
+    //light dark mode
+    $('.check-box').on('click', function() {
+        if ($(this).is(':checked')) {
+            $.ajax({
+                type: 'get',
+                url: '/mode/changeMode',
+                data: {
+                    'mode': 1
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('.bg-light').addClass('bg-dark');
+                    $('.text-dark').addClass('text-white');
+                    $('.border-dark').addClass('border-white');
+                    $('.ch-bg').removeClass('con');
+                    $('.ch-bg').addClass('bg-black');
+                    $('.left-col').addClass('ano-left-col');
+                }
+            })
+        } else {
+            $.ajax({
+                type: 'get',
+                url: '/mode/changeMode',
+                data: {
+                    'mode': 0
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('.bg-light').removeClass('bg-dark');
+                    $('.text-dark').removeClass('text-white');
+                    $('.border-dark').removeClass('border-white');
+                    $('.ch-bg').addClass('con');
+                    $('.ch-bg').remove('bg-black');
+                    $('.left-col').removeClass('ano-left-col');
+                }
+            })
+        }
+    });
+
+
+
+
 })

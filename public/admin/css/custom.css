@@ -3,10 +3,16 @@ body {
 }
 
 .con {
-    background: linear-gradient(white, #c4ade6);
+    background: linear-gradient( #add8e6, #ffffff,#6dd1f3 );
 }
 .left-col {
     background-image: url('../images/left-side.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.ano-left-col {
+    background-image: url('../images/ano-left-side.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -87,14 +93,11 @@ table{
     border-collapse: separate;
 }
 th{
-    color:#fff;
-    background: #121212;
+   padding:5px 0;
 }
 
 td{
     padding:5px;
-    background-color:snow;
-    border-top: 1px solid #fff;
 }
 .cart{
      font-size: 25px;
@@ -108,7 +111,7 @@ td{
 }
 
 .bg-image{
-    margin-top: 3px;
+    padding-top: 3px;
     background-image: url('../images/bg-image.jpg');
     background-position: center;
     background-size: cover;

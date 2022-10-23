@@ -211,8 +211,11 @@
                         @endguest
                     </div>
                 </div>
-                <div class="pe-3 py-3 text-center" style="width:10%;">
+                <div class="pe-3 py-3 text-center d-flex align-items-center" style="width:10%;">
                     <i class="far fa-moon fs-4 me-2"></i>
+                    <div class="form-check form-switch mx-1">
+                        <input class="form-check-input" style="width: 47px;height:22px" type="checkbox" checked>
+                    </div>
                     <i class="fas fa-sun fs-4  me-2"></i>
                 </div>
             </nav>

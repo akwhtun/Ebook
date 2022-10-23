@@ -7,6 +7,7 @@ use App\Models\Book;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\OrderList;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -21,18 +22,21 @@ class BookController extends Controller
         $books = Book::select('books.*', 'categories.name as category_name', 'authors.name as author_name')
             ->leftJoin('categories', 'books.category_id', 'categories.id')
             ->leftJoin('authors', 'books.author_id', 'authors.id')
-            ->orderBy('books.id', 'desc')->paginate(6);
+            ->orderBy('books.id', 'desc')->paginate(9);
         $latestBooks = Book::latest()->paginate(6);
         $categories = Category::all();
         $authors = Author::all();
+
+        $mode = View::where('id', 1)->first();
         // $oneTwo =
+        // dd($mode->toArray());
 
         if (Auth::user() != null) {
             $history = OrderList::where('user_id', Auth::user()->id)->get();
             $carts = Cart::where('user_id', Auth::user()->id)->get();
-            return view('user.books', compact('books', 'latestBooks', 'categories', 'authors', 'carts', 'history'));
+            return view('user.books', compact('books', 'latestBooks', 'categories', 'authors', 'carts', 'history', 'mode'));
         } else {
-            return view('user.books', compact('books', 'latestBooks', 'categories', 'authors'));
+            return view('user.books', compact('books', 'latestBooks', 'categories', 'authors', 'mode'));
         }
     }
 
@@ -212,12 +216,13 @@ class BookController extends Controller
     public function viewBookDetail($id)
     {
         $bookDetail = Book::where('id', $id)->first();
+        $mode = View::where('id', 1)->first();
 
         if (Auth::user() != null) {
             $carts = Cart::where('user_id', Auth::user()->id)->get();
-            return view('user.bookDetail', compact('bookDetail', 'carts'));
+            return view('user.bookDetail', compact('bookDetail', 'carts', 'mode'));
         } else {
-            return view('user.bookDetail', compact('bookDetail'));
+            return view('user.bookDetail', compact('bookDetail', 'mode'));
         }
     }
 }

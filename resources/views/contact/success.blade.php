@@ -13,18 +13,25 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="mt-3 border border-4 border-success">
-            <p class="bg-success text-white p-2 m-0 p-0">Contact Success</p>
-            <div class="d-flex align-items-center">
-                <span class="p-2 my-3 fs-5">
-                    We Accept your message.
-                    We'll Reply as soon as possible.
-                    Thanks fory your support.
-                </span>
-                <a href="{{ route('book#all') }}" class="text-decoration-none text-primary">Back Home <i
-                        class="fas fa-angle-double-right"></i></a>
+    <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
+    <div class="ch-bg" style="min-height: 80vh">
+        <div class="container pt-4">
+            <div class="border border-4 border-success text-dark">
+                <p class="bg-success text-white p-2 m-0 p-0">Contact Success</p>
+                <div class="d-flex align-items-center">
+                    <span class="p-2 my-3 fs-5">
+                        We Accept your message.
+                        We'll Reply as soon as possible.
+                        Thanks fory your support.
+                    </span>
+                    <a href="{{ route('book#all') }}" class="text-decoration-none text-primary">Back Home <i
+                            class="fas fa-angle-double-right"></i></a>
+                </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('admin/js/light-dark.js') }}"></script>
 @endsection
