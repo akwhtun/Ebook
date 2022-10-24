@@ -22,7 +22,7 @@
                     <span class="p-2 my-3 fs-5">
                         We Accept your message.
                         We'll Reply as soon as possible.
-                        Thanks fory your support.
+                        Thanks for your support.
                     </span>
                     <a href="{{ route('book#all') }}" class="text-decoration-none text-primary">Back Home <i
                             class="fas fa-angle-double-right"></i></a>

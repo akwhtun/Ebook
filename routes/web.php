@@ -50,6 +50,16 @@ Route::middleware('auth')->group(function () {
             Route::get('/unsuspend/{id}', [AuthController::class, 'unsuspend'])->name('account#unsuspend');
 
             Route::get('/delete/{id}', [AuthController::class, 'deleteAccount'])->name('account#delete');
+
+            Route::get('account/viewDetail', [AuthController::class, 'viewDetail'])->name('account#detail');
+
+            Route::get('account/editDetail', [AuthController::class, 'editDetail'])->name('account#edit');
+
+            Route::post('account/updateDetail', [AuthController::class, 'updateDetail'])->name('account#update');
+
+            Route::get('account/changePassword/{id}', [AuthController::class, 'adminChangePasswordPage'])->name('admin#changePassword');
+
+            Route::post('/account/changePassword', [AuthController::class, 'changeAdminPassword'])->name('adminPassword#change');
         });
 
         //Admin CRUD Author
@@ -132,30 +142,25 @@ Route::middleware('auth')->group(function () {
 
             Route::get('/view/{id}', [ContactController::class, 'view'])->name('contact#view');
         });
+
+        Route::get('/admin/manage/{role}', [AuthController::class, 'goAdmin'])->name('admin');
     });
 
     Route::group(['middleware' => 'auth_user'], function () {
+
         //User
+        Route::prefix('user')->group(function () {
 
-    });
+            Route::get('account/viewDetail', [AuthController::class, 'viewUserDetail'])->name('user#detail');
 
-    Route::prefix('account')->group(function () {
-        Route::get('/viewDetail', [AuthController::class, 'viewDetail'])->name('account#detail');
+            Route::get('account/editDetail', [AuthController::class, 'editUserDetail'])->name('user#edit');
 
-        Route::get('/editDetail', [AuthController::class, 'editDetail'])->name('account#edit');
+            Route::post('account/updateDetail', [AuthController::class, 'updateUserDetail'])->name('user#update');
 
-        Route::post('/updateDetail', [AuthController::class, 'updateDetail'])->name('account#update');
-    });
+            Route::get('account/changePassword/{id}', [AuthController::class, 'changePasswordPage'])->name('user#changePassword');
 
-    Route::prefix('comments')->group(function () {
-
-        Route::post('/create', [CommentController::class, 'createComment'])->name('comment#create');
-
-        Route::get('/edit/{id}', [CommentController::class, 'editComment'])->name('comment#edit');
-
-        Route::post('/update/{id}', [CommentController::class, 'updateComment'])->name('comment#update');
-
-        Route::get('/delete/{id}', [CommentController::class, 'deleteComment'])->name('comment#delete');
+            Route::post('/account/changePassword', [AuthController::class, 'changeUserPassword'])->name('password#change');
+        });
     });
 
     Route::prefix('carts')->group(function () {
@@ -188,7 +193,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/success', [ContactController::class, 'success'])->name('contact#success');
     });
 
-    Route::get('/admin/manage/{role}', [AuthController::class, 'goAdmin'])->name('admin');
+    Route::prefix('comments')->group(function () {
+
+        Route::post('/create', [CommentController::class, 'createComment'])->name('comment#create');
+
+        Route::get('/edit/{id}', [CommentController::class, 'editComment'])->name('comment#edit');
+
+        Route::post('/update/{id}', [CommentController::class, 'updateComment'])->name('comment#update');
+
+        Route::get('/delete/{id}', [CommentController::class, 'deleteComment'])->name('comment#delete');
+    });
 });
 
 Route::get('/', [BookController::class, 'getAllBooks'])->name('book#all');

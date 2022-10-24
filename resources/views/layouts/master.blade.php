@@ -191,7 +191,8 @@
                                                 href="{{ route('account#detail') }}">
                                                 <i class="text-dark fs-5 fas fa-user me-2"></i>
                                                 <span style="font-size: 18px;">Account</span></a>
-                                            <a class="dropdown-item  py-2 border border-0 border-bottom" href="">
+                                            <a class="dropdown-item  py-2 border border-0 border-bottom"
+                                                href="{{ route('admin#changePassword', Auth::user()->id) }}">
                                                 <i class="text-dark fs-5 fas fa-key me-2"></i>
                                                 <span style="font-size: 18px;"> Change Password</span></a>
                                             <div class="">
@@ -211,12 +212,8 @@
                         @endguest
                     </div>
                 </div>
-                <div class="pe-3 py-3 text-center d-flex align-items-center" style="width:10%;">
-                    <i class="far fa-moon fs-4 me-2"></i>
-                    <div class="form-check form-switch mx-1">
-                        <input class="form-check-input" style="width: 47px;height:22px" type="checkbox" checked>
-                    </div>
-                    <i class="fas fa-sun fs-4  me-2"></i>
+                <div class="text-center" style="width:10%;">
+                    <i class="fas fa-compress-arrows-alt fs-4"></i>
                 </div>
             </nav>
             @yield('content')

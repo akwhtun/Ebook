@@ -6,7 +6,7 @@
         <div class="bg-light shadow-sm rounded border border-3  p-4">
             <div class="d-flex justify-content-between align-items-start">
                 <div>
-                    <a href="{{ route('book#all') }}" class="text-dark" style="cursor: pointer"><i
+                    <a href="{{ route('admin#dashboard') }}" class="text-dark" style="cursor: pointer"><i
                             class="fas fa-arrow-circle-left fs-5">&nbsp;<small>Back</small></i></a>
                 </div>
                 @if (session('updateSuccess'))

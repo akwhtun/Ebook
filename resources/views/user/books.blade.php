@@ -67,7 +67,7 @@
     {{-- all books start --}}
     <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
     <div class="row g-0 con ">
-        <div class="col-2 col-left left-col" style="height: 165vh">
+        <div class="col-2 col-left left-col">
             <div class="text-light mt-4" style="font-size:18px;">
                 @if (Auth::user() != null)
                     <a href="{{ route('order#history', Auth::user()->id) }}"
@@ -86,51 +86,6 @@
                         </a>
                     @endif
                 @endif
-                <p class="p-2 m-0 border-1 border-bottom border-secondary text-center text-md-start">
-                    <span class="text-dark d-none d-md-inline text-uppercase">Filter By Price</span>
-                </p>
-                <div class="lists">
-                    <span
-                        class="d-flex justify-content-between align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
-                        <span class="d-none d-md-inline ms-3"><i class="fas fa-money-bill-alt me-1"></i> All Price
-                        </span>
-                        <i class="fas fa-angle-down me-4 down-arrow" style="cursor: pointer"></i>
-                    </span>
-                    <p class="li-group m-0 p-0">
-                        <a href=""
-                            class="text-decoration-none text-white ano-list d-flex justify-content-between align-items-center p-0 m-0 text-start">
-                            <span class="d-none d-md-inline ms-4 text-white">
-                                <input type="checkbox">
-                                <small>1000 - 2000</small>
-                            </span>
-                            <small class="bg-dark text-white rounded-circle p-1 me-4" style="font-size: 12px">20</small>
-                        </a>
-                        <a href=""
-                            class="text-decoration-none text-white ano-list d-flex justify-content-between align-items-center p-0 m-0 text-start">
-                            <span class="d-none d-md-inline ms-4 text-white">
-                                <input type="checkbox">
-                                <small>3000 - 4000</small>
-                            </span>
-                            <small class="bg-dark text-white rounded-circle p-1 me-4" style="font-size: 12px">20</small>
-                        </a>
-                        <a href=""
-                            class="text-decoration-none text-white ano-list d-flex justify-content-between align-items-center p-0 m-0 text-start">
-                            <span class="d-none d-md-inline ms-4 text-white">
-                                <input type="checkbox">
-                                <small>5000 - 6000</small>
-                            </span>
-                            <small class="bg-dark text-white rounded-circle p-1 me-4" style="font-size: 12px">20</small>
-                        </a>
-                        <a href=""
-                            class="text-decoration-none text-white ano-list d-flex justify-content-between align-items-center p-0 m-0 text-start">
-                            <span class="d-none d-md-inline ms-4 text-white">
-                                <input type="checkbox">
-                                <small>7000 - 8000</small>
-                            </span>
-                            <small class="bg-dark text-white rounded-circle p-1 me-4" style="font-size: 11px">20</small>
-                        </a>
-                    </p>
-                </div>
             </div>
             <div class="text-light" style="font-size:18px;">
                 <p class="p-2 m-0 border-1 border-bottom border-secondary text-center text-md-start">
@@ -249,43 +204,40 @@
     <script>
         //add to cart
         $(document).ready(function() {
-                $('.add-cart').on('click', function() {
-                    alert('hi');
-                });
-                $('.book-info').delegate('.add-cart', 'click', function() {
-                    $cart = $('.cart');
-                    $count = $('.cart-qty');
-                    $cart.removeClass('shopping-cart');
-                    $count.removeClass('cart-count');
+            $('.add-cart').on('click', function() {
+                $cart = $('.cart');
+                $count = $('.cart-qty');
+                $cart.removeClass('shopping-cart');
+                $count.removeClass('cart-count');
 
-                    $cartQty = parseInt($('.cart-qty').html());
-                    $userId = $(this).closest('.cart-Buttons').find('#userId').val();
-                    $bookId = $(this).closest('.cart-Buttons').find('#bookId').val();
-                    $qty = 1;
-                    $data = {
-                        'userId': $userId,
-                        'bookId': $bookId,
-                        'qty': $qty
-                    };
-                    $.ajax({
-                        type: 'get',
-                        url: '/carts/add',
-                        data: $data,
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.status == 'true') {
-                                $cart.addClass('shopping-cart');
-                                $count.addClass('cart-count');
+                $cartQty = parseInt($('.cart-qty').html());
+                $userId = $(this).closest('.cart-Buttons').find('#userId').val();
+                $bookId = $(this).closest('.cart-Buttons').find('#bookId').val();
+                $qty = 1;
+                $data = {
+                    'userId': $userId,
+                    'bookId': $bookId,
+                    'qty': $qty
+                };
+                $.ajax({
+                    type: 'get',
+                    url: '/carts/add',
+                    data: $data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status == 'true') {
+                            $cart.addClass('shopping-cart');
+                            $count.addClass('cart-count');
 
-                                $cartQty += 1;
-                                $('.cart-qty').html($cartQty);
-                            }
-                        },
-                        // error: function() {
-                        //     window.location.href = '/loginPage';
-                        // }
-                    })
-                });
-            }) <
-            />
-    @endsection
+                            $cartQty += 1;
+                            $('.cart-qty').html($cartQty);
+                        }
+                    },
+                    // error: function() {
+                    //     window.location.href = '/loginPage';
+                    // }
+                })
+            });
+        });
+    </script>
+@endsection

@@ -9,9 +9,11 @@ use App\Models\Comment;
 use App\Models\Contact;
 use App\Models\OrderList;
 use App\Models\User;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Mime\MimeTypes;
@@ -44,19 +46,19 @@ class AuthController extends Controller
         return view('admin.dashboard', compact('users', 'books', 'authors', 'categories', 'comments', 'orders', 'contacts'));
     }
 
-    //View Account Detail
+    //View Admin Account Detail
     public function viewDetail()
     {
-        return view('account.detail');
+        return view('adminAccount.detail');
     }
 
-    //Edit Account Detail
+    //Edit Admin Account Detail
     public function editDetail()
     {
-        return view('account.edit');
+        return view('adminAccount.edit');
     }
 
-    //Update Account Detail
+    //Update Admin Account Detail
     public function updateDetail(Request $request)
     {
         $this->validationCheck($request);
@@ -75,6 +77,107 @@ class AuthController extends Controller
         User::where('id', $id)->update($updateData);
         return redirect()->route('account#detail')->with(['updateSuccess' => 'Account Update Success']);
     }
+
+
+    //change admin password page
+
+    public function adminChangePasswordPage($id)
+    {
+        $userId = $id;
+        return view('adminAccount.changePassword',  compact('userId'));
+    }
+
+    //admin password changed
+
+    public function changeAdminPassword(Request $request)
+    {
+        $this->passwordValidationCheck($request);
+
+        $id = $request->userId;
+        $oldPassword = $request->oldPassword;
+        $userPassword = User::select('password')->where('id', $id)->first();
+
+        if (Hash::check($oldPassword, $userPassword->password)) {
+            $newPassword = $request->newPassword;
+            User::where('id', $id)->update([
+                'password' => Hash::make($newPassword)
+            ]);
+
+            return back()->with(['success' => 'Password Changed Successfully']);
+        } else {
+            return back()->with(['notMatch' => 'Old Password did not match!Try Again']);
+        }
+    }
+
+
+    //View User Account Detail
+    public function viewUserDetail()
+    {
+        $mode = View::where('id', 1)->first();
+
+        return view('userAccount.detail', compact('mode'));
+    }
+
+    //Edit User Account Detail
+    public function editUserDetail()
+    {
+        $mode = View::where('id', 1)->first();
+
+        return view('userAccount.edit', compact('mode'));
+    }
+
+    //Update User Account Detail
+    public function updateUserDetail(Request $request)
+    {
+        $this->validationCheck($request);
+        $id = Auth::user()->id;
+        $updateData = $this->getAccData($request);
+        if ($request->hasFile('profile')) {
+            $oldProfile = User::select('image')->where('id', $id)->first();
+            $oldProfileName = $oldProfile->image;
+            if ($oldProfileName != null) {
+                Storage::delete('public/userProfile/' . $oldProfileName);
+            }
+            $profile = uniqid() . $request->file('profile')->getClientOriginalName();
+            $request->file('profile')->storeAs('public/userProfile', $profile);
+            $updateData['image'] = $profile;
+        }
+        User::where('id', $id)->update($updateData);
+        return redirect()->route('user#detail')->with(['updateSuccess' => 'Account Update Success']);
+    }
+
+
+    //change user password page
+
+    public function changePasswordPage($id)
+    {
+        $userId = $id;
+        $mode = View::where('id', 1)->first();
+        return view('userAccount.changePassword',  compact('mode', 'userId'));
+    }
+
+    //user password changed
+
+    public function changeUserPassword(Request $request)
+    {
+        $this->passwordValidationCheck($request);
+
+        $id = $request->userId;
+        $oldPassword = $request->oldPassword;
+        $userPassword = User::select('password')->where('id', $id)->first();
+
+        if (Hash::check($oldPassword, $userPassword->password)) {
+            $newPassword = $request->newPassword;
+            User::where('id', $id)->update([
+                'password' => Hash::make($newPassword)
+            ]);
+
+            return back()->with(['success' => 'Password Changed Successfully']);
+        } else {
+            return back()->with(['notMatch' => 'Old Password did not match!Try Again']);
+        }
+    }
+
 
     //view admin list
     public function viewAdminList()
@@ -161,5 +264,17 @@ class AuthController extends Controller
             'gender' => 'required',
         ];
         Validator::make($request->all(), $validation)->validate();
+    }
+
+    //password validation check
+    public function passwordValidationCheck($request)
+    {
+
+        $password = [
+            'oldPassword' => 'required',
+            'newPassword' => 'required|min:8',
+            'confirmPassword' => 'required|same:newPassword',
+        ];
+        Validator::make($request->all(), $password)->validate();
     }
 }

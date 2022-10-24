@@ -30,7 +30,7 @@
                     <a class="text-decoration-none text-dark" href="{{ route('book#all') }}">Home</a>
                 </li>
                 <li class="p-2 ms-2">
-                    <a class="text-decoration-none text-dark" href="{{ route('contact#page') }}">Contact</a>
+                    <a class="text-decoration-none text-dark" href="{{ route('contact#page') }}">Contact Us</a>
                 </li>
             </ul>
         </div>
@@ -90,14 +90,15 @@
                                                 style="text-transform: capitalize">{{ Str::words(Auth::user()->name, 3, '...') }}</small>
                                         </div>
                                     </div>
-                                    <a class="dropdown-item text-dark  py-2 border border-0 border-bottom"
-                                        href="{{ route('account#detail') }}">
+                                    <a class="dropdown-item bg-light text-dark  py-2 border border-0 border-bottom"
+                                        href="{{ route('user#detail') }}">
                                         <i class="text-dark fs-5 fas fa-user me-2"></i>
                                         <span style="font-size: 18px;">Account</span></a>
-                                    <a class="dropdown-item text-dark  py-2 border border-0 border-bottom" href="">
-                                        <i class="text-dark fs-5 fas fa-key me-2"></i>
-                                        <span style="font-size: 18px;"> Change Password</span></a>
-                                    <div class="">
+                                    <a class="dropdown-item bg-light text-dark  py-2 border border-0 border-bottom"
+                                        href="{{ route('user#changePassword', Auth::user()->id) }}">
+                                        <i class="text-dark fs-5 fas fa-user me-2"></i>
+                                        <span style="font-size: 18px;">Change Password</span></a>
+                                    <div class="bg-light">
                                         <form action="{{ route('logout') }}" method="POST">
                                             @csrf
                                             <button type="submit"
@@ -156,14 +157,19 @@
                     <h3>My Account</h3>
                     <ul class="list-unstyled mt-4">
                         <li class="mt-2">
-                            <a class="text-decoration-none text-dark"
-                                href="{{ route('account#detail') }}">Profile</a>
+                            <a class="text-decoration-none text-dark" href="{{ route('user#detail') }}">Profile</a>
                         </li>
+                        @if (Auth::user() != null)
+                            <li class="mt-2">
+                                <a class="text-decoration-none text-dark"
+                                    href="{{ route('user#changePassword', Auth::user()->id) }}">Change Password</a>
+                            </li>
+                        @endif
                         <li class="mt-2">
-                            <a class="text-decoration-none text-dark" href="">Change Password</a>
-                        </li>
-                        <li class="mt-2">
-                            <a class="text-decoration-none text-dark" href="{{ route('logout') }}">Logout</a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="border-0 text-dark bg-light pe-3">Logout</button>
+                            </form>
                         </li>
                     </ul>
                 </div>

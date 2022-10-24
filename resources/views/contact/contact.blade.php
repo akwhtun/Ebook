@@ -6,7 +6,8 @@
         <button type="submit" class="border-0 bg-light text-dark">
             <div class="d-flex align-items-center">
                 <i class="fas fa-shopping-cart cart"></i>
-                <span class="badge rounded-circle border border-secondary text-dark ms-1 cart-qty cart-count">0</span>
+                <span
+                    class="badge rounded-circle border border-secondary text-dark ms-1 cart-qty">{{ count($carts) }}</span>
             </div>
         </button>
     </form>
