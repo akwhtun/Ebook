@@ -96,7 +96,7 @@
                                         <span style="font-size: 18px;">Account</span></a>
                                     <a class="dropdown-item bg-light text-dark  py-2 border border-0 border-bottom"
                                         href="{{ route('user#changePassword', Auth::user()->id) }}">
-                                        <i class="text-dark fs-5 fas fa-user me-2"></i>
+                                        <i class="text-dark fs-5 fas fa-key me-2"></i>
                                         <span style="font-size: 18px;">Change Password</span></a>
                                     <div class="bg-light">
                                         <form action="{{ route('logout') }}" method="POST">

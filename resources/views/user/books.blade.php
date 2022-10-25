@@ -26,47 +26,10 @@
 @endif
 
 @section('content')
-    {{-- <div class="container-lg wrapper">
-        <div class="row ">
-            <div class="col-3"></div>
-            <div class="col-9"> --}}
-    {{-- carousel start --}}
-    {{-- <p class="text-muted m-0 mt-1 ps-4 fs-5">Latest Books</p>
-                <div class="carousel slide border-bottom border-3 p-2 " data-bs-ride="carousel" id="slide">
-                    <div class="carousel-inner w-75 mx-auto">
-                        <div class="carousel-item active">
-                            <div class="d-flex slide-img justify-content-around align-items-center ">
-                                <img src="{{ asset('images/img.jpg') }}" width="120px">
-                                <img src="{{ asset('images/img.jpg') }}" width="120px">
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="d-flex slide-img justify-content-around align-items-center ">
-                                <img src="{{ asset('images/img2.jpg') }}" width="120px">
-                                <img src="{{ asset('images/img2.jpg') }}" width="120px">
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="d-flex slide-img justify-content-around align-items-center ">
-                                <img src="{{ asset('images/img3.jpg') }}" alt="">
-                                <img src="{{ asset('images/img3.jpg') }}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#slide" class="carousel-control-prev" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a href="#slide" class="carousel-control-next" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
-                </div> --}}
-    {{-- carousel end --}}
-    {{-- <a href="{{ route('download#book') }}" class="btn btn-danger">Download</a> --}}
-    {{-- <h3 class="text-dark px-5 pt-2 pe-3 col-3 m-0">All Books</h3> --}}
 
     {{-- all books start --}}
     <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
-    <div class="row g-0 con ">
+    <div class="row g-0 con min-vh-100">
         <div class="col-2 col-left left-col">
             <div class="text-light mt-4" style="font-size:18px;">
                 @if (Auth::user() != null)
@@ -86,6 +49,11 @@
                         </a>
                     @endif
                 @endif
+                <a href=""
+                    class="text-decoration-none text-white ano-list d-block p-2 m-0 mt-2 text-center text-md-start all-book">
+                    <span class="d-none d-md-inline ms-3"><i class="fas fa-book-open me-2"></i>All Books
+                    </span>
+                </a>
             </div>
             <div class="text-light" style="font-size:18px;">
                 <p class="p-2 m-0 border-1 border-bottom border-secondary text-center text-md-start">
@@ -98,7 +66,7 @@
                             <small class="text-white bg-dark rounded-circle p-1 badge">{{ count($authors) }}</small></span>
                         <i class="fas fa-angle-down me-4 down-arrow" style="cursor: pointer"></i>
                     </span>
-                    <p class="li-group">
+                    <p class="li-group authors">
                         @foreach ($authors as $author)
                             <a href="{{ route('author#filter', $author->id) }}"
                                 class="text-decoration-none text-white ano-list d-block p-2 m-0 text-start">
@@ -120,7 +88,7 @@
                                 class="text-white bg-dark rounded-circle p-1 badge">{{ count($categories) }}</small></span>
                         <i class="fas fa-angle-down me-4 down-arrow" style="cursor: pointer"></i>
                     </span>
-                    <p class="li-group">
+                    <p class="li-group categories">
                         @foreach ($categories as $category)
                             <a href="{{ route('category#filter', $category->id) }}"
                                 class="text-decoration-none text-white ano-list d-block p-2 m-0 text-start">
@@ -131,67 +99,8 @@
                 </div>
             </div>
         </div>
-        <div class=" col-10 con ch-bg">
-            @if (count($books) > 0)
-                <div class="d-flex flex-wrap justify-content-start align-items-center gap-3 mb-3 p-2">
-                    @foreach ($books as $book)
-                        <div
-                            class="text-center rounded shadow border-0 p-3 mt-5 d-flex flex-wrap book-info  bg-light text-dark">
-                            <div class="book" style="flex-basis:53%">
-                                @if ($book->photo == null)
-                                    <img src="{{ asset('storage/default.jpg') }}" class="rounded w-100" alt="default">
-                                @else
-                                    <img src="{{ asset('storage/cover/' . $book->photo) }}" class=" rounded w-100"
-                                        alt="book cover">
-                                @endif
-                            </div>
-                            <div class="detail" style="flex-basis: 46%">
-                                <p class="m-0 p-0 text-dark">{{ $book->title }}</p>
-                                <p class="m-0 p-0 text-muted">{{ $book->author_name }}</p>
-                                {{-- <p class="mt-2" style="margin-left: 1px">{{ Str::words($book->summary, 6, '...') }}</p> --}}
-                                <p class="mt-2 p-0 text-success">{{ $book->price }} kyats</p>
-                                <p class="mt-2 p-0 text-dark"> <i class="fas fa-eye"></i> 0</p>
-                                <div class="ratign mt-2 text-warning">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="book-btn mt-3">
-                                <div class="d-flex justify-content-between">
-                                    <a href="{{ route('book#detail', $book->id) }}"
-                                        class=" py-1 btn btn-outline-secondary">
-                                        <span class="m-0 p-0">{{ count($book->comments) }} Comments</span> &nbsp;<i
-                                            class="fas fa-comment-alt"></i>
-                                    </a>
-                                    <a href="{{ route('book#detail', $book->id) }}"
-                                        class=" py-1 text-decoration-none text-primary">See More
-                                        &nbsp;<i class=" fs-5 fas fa-angle-double-right"></i> </a>
-                                </div>
-                                <div class="mt-2 d-flex justify-content-between cart-Buttons">
-                                    @if (Auth::user() != null)
-                                        <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
-                                    @endif
-                                    <input type="hidden" id="bookId" value="{{ $book->id }}">
-                                    <a href="{{ route('download#book', $book->id) }}" class=" py-1 btn btn-primary ">
-                                        Download &nbsp;<i class="fas fa-file-download"></i>
-                                    </a>
-                                    <span class="py-1 btn btn-success d-block ms-4 add-cart" style="cursor: pointer">
-                                        Add To Cart &nbsp;<i class="fas fa-shopping-cart"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="mt-1 px-3">{{ $books->links() }}</div>
-            @else
-                <div class="text-center mt-5">
-                    <p class="fs-4 text-muted">No Book Found...😞</p>
-                </div>
-            @endif
+        <div class=" col-10 con ch-bg book-data" id="data">
+            @include('user.bookData');
         </div>
     </div>
 @endsection
@@ -204,7 +113,7 @@
     <script>
         //add to cart
         $(document).ready(function() {
-            $('.add-cart').on('click', function() {
+            $('.book-data').delegate('.add-cart', 'click', function() {
                 $cart = $('.cart');
                 $count = $('.cart-qty');
                 $cart.removeClass('shopping-cart');
@@ -233,11 +142,115 @@
                             $('.cart-qty').html($cartQty);
                         }
                     },
-                    // error: function() {
-                    //     window.location.href = '/loginPage';
-                    // }
+                    error: function() {
+                        window.location.href = '/loginPage';
+                    }
                 })
             });
         });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            //pagination by ajax
+            $(document).on('click', '.pagination a', function(e) {
+                e.preventDefault();
+                $page = $(this).attr('href').split('page=')[1];
+                fetchData($page);
+            })
+
+            function fetchData(page) {
+                $.ajax({
+                    type: 'get',
+                    url: '/pagination?page=' + page,
+                    success: function(data) {
+                        $('#data').html(data);
+
+                        mode();
+
+                    }
+                })
+            }
+
+            //author filter by ajax
+
+            $(document).on('click', '.authors a', function(e) {
+                e.preventDefault();
+                $author = $(this).attr('href').split('authors/filter/')[1];
+                fetchAuthor($author);
+            })
+
+            function fetchAuthor(author) {
+                $.ajax({
+                    type: 'get',
+                    url: '/filterAuthor/' + author,
+                    success: function(data) {
+                        $('#data').html(data);
+
+                        mode();
+                    }
+                })
+            }
+
+            //category filter by ajax
+
+            $(document).on('click', '.categories a', function(e) {
+                e.preventDefault();
+                $category = $(this).attr('href').split('categories/filter/')[1];
+                fetchCategory($category);
+            })
+
+            function fetchCategory(category) {
+                $.ajax({
+                    type: 'get',
+                    url: '/filterCategory/' + category,
+                    success: function(data) {
+                        $('#data').html(data);
+
+                        mode();
+                    }
+                })
+            }
+
+            //get all book
+
+            $(document).on('click', '.all-book', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'get',
+                    url: '/books',
+                    success: function(data) {
+                        $('#data').html(data);
+
+                        mode();
+                    }
+                })
+            })
+
+
+            function mode() {
+                //light dark
+                $view = $('.mode').val();
+                if ($view == ' light-mode ') {
+                    $('.bg-light').removeClass('bg-dark');
+                    $('.text-dark').removeClass('text-white');
+                    $('.border-dark').removeClass('border-white');
+                    $('.ch-bg').addClass('con');
+                    $('.ch-bg').remove('bg-black');
+                    $('.left-col').removeClass('ano-left-col');
+                }
+                if ($view == ' dark-mode ') {
+                    $('.bg-light').addClass('bg-dark');
+                    $('.text-dark').addClass('text-white');
+                    $('.border-dark').addClass('border-white');
+                    $('.ch-bg').removeClass('con');
+                    $('.ch-bg').addClass('bg-black');
+                    $('.left-col').addClass('ano-left-col');
+                }
+
+            }
+        })
     </script>
 @endsection

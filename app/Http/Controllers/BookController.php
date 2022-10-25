@@ -19,25 +19,23 @@ class BookController extends Controller
     //get all books
     public function getAllBooks()
     {
-        $books = Book::select('books.*', 'categories.name as category_name', 'authors.name as author_name')
-            ->leftJoin('categories', 'books.category_id', 'categories.id')
-            ->leftJoin('authors', 'books.author_id', 'authors.id')
-            ->orderBy('books.id', 'desc')->paginate(9);
-        $latestBooks = Book::latest()->paginate(6);
+        $books = Book::latest()->paginate(9);;
         $categories = Category::all();
         $authors = Author::all();
-
         $mode = View::where('id', 1)->first();
-        // $oneTwo =
-        // dd($mode->toArray());
 
         if (Auth::user() != null) {
             $history = OrderList::where('user_id', Auth::user()->id)->get();
             $carts = Cart::where('user_id', Auth::user()->id)->get();
-            return view('user.books', compact('books', 'latestBooks', 'categories', 'authors', 'carts', 'history', 'mode'));
+            return view('user.books', compact('books',  'categories', 'authors', 'carts', 'history', 'mode'));
         } else {
-            return view('user.books', compact('books', 'latestBooks', 'categories', 'authors', 'mode'));
+            return view('user.books', compact('books',  'categories', 'authors', 'mode'));
         }
+
+        // if ($request->ajax()) {
+        //     $pizzas = Product::orderBy('created_at', 'desc')->paginate(6);
+        //     return view('user.home_data', compact('pizzas'))->render();
+        // }
     }
 
     //add book
@@ -149,19 +147,25 @@ class BookController extends Controller
     //Filter By Category
     public function catFilter($id)
     {
-        $books = Book::where('category_id', $id)->paginate(6);
+        $books = Book::where('category_id', $id)->paginate(9);
         $categories = Category::all();
         $authors = Author::all();
-        return view('user.books', compact('books', 'categories', 'authors'));
+        $carts = Cart::where('user_id', Auth::user()->id)->get();
+        $mode = View::where('id', 1)->first();
+        $history = OrderList::where('user_id', Auth::user()->id)->get();
+        return view('user.books', compact('books', 'categories', 'authors', 'carts', 'mode', 'history'));
     }
 
     //Filter By Author
     public function autFilter($id)
     {
-        $books = Book::where('author_id', $id)->paginate(6);
+        $books = Book::where('author_id', $id)->paginate(9);
         $categories = Category::all();
         $authors = Author::all();
-        return view('user.books', compact('books', 'categories', 'authors'));
+        $carts = Cart::where('user_id', Auth::user()->id)->get();
+        $mode = View::where('id', 1)->first();
+        $history = OrderList::where('user_id', Auth::user()->id)->get();
+        return view('user.books', compact('books', 'categories', 'authors', 'carts', 'mode', 'history'));
     }
 
     //Filter By Price

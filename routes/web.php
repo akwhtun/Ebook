@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\OrderListController;
@@ -219,6 +220,14 @@ Route::get('/categories/filter/{id}', [BookController::class, 'catFilter'])->nam
 
 Route::get('/authors/filter/{id}', [BookController::class, 'autFilter'])->name('author#filter');
 
-Route::get('/prices/filter/{amount}', [BookController::class, 'priceFilter'])->name('price#filter');
-
 Route::get('/mode/changeMode', [ViewController::class, 'changeMode'])->name('mode#changeMode');
+
+
+//Filter By Ajax
+Route::get('/pagination', [FilterController::class, 'fetchData']);
+
+Route::get('/filterAuthor/{id}', [FilterController::class, 'filterAuthor']);
+
+Route::get('/filterCategory/{id}', [FilterController::class, 'filterCategory']);
+
+Route::get('/books', [FilterController::class, 'allBook']);

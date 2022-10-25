@@ -128,7 +128,7 @@
                         </div>
                     @endforeach
                 </div>
-                <a href="{{ route('comment#view', $bookDetail->id) }}" class="btn btn-sm btn-outline-info my-1"
+                <a href="{{ route('comment#view', $bookDetail->id) }}" class="btn btn-sm btn-outline-info my-1 ms-3"
                     style="width: 200px">All Comments <i class="fas fa-angle-double-down ms-1"></i></a>
             @else
                 <div class="card-body text-start">
