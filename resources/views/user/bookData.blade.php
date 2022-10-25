@@ -1,7 +1,7 @@
   @if (count($books) > 0)
-      <div class="d-flex flex-wrap justify-content-start align-items-center gap-3 mb-3 p-2">
+      <div class="d-flex flex-wrap justify-content-lg-start justify-content-center align-items-center gap-3 mb-3 p-2">
           @foreach ($books as $book)
-              <div class="text-center rounded shadow border-0 p-3 mt-5 d-flex flex-wrap book-info  bg-light text-dark">
+              <div class="text-center rounded shadow border-0 p-3 mt-5 d-flex flex-wrap book-info bg-light text-dark">
                   <div class="book" style="flex-basis:53%">
                       @if ($book->photo == null)
                           <img src="{{ asset('storage/default.jpg') }}" class="rounded w-100" alt="default">

@@ -3,7 +3,7 @@
 @section('title', 'order list')
 
 @section('content')
-    <div class="container p-2">
+    <div class="container py-2 px-3">
         <div class=" bg-light shadow-sm rounded border border-3  p-4">
             <div class="d-flex justify-content-between mb-2">
                 <h3>Order List - {{ $orderLists->total() }}</h3>
@@ -12,7 +12,7 @@
             @if (count($orderLists) > 0)
                 <table class="table">
                     <thead>
-                        <tr class="bg-dark text-center">
+                        <tr class="text-center">
                             <th scope="col" class="col-2">Customer</th>
                             <th scope="col" class="col-2">Total Fee</th>
                             <th scope="col" class="col-2">Address</th>

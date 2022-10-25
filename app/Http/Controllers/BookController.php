@@ -19,11 +19,13 @@ class BookController extends Controller
     //get all books
     public function getAllBooks()
     {
-        $books = Book::latest()->paginate(9);;
+        $books = Book::when(request('searchKey'), function ($query) {
+            $query->where('books.title', 'like', '%' . request('searchKey') . '%');
+        })->latest()->paginate(9);;
         $categories = Category::all();
         $authors = Author::all();
         $mode = View::where('id', 1)->first();
-
+        $books->appends(request()->all());
         if (Auth::user() != null) {
             $history = OrderList::where('user_id', Auth::user()->id)->get();
             $carts = Cart::where('user_id', Auth::user()->id)->get();

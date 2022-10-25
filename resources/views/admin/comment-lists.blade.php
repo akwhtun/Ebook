@@ -30,7 +30,7 @@
             @if (count($comments) > 0)
                 <table class="table">
                     <thead>
-                        <tr class="bg-dark text-center">
+                        <tr class="text-center">
                             <th scope="col" class="col-2">User</th>
                             <th scope="col" class="col-2">Book</th>
                             <th scope="col" class="col-4">Comment</th>

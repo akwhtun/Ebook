@@ -30,7 +30,7 @@
     {{-- all books start --}}
     <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
     <div class="row g-0 con min-vh-100">
-        <div class="col-2 col-left left-col">
+        <div class="col-lg-3 col-md-4 col-sm-5 col-7  col-left left-col">
             <div class="text-light mt-4" style="font-size:18px;">
                 @if (Auth::user() != null)
                     <a href="{{ route('order#history', Auth::user()->id) }}"
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div class=" col-10 con ch-bg book-data" id="data">
+        <div class="col-lg-9 col-12 con ch-bg book-data" id="data">
             @include('user.bookData');
         </div>
     </div>

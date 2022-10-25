@@ -1,3 +1,17 @@
+html::-webkit-scrollbar, .overflow-auto::-webkit-scrollbar{
+    width:0.5rem;
+}
+
+html::-webkit-scrollbar-track, .overflow-auto::-webkit-scrollbar-track{
+    background:#fffbff;
+}
+
+html::-webkit-scrollbar-thumb, .overflow-auto::-webkit-scrollbar-thumb{
+    background: #1b8dff;
+    border-radius: 5rem;
+
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -140,8 +154,67 @@ td{
     }
 }
 
-@media (max-width : 1000px) {
+.searchBar{
+    width: 30%;
+}
+
+.profile{
+    width: 27%;
+}
+
+.dark-light{
+    width: 7%;
+}
+
+.book-info{
+    flex-basis: 32%;
+}
+
+@media (max-width : 1250px) {
     .searchBar {
-        width: 92%;
+        margin-top: 5px;
+        margin-bottom: 3px;
+        width:100%;
+    }
+
+    .profile{
+        width: 65%;
+    }
+
+    .dark-light{
+        width: 25%;
+       justify-content: end;
+    }
+
+
+
+}
+
+@media (max-width: 1200px) {
+
+      .book-info{
+        flex-basis: 48%;
+    }
+}
+
+
+@media (max-width: 992px) {
+   /* .left-col{
+    margin-left: -250px;
+   } */
+}
+
+@media (max-width: 800px) {
+
+      .book-info{
+        flex-basis: 75%;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+      .book-info{
+        flex-basis: 100%;
     }
 }

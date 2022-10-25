@@ -19,7 +19,7 @@
 
 <body>
 
-    <nav
+    {{-- <nav
         class="navbar bg-light d-flex justify-content-around align-items-center flex-wrap shadow-sm m-0 p-0 sticky-top">
         <a href="{{ route('book#all') }}" class="navbar-brand text-end m-0 p-0 py-1" style="width:8%;">
             <img src="{{ asset('admin/images/logo.png') }}" alt="logo" width="60px">
@@ -126,13 +126,126 @@
             </div>
             <i class="fas fa-sun fs-4 text-dark"></i>
         </div>
+    </nav> --}}
+
+    <nav class="navbar navbar-expand-sm navbar-dark px-3 bg-light d-flex flex-wrap m-0 p-0 sticky-top shadow-sm">
+        <a class="navbar-brand mx-sm-5  m-0 p-0" href="{{ route('book#all') }}">
+            <img src="{{ asset('admin/images/logo.png') }}" alt="logo" width="60px">
+        </a>
+        <button class="navbar-toggler d-lg-none text-dark border border-dark" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars fs-4 py-1"></i>
+        </button>
+        <div class="collapse navbar-collapse ms-sn-5 justify-content-center" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ms-3">
+                <li class="nav-item active">
+                    <a class="nav-link text-dark" href="{{ route('book#all') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ route('contact#page') }}">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+        <div class="searchBar mx-3">
+            @yield('searchBar')
+        </div>
+        <div class="navbar nav justify-content-start justify-content-xl-center m-0 p-0 mx-3 mx-xl-1 profile">
+            <div class="nav-item d-flex align-items-center m-0 p-0">
+                @guest
+                    @if (Route::has('login'))
+                        <a class="nav-link text-dark" href="{{ route('loginPage') }}">Login</a>
+                    @endif
+
+                    @if (Route::has('register'))
+                        <a class="nav-link text-dark" href="{{ route('registerPage') }}">Register</a>
+                    @endif
+                @else
+                    <div class="nav-link m-0 p-0">
+                        <div class="d-flex align-items-center">
+                            @if (Auth::user()->image == null)
+                                @if (Auth::user()->gender == 'Female')
+                                    <img src="{{ asset('storage/default_female.jpg') }}"
+                                        class="img-thumbnail rounded-circle" style="width: 50px;height:50px">
+                                @else
+                                    <img src="{{ asset('storage/default_male.jpg') }}" class="img-thumbnail rounded-circle"
+                                        style="width: 50px;height:50px">
+                                @endif
+                            @else
+                                <img src="{{ asset('storage/userProfile/' . Auth::user()->image) }}"
+                                    class="img-thumbnail rounded-circle" style="width: 50px;height:50px">
+                            @endif
+                            <p class="ms-2 text-dark
+                                        pt-3"
+                                style="text-transform: capitalize">
+                                {{ Str::words(Auth::user()->name, 3, '...') }}</p>
+                            <div class="dropdown open ms-2 me-5 pt-1">
+                                <a id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-angle-down fs-4 text-dark" style="cursor: pointer"></i>
+                                </a>
+                                <div class="dropdown-menu m-0 p-2 bg-light" aria-labelledby="triggerId"
+                                    style="width: 250px;">
+                                    <div class="d-flex p-2 border border-0 border-bottom align-items-center">
+                                        @if (Auth::user()->image == null)
+                                            @if (Auth::user()->gender == 'Female')
+                                                <img src="{{ asset('storage/default_female.jpg') }}"
+                                                    class="img-thumbnail rounded-circle" style="width: 50px;height:50px">
+                                            @else
+                                                <img src="{{ asset('storage/default_male.jpg') }}"
+                                                    class="img-thumbnail rounded-circle" style="width: 50px;height:50px">
+                                            @endif
+                                        @else
+                                            <img src="{{ asset('storage/userProfile/' . Auth::user()->image) }}"
+                                                class="img-thumbnail rounded-circle" style="width: 50px;height:50px">
+                                        @endif
+                                        <div class="m-0 p-0 ms-1">
+                                            <small class="ms-1 text-dark"
+                                                style="text-transform: capitalize">{{ Str::words(Auth::user()->name, 3, '...') }}</small>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item bg-light text-dark  py-2 border border-0 border-bottom"
+                                        href="{{ route('user#detail') }}">
+                                        <i class="text-dark fs-5 fas fa-user me-2"></i>
+                                        <span style="font-size: 18px;">Account</span></a>
+                                    <a class="dropdown-item bg-light text-dark  py-2 border border-0 border-bottom"
+                                        href="{{ route('user#changePassword', Auth::user()->id) }}">
+                                        <i class="text-dark fs-5 fas fa-key me-2"></i>
+                                        <span style="font-size: 18px;">Change Password</span></a>
+                                    <div class="bg-light">
+                                        <form action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                            <button type="submit"
+                                                class="btn btn-dark text-light d-flex justify-content-start align-items-center w-100">
+                                                <i class="fas fa-power-off mx-2 fs-5"></i><span style="font-size: 18px;"
+                                                    class="ms-2">
+                                                    Logout</span></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @yield('cart')
+
+                @endguest
+            </div>
+        </div>
+        <div class="pe-3 py-1 text-center d-flex align-items-center dark-light m-0 p-0">
+            <i class="far fa-moon fs-4 text-dark"></i>
+            <div class="form-check form-switch mx-1">
+                <input class="form-check-input check-box" style="width: 47px;height:22px" type="checkbox"
+                    @if ($mode->mode == 1) checked @endif>
+            </div>
+            <i class="fas fa-sun fs-4 text-dark"></i>
+        </div>
     </nav>
     @yield('content')
 
     <footer class="">
         <div class="text-dark px-5 pt-5 pb-3 shadow bg-light">
             <div class="row fs-5">
-                <div class="col-3">
+                <div class="col-lg-3 col-md-6 col-12 text-lg-start text-center">
                     <h3>Quick Links</h3>
                     <ul class="list-unstyled mt-4">
                         <li class="mt-2"><a class="text-decoration-none text-dark"
@@ -153,7 +266,7 @@
                                 Account</a></;>
                     </ul>
                 </div>
-                <div class="col-3">
+                <div class="col-lg-3 col-md-6 col-12 text-lg-start text-center">
                     <h3>My Account</h3>
                     <ul class="list-unstyled mt-4">
                         <li class="mt-2">
@@ -173,7 +286,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-3">
+                <div class="col-lg-3 col-md-6 col-12 text-lg-start text-center">
                     <h3>Follow Us</h3>
                     <ul class="list-unstyled mt-4">
                         <li class="mt-2">
@@ -195,7 +308,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-3">
+                <div class="col-lg-3 col-md-6 col-12 text-lg-start text-center">
                     <h3>Contacts</h3>
                     <ul class="list-unstyled mt-4">
                         <li class="mt-2">
