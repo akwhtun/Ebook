@@ -16,8 +16,8 @@
                 @endif
             </div>
 
-            <div class="px-5">
-                <div class="d-flex align-items-center">
+            <div class="px-lg-5">
+                <div class="d-flex flex-lg-row flex-column align-items-center">
                     @if ($contact->user->image == null)
                         @if ($contact->user->gender == 'Female')
                             <img src="{{ asset('storage/default_female.jpg') }}" class="img-thumbnail"
@@ -30,7 +30,7 @@
                         <img src="{{ asset('storage/userProfile/' . $contact->user->image) }}" class="img-thumbnail"
                             style="width: 210px;height:220px">
                     @endif
-                    <div>
+                    <div class="mt-lg-0 mt-4">
                         <p class="fs-5 ms-3"><i class="fas fa-user-circle"></i> Name : {{ $contact->user->name }}
                         </p>
                         <p class="fs-5 ms-3"><i class="fas fa-envelope"></i> Email : {{ $contact->user->email }}
@@ -47,8 +47,8 @@
                         </p>
                     </div>
                 </div>
-                <div class="py-4 d-flex">
-                    <p class="fs-5 text-dark col-2 ms-2"><i class="fas fa-paragraph"></i> Subject : </p>
+                <div class="py-4 d-flex flex-lg-row flex-column">
+                    <p class="fs-5 text-dark col-lg-2 col-12 ms-2"><i class="fas fa-paragraph"></i> Subject : </p>
                     <p class="ms-2 fs-5 text-muted col-10">{{ $contact->subject }}</p>
                 </div>
                 <div class="text-end mt-2">

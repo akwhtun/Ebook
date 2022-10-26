@@ -13,10 +13,10 @@
             </div>
             {{ $lists->links() }}
             <div class="row">
-                <div class="col-5">
+                <div class="col-lg-5 col-12 table-responsive-lg">
                     <table class="table">
                         <thead>
-                            <tr class="bg-dark text-center">
+                            <tr class="bg-dark text-white text-center">
                                 <th scope="col" class="col-2">Book</th>
                                 <th scope="col" class="col-1">Quantity</th>
                                 <th scope="col" class="col-2">Total Price</th>
@@ -44,7 +44,7 @@
                         @endforeach
                     </table>
                 </div>
-                <div class="col-7">
+                <div class="col-lg-7 col-12">
                     <div
                         class="border @if ($status == 0) border-warning
                     @elseif($status == 1)
@@ -59,7 +59,7 @@
                     bg-danger @endif fs-5 p-1 text-white m-0 p-0">
                             Order Detail</p>
                         <div class="d-flex align-items-center justify-content-around p-1">
-                            <div>
+                            <div class="d-none d-lg-block">
                                 @if ($lists[0]->user->image == null)
                                     @if (Auth::user()->gender == 'Female')
                                         <img src="{{ asset('storage/default_female.jpg') }}"

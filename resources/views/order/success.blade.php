@@ -18,12 +18,12 @@
         <div class="container mx-auto pt-4">
             <div class="border border-4 border-success text-dark">
                 <p class="bg-success text-white p-2 m-0 p-0">Order Success</p>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center flex-lg-row flex-column">
                     <span class="p-2 my-3 fs-5">
                         We Accept Order Success.
                         We'll Deliver Soon.
                     </span>
-                    <a href="{{ route('book#all') }}" class="text-decoration-none text-primary">Back Home <i
+                    <a href="{{ route('book#all') }}" class="text-decoration-none text-primary mb-lg-0 mb-2">Back Home <i
                             class="fas fa-angle-double-right"></i></a>
                 </div>
             </div>

@@ -68,10 +68,13 @@
                 </a>
                 <div class="lists">
                     <span
-                        class="d-flex justify-content-between align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
-                        <span class="d-none d-md-inline"><i class="fab fa-first-order me-1"></i> Orders
-                        </span>
-                        <i class="fas fa-angle-down me-4 down-arrow" style="cursor: pointer"></i>
+                        class="d-flex justify-content-md-between justify-content-center align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
+                        <div>
+                            <i class="fab fa-first-order me-1"></i>
+                            <span class="d-none d-md-inline"> Orders
+                            </span>
+                        </div>
+                        <i class="fas fa-angle-down me-4 down-arrow ms-md-0 ms-1" style="cursor: pointer"></i>
                     </span>
                     <p class="li-group">
                         <a href="{{ route('order#viewList') }}"
@@ -98,10 +101,13 @@
                 </div>
                 <div class="lists">
                     <span
-                        class="d-flex justify-content-between align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
-                        <span class="d-none d-md-inline"><i class="fas fa-list me-1"></i> Contacts
-                        </span>
-                        <i class="fas fa-angle-down me-4 down-arrow" style="cursor: pointer"></i>
+                        class="d-flex justify-content-md-between justify-content-center align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
+                        <div>
+                            <i class="fas fa-list me-1"></i>
+                            <span class="d-none d-md-inline"> Contacts
+                            </span>
+                        </div>
+                        <i class="fas fa-angle-down me-4 down-arrow ms-md-0 ms-1" style="cursor: pointer"></i>
                     </span>
                     <p class="li-group">
                         <a href="{{ route('contact#list') }}"
@@ -131,7 +137,7 @@
                 <div class="searchBar">
                     @yield('searchBar')
                 </div>
-                <div class="navbar nav justify-content-end m-0 p-0" style="width:32%;">
+                <div class="navbar nav justify-content-xl-end justify-content-start m-0 p-0  adm-pro">
                     <div class="nav-item d-flex align-items-center m-0 p-0">
                         @guest
                             @if (Route::has('login'))

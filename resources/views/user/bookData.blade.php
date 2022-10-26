@@ -49,7 +49,9 @@
               </div>
           @endforeach
       </div>
-      <div class="mt-1 px-3">{{ $books->links() }}</div>
+      <div class="mt-1 px-3">
+          <p class="text-dark">{{ $books->links() }}</p>
+      </div>
   @else
       <div class="text-center mt-5">
           <p class="fs-4 text-muted">No Book Found...😞</p>

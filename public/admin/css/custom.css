@@ -153,7 +153,9 @@ td{
       color:black;
     }
 }
-
+.con{
+    display: flex;
+}
 .searchBar{
     width: 30%;
 }
@@ -170,11 +172,27 @@ td{
     flex-basis: 32%;
 }
 
+.book-photo{
+        width: 35%;
+    }
+
+.book-detail{
+    width: 65%;
+}
+
+.adm-pro{
+    width: 32%;
+}
+
 @media (max-width : 1250px) {
     .searchBar {
         margin-top: 5px;
         margin-bottom: 3px;
         width:100%;
+    }
+
+    .adm-pro{
+        width: 80%;
     }
 
     .profile{
@@ -198,16 +216,18 @@ td{
 }
 
 
-@media (max-width: 992px) {
-   /* .left-col{
-    margin-left: -250px;
-   } */
-}
-
-@media (max-width: 800px) {
+@media (max-width: 870px) {
 
       .book-info{
         flex-basis: 75%;
+    }
+
+    .book-photo{
+        width: 100%;
+    }
+
+    .book-detail{
+        width: 100%;
     }
 }
 

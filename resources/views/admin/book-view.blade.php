@@ -14,7 +14,7 @@
                 <h3>{{ $viewBook->author_name }}</h3>
             </div>
             <div class="row g-0">
-                <div class="col-5 ps-5 mx-auto">
+                <div class="col-md-5 col-12 ps-lg-5 mx-auto">
                     @if ($viewBook->photo == null)
                         <img src="{{ asset('storage/default.jpg') }}" class="img-thumbnail"
                             style="width: 340px;height:410px">
@@ -23,7 +23,7 @@
                             style="width: 400px;height:420px">
                     @endif
                 </div>
-                <div class="col-7 mx-auto">
+                <div class="col-md-7 col-12 mx-auto">
                     <div class="text-dark p-2 ms-2 fs-5 list-group">
                         <p class="list-group-item"><i class="me-1 fas fa-calendar-day"></i> Date :
                             {{ $viewBook->created_at->format('j-F-Y') }}
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-2 p-2 ms-5">
+            <div class="mt-2 p-2 ms-md-5">
                 <p><i class="fas fa-file-alt fs-5"></i>
                     <span class="ms-3" style="font-size: 17px;">{{ $viewBook->summary }} Lorem ipsum dolor, sit amet
                         consectetur

@@ -17,7 +17,7 @@
     <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
     <div class="px-5 py-3 row g-0 data ch-bg" style="min-height: 80vh;">
         @if (count($carts) > 0)
-            <div class="col-8">
+            <div class="col-lg-8 col-12">
                 <table class="w-100">
                     <tr class="text-center bg-dark text-white">
                         <th class="col-2">Book</th>
@@ -58,7 +58,7 @@
                     @endforeach
                 </table>
             </div>
-            <div class="col-4 px-3">
+            <div class="col-lg-4 col-12 my-lg-0 my-3 px-3">
                 <h4 class="text-dark"><span>Cart Summary</span> <i class="fas fa-cart-arrow-down ms-3"></i></h4>
                 <div class="mt-2 text-dark">
                     <p class="fs-4 d-flex justify-content-between">

@@ -30,28 +30,33 @@
     {{-- all books start --}}
     <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
     <div class="row g-0 con min-vh-100">
-        <div class="col-lg-3 col-md-4 col-sm-5 col-7  col-left left-col">
+        <div class="col-3 col-left left-col">
             <div class="text-light mt-4" style="font-size:18px;">
                 @if (Auth::user() != null)
                     <a href="{{ route('order#history', Auth::user()->id) }}"
-                        class="d-flex justify-content-between align-items-center text-decoration-none text-white ano-list d-block p-2 m-0 mt-2 text-center text-md-start">
-                        <span class="d-none d-md-inline ms-3"><i class="fas fa-history me-2"></i>Order History
-                        </span>
-                        <small class="text-white bg-danger rounded-circle p-1 me-4 badge">{{ count($history) }}</small>
+                        class="d-flex justify-content-md-between justify-content-center align-items-center text-decoration-none text-white ano-list d-block p-2 m-0 mt-2 text-center text-md-start">
+                        <div>
+                            <i class="fas fa-history  ms-3"></i>
+                            <span class="d-none d-md-inline ms-1">Order History
+                            </span>
+                        </div>
+                        <small class="text-white bg-danger rounded-circle p-1 me-4 badge ms-3">{{ count($history) }}</small>
                     </a>
                 @endif
                 @if (Auth::user() != null)
                     @if (Auth::user()->role == 'admin')
                         <a href="{{ route('admin', Auth::user()->role) }}"
                             class="text-decoration-none text-white ano-list d-block p-2 m-0 mt-2 text-center text-md-start">
-                            <span class="d-none d-md-inline ms-3"><i class="fas fa-user-secret me-2"></i>Go Admin
+                            <i class="fas fa-user-secret ms-0 ms-md-3"></i>
+                            <span class="d-none d-md-inline ms-1">Go Admin
                             </span>
                         </a>
                     @endif
                 @endif
                 <a href=""
                     class="text-decoration-none text-white ano-list d-block p-2 m-0 mt-2 text-center text-md-start all-book">
-                    <span class="d-none d-md-inline ms-3"><i class="fas fa-book-open me-2"></i>All Books
+                    <i class="fas fa-book-open ms-0 ms-md-3"></i>
+                    <span class="d-none d-md-inline ms-1">All Books
                     </span>
                 </a>
             </div>
@@ -62,15 +67,19 @@
                 <div class="lists">
                     <span
                         class="d-flex justify-content-between align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
-                        <span class="d-none d-md-inline ms-3"><i class="fas fa-pen-alt me-1"></i> Authors
-                            <small class="text-white bg-dark rounded-circle p-1 badge">{{ count($authors) }}</small></span>
+                        <div>
+                            <i class="fas fa-pen-alt ms-3"></i>
+                            <span class="d-none d-md-inline ms-1">Authors
+                            </span>
+                            <small class="text-white bg-dark rounded-circle p-1 badge">{{ count($authors) }}</small>
+                        </div>
                         <i class="fas fa-angle-down me-4 down-arrow" style="cursor: pointer"></i>
                     </span>
                     <p class="li-group authors">
                         @foreach ($authors as $author)
                             <a href="{{ route('author#filter', $author->id) }}"
-                                class="text-decoration-none text-white ano-list d-block p-2 m-0 text-start">
-                                <span class="d-none d-md-inline ms-3  text-white">{{ $author->name }}</span>
+                                class="text-decoration-none text-white ano-list d-block p-2 m-0 text-md-start text-center">
+                                <span class="d-inline ms-3  text-white">{{ $author->name }}</span>
                             </a>
                         @endforeach
                     </p>
@@ -83,24 +92,28 @@
                 <div class="lists">
                     <span
                         class="d-flex justify-content-between align-items-center text-decoration-none text-white header-list d-block p-2 m-0 mt-2 text-center text-md-start">
-                        <span class="d-none d-md-inline ms-3"><i class="fas fa-list-alt me-1"></i> Categories
-                            <small
-                                class="text-white bg-dark rounded-circle p-1 badge">{{ count($categories) }}</small></span>
+                        <div>
+                            <i class="fas fa-list-alt ms-3"></i>
+                            <span class="d-none d-md-inline ms-1"> Categories
+                            </span>
+                            <small class="text-white bg-dark rounded-circle p-1 badge">{{ count($categories) }}</small>
+                        </div>
                         <i class="fas fa-angle-down me-4 down-arrow" style="cursor: pointer"></i>
                     </span>
                     <p class="li-group categories">
                         @foreach ($categories as $category)
                             <a href="{{ route('category#filter', $category->id) }}"
                                 class="text-decoration-none text-white ano-list d-block p-2 m-0 text-start">
-                                <span class="d-none d-md-inline ms-3  text-white">{{ $category->name }}</span>
+                                <span class="d-inline ms-3  text-white">{{ $category->name }}</span>
                             </a>
                         @endforeach
                     </p>
                 </div>
             </div>
         </div>
-        <div class="col-lg-9 col-12 con ch-bg book-data" id="data">
-            @include('user.bookData');
+
+        <div class="col-9 con ch-bg book-data flex-column" id="data">
+            @include('user.bookData')
         </div>
     </div>
 @endsection

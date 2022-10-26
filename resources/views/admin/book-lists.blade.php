@@ -40,52 +40,50 @@
             @endif
             {{ $books->links() }}
             @if (count($books) > 0)
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" style="width: 4%">ID</th>
-                            <th scope="col" style="width: 13%">Photo</th>
-                            <th scope="col" style="width: 13%">Title</th>
-                            <th scope="col"style="width: 18%">Author</th>
-                            <th scope="col" style="width: 26%">Summary</th>
-                            <th scope="col" style="width: 8%">Price</th>
-                            <th scope="col" style="width: 8%">Category</th>
-                            <th scope="col" style="width: 3%">PDF File</th>
-                            <th scope="col" style="width: 2%"></th>
-                            <th scope="col" style="width: 2%"></th>
-                            <th scope="col" style="width: 3%"></th>
+                <div class="table-responsive-lg">
+                    <table class="table">
+
+                        <tr class="text-center bg-dark text-white">
+                            <th class="col-1">ID</th>
+                            <th class="col-3">Book</th>
+                            <th class="col-2">Summary</th>
+                            <th class="col-2">Price</th>
+                            <th class="col-1">Category</th>
+                            <th class="col-1">PDF File</th>
+                            <th class="col-2">Action</th>
                         </tr>
-                    </thead>
-                    @foreach ($books as $book)
-                        <tbody>
-                            <tr>
-                                <th scope="row">{{ $book->id }}</th>
-                                @if ($book->photo == null)
-                                    <td><img src="{{ asset('storage/default.jpg') }}" class="img-thumbnail" width="140px"
-                                            height="230px"></td>
-                                @else
-                                    <td><img src="{{ asset('storage/cover/' . $book->photo) }}" class="img-thumbnail"
-                                            width="140px" height="230px"></td>
-                                @endif
-                                <td>{{ $book->title }}</td>
-                                <td>{{ $book->author_name }}</td>
+
+                        @foreach ($books as $book)
+                            <tr class="text-center">
+                                <td>{{ $book->id }}</td>
+                                <td
+                                    class="d-flex flex-wrap flex-lg-row flex-column justify-conent-lg-around justify-content-center align-items-center">
+                                    @if ($book->photo == null)
+                                        <img src="{{ asset('storage/default.jpg') }}" class="img-thumbnail" width="140px"
+                                            height="230px">
+                                    @else
+                                        <img src="{{ asset('storage/cover/' . $book->photo) }}" class="img-thumbnail"
+                                            width="140px" height="230px">
+                                    @endif
+                                    <div class="ms-1">
+                                        <p>{{ $book->title }}</p>
+                                        <p>{{ $book->author_name }}</p>
+                                    </div>
+                                </td>
                                 <td> {{ Str::words($book->summary, 8, '...') }}</td>
                                 <td><span class="text-black">{{ $book->price }}</span> kyats</td>
                                 <td>{{ $book->category_name }}</td>
                                 <td>{{ $book->pdf }}</td>
-                                <td>
-                                    <a href="{{ route('book#view', $book->id) }}" class="btn btn-success">View</a>
-                                </td>
-                                <td>
-                                    <a href="{{ route('book#edit', $book->id) }}" class="btn btn-warning">Edit</a>
-                                </td>
-                                <td>
-                                    <a href="{{ route('book#delete', $book->id) }}" class="btn btn-danger">Delete</a>
+                                <td class="flex-lg-row flex-column justify-content-center">
+                                    <a href="{{ route('book#view', $book->id) }}" class="btn btn-success mb-1">View</a>
+                                    <a href="{{ route('book#edit', $book->id) }}"
+                                        class="btn btn-warning mb-1 mx-1">Edit</a>
+                                    <a href="{{ route('book#delete', $book->id) }}" class="btn btn-danger mb-1">Delete</a>
                                 </td>
                             </tr>
-                        </tbody>
-                    @endforeach
-                </table>
+                        @endforeach
+                    </table>
+                </div>
             @else
                 <div class="mt-5">
                     <p class="fs-4 text-muted text-center">There is no Book...</p>

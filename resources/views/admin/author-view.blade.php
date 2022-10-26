@@ -9,7 +9,7 @@
                         class="fas fa-arrow-circle-left fs-5">&nbsp;<small>Back</small></i></a>
             </div>
             <div class="row g-0 mt-2">
-                <div class="col-5 ps-5 mx-auto">
+                <div class="col-md-5 col-12 ps-lg-5 mx-auto">
                     @if ($author->photo == null)
                         @if ($author->gender == 'Male')
                             <img src="{{ asset('storage/author/default_male_author.jpg') }}" class="img-thumbnail"
@@ -23,7 +23,7 @@
                             style="width: 360px;height:360px">
                     @endif
                 </div>
-                <div class="col-7 mx-auto">
+                <div class="col-md-7 col-12 mx-auto">
                     <div class="text-dark p-2 ms-2 fs-5 list-group">
                         <p class="list-group-item"><i class="me-1 fas fa-user-circle"></i> Name : {{ $author->name }}</p>
                         <p class="list-group-item"><i class="me-1 fas fa-sort-amount-up"></i> Age :

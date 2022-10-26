@@ -12,7 +12,7 @@
 @section('content')
     <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
     <div class="ch-bg">
-        <div class="col-7 mx-auto p-2">
+        <div class="col-lg-7 col-12  mx-auto p-2">
             <div class=" bg-light shadow-sm rounded border border-3  px-4 pb-4 pt-2">
                 <div class="text-center py-1 text-dark">
                     <h4>Edit Account Info</h4>

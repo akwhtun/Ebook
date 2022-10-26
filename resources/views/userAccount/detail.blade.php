@@ -32,7 +32,7 @@
                     Account Info
                 </div>
                 <div class="row g-0">
-                    <div class="col-5 ps-5 mx-auto">
+                    <div class="col-lg-5 col-12 text-lg-start text-center ps-lg-5 mx-auto">
                         @if (Auth::user()->image == null)
                             @if (Auth::user()->gender == 'Female')
                                 <img src="{{ asset('storage/default_female.jpg') }}" class="img-thumbnail"
@@ -46,7 +46,7 @@
                                 style="width: 330px;height:350px">
                         @endif
                     </div>
-                    <div class="col-7 mx-auto">
+                    <div class="col-lg-7 col-12 text-lg-start text-center mx-auto">
                         <div class="text-dark p-2 ms-2 fs-5 list-group">
                             <p class="list-group-item mt-2"><i class="me-1 fas fa-user-circle"></i> Name :
                                 {{ Auth::user()->name }}

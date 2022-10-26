@@ -22,8 +22,8 @@
             <a href="{{ route('book#all') }}" class="text-dark" style="cursor: pointer"><i
                     class="fas fa-arrow-circle-left fs-5">&nbsp;<small>Back</small></i></a>
         </div>
-        <div class="d-flex px-5">
-            <div class="py-1 text-center" style="width: 35%">
+        <div class="d-flex flex-lg-row flex-column align-items-center px-5">
+            <div class="py-1 text-center book-photo">
                 @if ($bookDetail->photo == null)
                     <img src="{{ asset('storage/default.jpg') }}" class="rounded img-thumbnail" alt="book cover"
                         style="width:230px;height:320px">
@@ -32,7 +32,7 @@
                         alt="book cover" style="width:230px;height:320px">
                 @endif
             </div>
-            <div class=" p-2 text-dark" style="width: 65%">
+            <div class=" p-2 text-dark book-detail text-md-start text-center">
                 <p class="fs-4">{{ $bookDetail->title }}</p>
                 <p>{{ $bookDetail->view }} <i class="fas fa-eye ms-1"></i></p>
                 <p class="fs-4">{{ $bookDetail->price }} kyats</p>
@@ -41,15 +41,15 @@
                     <button class="btn btn-sm btn-success minus-btn"><i class="fas fa-minus"></i></button>
                     <span class="py-1 text-center qty-val" style="width:40px">1</span>
                     <button class="btn btn-sm btn-success plus-btn"><i class="fas fa-plus"></i></button>
-                    <div class="ms-1">
+                    <div class="ms-md-1 ms-0">
                         @if (Auth::user() != null)
                             <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
                         @endif
                         <input type="hidden" id="bookId" value="{{ $bookDetail->id }}">
-                        <span class="py-1 btn btn-success d-block ms-4 add-cart" style="cursor: pointer">
+                        <span class="py-1 btn btn-success d-block ms-md-4 ms-1 add-cart" style="cursor: pointer">
                             Add To Cart &nbsp;<i class="fas fa-shopping-cart"></i> </span>
                     </div>
-                    <a href="{{ route('download#book', $bookDetail->id) }}" class=" py-1 btn btn-primary ms-5 ">
+                    <a href="{{ route('download#book', $bookDetail->id) }}" class=" py-1 btn btn-primary ms-md-5 ms-2">
                         Download &nbsp;<i class="fas fa-file-download"></i>
                     </a>
                 </div>

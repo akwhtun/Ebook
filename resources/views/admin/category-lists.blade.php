@@ -52,42 +52,44 @@
             @endif
             {{ $categories->links() }}
             @if (count($categories) > 0)
-                <table class="table">
-                    <thead>
-                        <tr class="d-flex justify-content-around">
+                <div class="table-responsive-lg">
+                    <table class="table">
+
+                        <tr class="d-flex justify-content-around bg-dark text-white">
                             <th class="text-center" style="flex-basis: 10%">ID</th>
                             <th class="text-center" style="flex-basis: 40%">Category</th>
-                            <th class="text-center" style="flex-basis: 40%"></th>
+                            <th class="text-center" style="flex-basis: 40%">Action</th>
                         </tr>
-                    </thead>
-                    @foreach ($categories as $category)
-                        <tbody class="cat">
-                            <tr class="d-flex justify-content-around">
-                                <th class="text-center" style="flex-basis: 10%">{{ $category->id }}</th>
+
+                        @foreach ($categories as $category)
+                            <tr class="d-flex justify-content-around cat">
+                                <td class="text-center" style="flex-basis: 10%">{{ $category->id }}</td>
                                 <td class="text-center notEditCat" style="flex-basis: 40%">{{ $category->name }}</td>
-                                <td class="text-center editCat" style="flex-basis: 83%">
+                                <td class="text-center editCat " style="flex-basis: 83%">
                                     <form action="{{ route('category#update') }}" method="POST"
-                                        class="d-flex justify-content-around">
+                                        class="d-flex justify-content-lg-around justify-content-between">
                                         @csrf
                                         <input type="hidden" name="categoryId" value="{{ $category->id }}">
                                         <input type="text" name="categoryUpdateName" value="{{ $category->name }}"
                                             class="form-control w-50">
-                                        <div class="me-5">
-                                            <button type="submit" class="editBtn btn btn-success me-2">Update</button>
+                                        <div class="me-lg-5 me-0 d-flex flex-sm-row flex-column ps-5">
+                                            <button type="submit"
+                                                class="editBtn btn btn-success me-lg-2 mb-1">Update</button>
                                             <button type="button"
-                                                class="editBtn btn btn-info cancelBtn me-4">Cancel</button>
+                                                class="editBtn btn btn-info cancelBtn me-lg-4 mx-1 mb-1">Cancel</button>
                                         </div>
                                     </form>
                                 </td>
                                 <td class="text-center button" style="flex-basis: 40%">
-                                    <button type="button" class="btn btn-warning me-3 editButton notEditBtn">Edit</button>
+                                    <button type="button"
+                                        class="btn btn-warning me-3 editButton notEditBtn mb-1">Edit</button>
                                     <a href="{{ route('category#delete', $category->id) }}"
-                                        class="btn btn-danger notEditBtn">Delete</a>
+                                        class="btn btn-danger notEditBtn mb-1">Delete</a>
                                 </td>
                             </tr>
-                        </tbody>
-                    @endforeach
-                </table>
+                        @endforeach
+                    </table>
+                </div>
             @else
                 <div class="mt-5">
                     <p class="fs-4 text-muted text-center">There is no Category...</p>
@@ -96,7 +98,7 @@
             <div class="mt-5 w-75 mx-auto">
                 <form action="{{ route('category#create') }}" method="POST" class="input-group d-flex">
                     @csrf
-                    <div class="w-75">
+                    <div class="w-50">
                         <input type="text" name="categoryName"
                             class="form-control @error('categoryName') is-invalid @enderror"
                             placeholder="Enter New Category...">

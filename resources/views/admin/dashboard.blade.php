@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container p-3 ">
-        <div class="row flex-column flex-lg-row  px-5">
+        <div class="row flex-column flex-md-row flex-wrap px-5">
             <h2 class="h5 text-info py-3">QUICK STATS</h2>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="card mb-3 px-3 py-4 shadow-sm rounded border-0 text-white"
                     style="background: linear-gradient(#dd1568, #624fe1);">
                     <div class="card-body d-flex align-items-center justify-content-evenly">
@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="card mb-3 px-3 py-4 shadow-sm rounded border-0 text-white"
                     style="background: linear-gradient(lime, #008c52);">
                     <div class="card-body d-flex align-items-center justify-content-evenly">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="card mb-3 px-3 py-4 shadow-sm rounded border-0 text-white"
                     style="background: linear-gradient(#1bbbff,
                 #2d1780);">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="card mb-3 px-3 py-4 shadow-sm rounded border-0 text-white"
                     style="background: linear-gradient(#ff9292, #fa0a3e);">
                     <div class="card-body d-flex align-items-center justify-content-evenly">
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="card mb-3 px-3 py-4 shadow-sm rounded border-0 text-white"
                     style="background: linear-gradient(#f9ff44, #c4b403);">
                     <div class="card-body d-flex align-items-center justify-content-evenly">
@@ -75,7 +75,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="card mb-3 px-3 py-4 shadow-sm rounded border-0 text-white"
                     style="background: linear-gradient(#d364ff, #950195);">
                     <div class="card-body d-flex align-items-center justify-content-evenly">
@@ -89,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="card mb-3 px-3 py-4 shadow-sm rounded border-0 text-white"
                     style="background: linear-gradient(#05edf1, #059af7);">
                     <div class="card-body d-flex align-items-center justify-content-evenly">

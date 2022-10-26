@@ -11,8 +11,9 @@
                         class="fas fa-arrow-circle-left fs-5"></i></span>
             </div>
 
-            <div class="px-5">
-                <div class="d-flex align-items-center">
+            <div class="px-lg-5">
+                <div
+                    class="d-flex align-items-center justify-content-lg-start justify-content-center flex-lg-row flex-column">
                     @if ($comment->book->photo == null)
                         <img src="{{ asset('storage/default.jpg') }}" class="rounded" alt="default"
                             style="width:160px;height:200px">
@@ -20,7 +21,7 @@
                         <img src="{{ asset('storage/cover/' . $comment->book->photo) }}" class=" rounded" alt="book cover"
                             style="width:160px;height:200px">
                     @endif
-                    <div>
+                    <div class="mt-lg-0 mt-4 text-lg-start text-center">
                         <p class="fs-5 ms-3"><i class="fas fa-book-open"></i> Book Titlt : {{ $comment->book->title }}
                         </p>
                         <p class="fs-5 ms-3"><i class="fas fa-user-circle"></i> User Name : {{ $comment->user->name }}
@@ -29,8 +30,8 @@
                         </p>
                     </div>
                 </div>
-                <div class="py-4 d-flex">
-                    <p class="fs-5 text-dark col-2 ms-2"><i class="fas fa-comment"></i> Comment : </p>
+                <div class="py-4 d-flex flex-lg-row flex-column align-items-lg-start align-items-center text-center">
+                    <p class="fs-5 text-dark col-lg-2 col-12 ms-2"><i class="fas fa-comment"></i> Comment : </p>
                     <p class="ms-2 fs-5 text-muted col-10">{{ $comment->content }}</p>
                 </div>
                 <div class="text-end mt-2">

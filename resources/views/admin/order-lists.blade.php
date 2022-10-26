@@ -10,20 +10,20 @@
             </div>
             {{ $orderLists->links() }}
             @if (count($orderLists) > 0)
-                <table class="table">
-                    <thead>
-                        <tr class="text-center">
-                            <th scope="col" class="col-2">Customer</th>
-                            <th scope="col" class="col-2">Total Fee</th>
-                            <th scope="col" class="col-2">Address</th>
-                            <th scope="col" class="col-1">Order Code</th>
-                            <th scope="col" class="col-2">Order Date</th>
-                            <th scope="col" class="col-1">Status</th>
-                            <th scope="col" class="col-2">Action</th>
+                <div class="table-responsive-lg">
+                    <table class="table">
+
+                        <tr class="text-center bg-dark text-white">
+                            <th class="col-2">Customer</th>
+                            <th class="col-2">Total Fee</th>
+                            <th class="col-2">Address</th>
+                            <th class="col-1">Order Code</th>
+                            <th class="col-2">Order Date</th>
+                            <th class="col-1">Status</th>
+                            <th class="col-2">Action</th>
                         </tr>
-                    </thead>
-                    @foreach ($orderLists as $order)
-                        <tbody class="data">
+
+                        @foreach ($orderLists as $order)
                             <tr class="text-center">
                                 <td>{{ $order->user->name }}</td>
                                 <td>{{ $order->total_price }} Ks</td>
@@ -61,9 +61,9 @@
                                 </td>
 
                             </tr>
-                        </tbody>
-                    @endforeach
-                </table>
+                        @endforeach
+                    </table>
+                </div>
             @else
                 <div class="mt-5">
                     <p class="fs-4 text-muted text-center">There is no order...</p>

@@ -15,8 +15,8 @@
 
 @section('content')
     <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
-    <div class="bg-image d-flex justify-content-end bg-light">
-        <div class="col-5 me-4 p-4">
+    <div class="bg-image d-flex justify-content-md-end justify-content-center bg-light">
+        <div class="col-lg-5 col-lg-7 col-md-9 col-12 me-4 p-4">
             <p class="text-dark fs-5">Contact Us</p>
             <form action="{{ route('contact#send') }}" method="POST">
                 @csrf
@@ -54,16 +54,16 @@
                     OR</p>
             </div>
 
-            <div class="d-flex justify-content-between align-items-center flex-wrap text-white mt-5">
-                <p class="fs-5">
+            <div class="d-flex justify-content-between align-items-center flex-wrap text-white mt-5 mb-2">
+                <p class="fs-5 mb-2">
                     <i class="fas fa-phone"></i>
                     <span class="ms-1">09-891082064</span>
                 </p>
-                <p class="fs-5">
+                <p class="fs-5 mb-2">
                     <i class="fas fa-envelope"></i>
                     <span class="ms-1">akwhtun@gmail.com</span>
                 </p>
-                <p class="fs-5">
+                <p class="fs-5 mb-2">
                     <i class="fas fa-map-marker-alt"></i>
                     <span class="ms-1">Myanmar, Mandalay, Myingyan</span>
                 </p>

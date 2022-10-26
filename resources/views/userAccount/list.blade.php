@@ -28,23 +28,20 @@
             </div>
             {{ $users->links() }}
             @if (count($users) > 0)
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" style="width: 5%">ID</th>
-                            <th scope="col" style="width: 20%">Profile</th>
-                            <th scope="col"style="width: 19%">Name</th>
-                            <th scope="col" style="width: 16%">Email</th>
-                            <th scope="col" style="width: 7%">Gender</th>
-                            <th scope="col" style="width: 7%">Role</th>
-                            <th scope="col" style="width: 36%"></th>
+                <div class="table-responsive-lg">
+                    <table class="table">
+                        <tr class="text-center bg-dark text-white">
+                            <th class="col-1">ID</th>
+                            <th class="col-4">Profile</th>
+                            <th class="col-2">Gender</th>
+                            <th class="col-2">Role</th>
+                            <th class="col-3">Action</th>
                         </tr>
-                    </thead>
-                    @foreach ($users as $user)
-                        <tbody>
-                            <tr class=>
-                                <th scope="row">{{ $user->id }}</th>
-                                <td>
+
+                        @foreach ($users as $user)
+                            <tr class="text-center">
+                                <td>{{ $user->id }}</td>
+                                <td class="d-flex justify-conent-lg-around flex-lg-row flex-column align-items-center">
                                     @if ($user->image == null)
                                         @if ($user->gender == 'Male')
                                             <img src="{{ asset('storage/default_male.jpg') }}" class="img-thumbnail"
@@ -57,18 +54,20 @@
                                         <img src="{{ asset('storage/userProfile/' . $user->image) }}" class="img-thumbnail"
                                             style="width: 130px;height:130px">
                                     @endif
+                                    <div class="ms-1">
+                                        <p>{{ $user->name }}</p>
+                                        <p>{{ $user->email }}</p>
+                                    </div>
                                 </td>
-                                <td class="ms-1">{{ $user->name }}</td>
-                                <td class="ms-1">{{ $user->email }}</td>
-                                <td class="ms-1">{{ $user->gender }}</td>
-                                <td class="ms-1">
+                                <td>{{ $user->gender }}</td>
+                                <td>
                                     <p class="badge bg-primary" style="text-transform: capitalize;font-size: 14px">
                                         {{ $user->role }}</p>
                                 </td>
                                 @if (Auth::user()->id != $user->id)
-                                    <td class="ms-1">
-                                        <div class="d-flex">
-                                            <div class="dropdown open">
+                                    <td>
+                                        <div class="d-flex flex-lg-row flex-column">
+                                            <div class="dropdown open mb-1">
                                                 <button class="btn btn-outline-primary dropdown-toggle" type="button"
                                                     id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
@@ -82,7 +81,7 @@
                                                         Admin </a>
                                                 </div>
                                             </div>
-                                            <div>
+                                            <div class="mb-1 mx-1">
                                                 @if ($user->suspend == '0')
                                                     <a href="{{ route('account#suspend', $user->id) }}"
                                                         class="btn btn-outline-success">Active</a>
@@ -92,25 +91,14 @@
                                                 @endif
                                             </div>
                                             <a href="{{ route('account#delete', $user->id) }}"
-                                                class="btn btn-outline-danger">Delete</a>
+                                                class="btn btn-outline-danger mb-1">Delete</a>
                                         </div>
                                     </td>
-                                    {{-- <td class="ms-1">
-                                    <select name="" class="form-select">
-                                        <option value="0" @if ($user->suspend == 1) selected @endif>Suspended
-                                        </option>
-                                        <option value="1" @if ($user->suspend == 0) selected @endif>Unsuspended
-                                        </option>
-                                    </select>
-                                </td>
-                                <td class="ms-1">
-                                    <a href="" class="btn btn-danger">Delete</a>
-                                </td> --}}
                                 @endif
                             </tr>
-                        </tbody>
-                    @endforeach
-                </table>
+                        @endforeach
+                    </table>
+                </div>
             @else
                 <div class="mt-5">
                     <p class="fs-4 text-muted text-center">There is no User...</p>

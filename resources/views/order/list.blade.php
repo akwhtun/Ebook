@@ -34,7 +34,7 @@
                     @foreach ($lists as $list)
                         <tr class="text-center text-dark">
                             <td>
-                                <div class="d-flex justify-content-around">
+                                <div class="d-flex justify-content-around align-items-start flex-lg-row flex-column">
                                     @if ($list->book->photo == null)
                                         <img src="{{ asset('storage/default.jpg') }}" class="rounded" alt="default"
                                             style="width:60px;height:80px">

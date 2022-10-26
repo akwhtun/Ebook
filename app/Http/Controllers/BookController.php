@@ -20,7 +20,7 @@ class BookController extends Controller
     public function getAllBooks()
     {
         $books = Book::when(request('searchKey'), function ($query) {
-            $query->where('books.title', 'like', '%' . request('searchKey') . '%');
+            $query->where('title', 'like', '%' . request('searchKey') . '%');
         })->latest()->paginate(9);;
         $categories = Category::all();
         $authors = Author::all();
