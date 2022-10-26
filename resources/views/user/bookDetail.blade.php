@@ -17,12 +17,12 @@
 
 @section('content')
     <input type="hidden" class="mode" value="@if ($mode->mode == 1) dark-mode @else light-mode @endif">
-    <div class="py-3 min-vh-100 ch-bg">
+    <div class="py-3 min-vh-100 ch-bg flex-column">
         <div class="px-5">
             <a href="{{ route('book#all') }}" class="text-dark" style="cursor: pointer"><i
                     class="fas fa-arrow-circle-left fs-5">&nbsp;<small>Back</small></i></a>
         </div>
-        <div class="d-flex align-items-center px-5">
+        <div class="d-flex flex-lg-row flex-column align-items-center px-5">
             <div class="py-1 text-center book-photo">
                 @if ($bookDetail->photo == null)
                     <img src="{{ asset('storage/default.jpg') }}" class="rounded img-thumbnail" alt="book cover"
@@ -32,7 +32,7 @@
                         alt="book cover" style="width:230px;height:320px">
                 @endif
             </div>
-            <div class=" p-2 text-dark book-detail">
+            <div class=" p-2 text-dark book-detail text-md-start text-center">
                 <p class="fs-4">{{ $bookDetail->title }}</p>
                 <p><i class="fas fa-eye me-1"></i> {{ $bookDetail->view }}</p>
                 <p class="fs-4">{{ $bookDetail->price }} kyats</p>
@@ -55,12 +55,13 @@
                 </div>
                 <div class="mt-4 d-flex justify-content-between">
                     <p><i class="fas fa-user fs-5 me-1"></i> {{ $bookDetail->author->name }}</p>
-                    <a href="" class="text-info text-decoration-none me-3">Other Books <i
+                    <a href="{{ route('author#filter', $bookDetail->author->id) }}"
+                        class="text-info text-decoration-none me-3">Other Books <i
                             class="fas fa-angle-double-right"></i></a>
                 </div>
             </div>
         </div>
-        <div class="m-3 px-3 card bg-light text-dark">
+        <div class="m-3 px-3 card bg-light text-dark bg-success">
             @if (count($bookDetail->comments) > 0)
                 <div
                     class="d-flex justify-content-between align-items-center py-1 ms-2 border border-0 border-bottom border-bottom-3 border-white">
@@ -142,8 +143,9 @@
                         <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                     @endif
                     <input type="hidden" name="bookId" value="{{ $bookDetail->id }}">
-                    <textarea name="content" cols="10" rows="3" class="form-control @error('content') is-invalid @enderror"
-                        value="{{ old('content') }}" placeholder="Leave a comment..."></textarea>
+                    <textarea name="content" cols="10" rows="3"
+                        class="bg-light text-dark form-control @error('content') is-invalid @enderror" value="{{ old('content') }}"
+                        placeholder="Leave a comment..."></textarea>
                     @error('content')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -151,6 +153,57 @@
                     @enderror
                     <button type="submit" class="btn btn-sm btn-primary mt-3">Add Comment</button>
                 </form>
+            </div>
+        </div>
+
+        <div>
+            <p class="text-success fs-4 ps-3 m-0 p-0">Another Books</p>
+            <div class="d-flex justify-content-center align-items-center gap-3 mb-3 px-3 owl-carousel owl-theme">
+                @foreach ($randomBooks as $book)
+                    <div class="item text-center rounded shadow border-0 p-4 mt-4 d-flex flex-wrap book-info bg-light text-dark"
+                        style="width: 400px">
+                        <div class="book" style="flex-basis:53%">
+                            @if ($book->photo == null)
+                                <img src="{{ asset('storage/default.jpg') }}" class="rounded w-100" alt="default">
+                            @else
+                                <img src="{{ asset('storage/cover/' . $book->photo) }}" class=" rounded w-100"
+                                    alt="book cover">
+                            @endif
+                        </div>
+                        <div class="detail" style="flex-basis: 46%">
+                            <p class="m-0 p-0 text-dark">{{ $book->title }}</p>
+                            <p class="m-0 p-0 text-muted">{{ $book->author->name }}</p>
+                            {{-- <p class="mt-2" style="margin-left: 1px">{{ Str::words($book->summary, 6, '...') }}</p> --}}
+                            <p class="mt-2 p-0 text-success">{{ $book->price }} kyats</p>
+                            <p class="mt-2 p-0 text-dark"> <i class="fas fa-eye"></i> {{ $book->view }}</p>
+
+                        </div>
+                        <div class="book-btn mt-3">
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('book#detail', $book->id) }}"
+                                    class=" py-1 btn btn-outline-secondary view">
+                                    <span class="m-0 p-0">{{ count($book->comments) }} Comments</span> &nbsp;<i
+                                        class="fas fa-comment-alt"></i>
+                                </a>
+                                <a href="{{ route('book#detail', $book->id) }}"
+                                    class=" py-1 text-decoration-none text-primary view">See More
+                                    &nbsp;<i class=" fs-5 fas fa-angle-double-right"></i> </a>
+                            </div>
+                            <div class="mt-2 d-flex justify-content-between cart-Buttons">
+                                @if (Auth::user() != null)
+                                    <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
+                                @endif
+                                <input type="hidden" id="bookId" value="{{ $book->id }}">
+                                <a href="{{ route('download#book', $book->id) }}" class=" py-1 btn btn-primary ">
+                                    Download &nbsp;<i class="fas fa-file-download"></i>
+                                </a>
+                                <span class="py-1 btn btn-success d-block ms-4 add-cart" style="cursor: pointer">
+                                    Add To Cart &nbsp;<i class="fas fa-shopping-cart"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -180,6 +233,28 @@
         })
     </script>
     <script src="{{ asset('admin/js/light-dark.js') }}"></script>
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: false,
+            autoplay: true,
+            autoplayTimeout: 10000,
+            dots: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                800: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                },
+            }
+
+        })
+    </script>
 @endsection
 
 @section('ajax')

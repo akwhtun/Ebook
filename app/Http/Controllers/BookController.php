@@ -223,7 +223,7 @@ class BookController extends Controller
     {
         $book = Book::where('id', $id)->first();
         $mode = View::where('id', 1)->first();
-
+        $randomBooks = Book::all()->random(5);
         $viewcount = $book->view;
 
         $increase = $viewcount + 1;
@@ -234,9 +234,9 @@ class BookController extends Controller
         $bookDetail = Book::where('id', $id)->first();
         if (Auth::user() != null) {
             $carts = Cart::where('user_id', Auth::user()->id)->get();
-            return view('user.bookDetail', compact('bookDetail', 'carts', 'mode'));
+            return view('user.bookDetail', compact('bookDetail', 'carts', 'mode', 'randomBooks'));
         } else {
-            return view('user.bookDetail', compact('bookDetail', 'mode'));
+            return view('user.bookDetail', compact('bookDetail', 'mode', 'randomBooks'));
         }
     }
 }

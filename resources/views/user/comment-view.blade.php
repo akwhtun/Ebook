@@ -76,8 +76,9 @@
                         <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                     @endif
                     <input type="hidden" name="bookId" value="{{ $bookId }}">
-                    <textarea name="content" cols="10" rows="3" class="form-control @error('content') is-invalid @enderror"
-                        value="{{ old('content') }}" placeholder="Leave a comment..."></textarea>
+                    <textarea name="content" cols="10" rows="3"
+                        class="bg-light text-dark form-control @error('content') is-invalid @enderror" value="{{ old('content') }}"
+                        placeholder="Leave a comment..."></textarea>
                     @error('content')
                         <div class="invalid-feedback">
                             {{ $message }}

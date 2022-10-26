@@ -15,6 +15,11 @@
 
     {{-- Custom css --}}
     <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
+
+    {{-- Carousel --}}
+    <link rel="stylesheet" href="{{ asset('owl/owl.carousel.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('owl/owl.theme.default.min.css') }}">
 </head>
 
 <body>
@@ -338,6 +343,9 @@
 
     {{-- JQuery --}}
     <script src="{{ asset('jquery/jquery.js') }}"></script>
+
+    {{-- Carousel Js --}}
+    <script src="{{ asset('owl/owl.carousel.min.js') }}"></script>
 
     {{-- Custom Js --}}
     <script src="{{ asset('admin/js/custom.js') }}"></script>

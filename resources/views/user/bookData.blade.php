@@ -15,13 +15,6 @@
                       {{-- <p class="mt-2" style="margin-left: 1px">{{ Str::words($book->summary, 6, '...') }}</p> --}}
                       <p class="mt-2 p-0 text-success">{{ $book->price }} kyats</p>
                       <p class="mt-2 p-0 text-dark"> <i class="fas fa-eye"></i> {{ $book->view }}</p>
-                      <div class="ratign mt-2 text-warning">
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                      </div>
                   </div>
                   <div class="book-btn mt-3">
                       <div class="d-flex justify-content-between">
