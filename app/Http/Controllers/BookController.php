@@ -221,9 +221,17 @@ class BookController extends Controller
     //view book
     public function viewBookDetail($id)
     {
-        $bookDetail = Book::where('id', $id)->first();
+        $book = Book::where('id', $id)->first();
         $mode = View::where('id', 1)->first();
 
+        $viewcount = $book->view;
+
+        $increase = $viewcount + 1;
+        Book::where('id', $id)->update([
+            'view' => $increase
+        ]);
+
+        $bookDetail = Book::where('id', $id)->first();
         if (Auth::user() != null) {
             $carts = Cart::where('user_id', Auth::user()->id)->get();
             return view('user.bookDetail', compact('bookDetail', 'carts', 'mode'));

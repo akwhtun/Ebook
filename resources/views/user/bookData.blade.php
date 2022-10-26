@@ -14,7 +14,7 @@
                       <p class="m-0 p-0 text-muted">{{ $book->author->name }}</p>
                       {{-- <p class="mt-2" style="margin-left: 1px">{{ Str::words($book->summary, 6, '...') }}</p> --}}
                       <p class="mt-2 p-0 text-success">{{ $book->price }} kyats</p>
-                      <p class="mt-2 p-0 text-dark"> <i class="fas fa-eye"></i> 0</p>
+                      <p class="mt-2 p-0 text-dark"> <i class="fas fa-eye"></i> {{ $book->view }}</p>
                       <div class="ratign mt-2 text-warning">
                           <i class="fas fa-star"></i>
                           <i class="fas fa-star"></i>
@@ -25,12 +25,12 @@
                   </div>
                   <div class="book-btn mt-3">
                       <div class="d-flex justify-content-between">
-                          <a href="{{ route('book#detail', $book->id) }}" class=" py-1 btn btn-outline-secondary">
+                          <a href="{{ route('book#detail', $book->id) }}" class=" py-1 btn btn-outline-secondary view">
                               <span class="m-0 p-0">{{ count($book->comments) }} Comments</span> &nbsp;<i
                                   class="fas fa-comment-alt"></i>
                           </a>
                           <a href="{{ route('book#detail', $book->id) }}"
-                              class=" py-1 text-decoration-none text-primary">See More
+                              class=" py-1 text-decoration-none text-primary view">See More
                               &nbsp;<i class=" fs-5 fas fa-angle-double-right"></i> </a>
                       </div>
                       <div class="mt-2 d-flex justify-content-between cart-Buttons">

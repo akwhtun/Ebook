@@ -22,7 +22,7 @@
             <a href="{{ route('book#all') }}" class="text-dark" style="cursor: pointer"><i
                     class="fas fa-arrow-circle-left fs-5">&nbsp;<small>Back</small></i></a>
         </div>
-        <div class="d-flex flex-lg-row flex-column align-items-center px-5">
+        <div class="d-flex align-items-center px-5">
             <div class="py-1 text-center book-photo">
                 @if ($bookDetail->photo == null)
                     <img src="{{ asset('storage/default.jpg') }}" class="rounded img-thumbnail" alt="book cover"
@@ -32,9 +32,9 @@
                         alt="book cover" style="width:230px;height:320px">
                 @endif
             </div>
-            <div class=" p-2 text-dark book-detail text-md-start text-center">
+            <div class=" p-2 text-dark book-detail">
                 <p class="fs-4">{{ $bookDetail->title }}</p>
-                <p>{{ $bookDetail->view }} <i class="fas fa-eye ms-1"></i></p>
+                <p><i class="fas fa-eye me-1"></i> {{ $bookDetail->view }}</p>
                 <p class="fs-4">{{ $bookDetail->price }} kyats</p>
                 <p class="">{{ $bookDetail->summary }}</p>
                 <div class="d-flex align-items-center quantity">

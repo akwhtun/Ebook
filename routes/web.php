@@ -223,6 +223,7 @@ Route::get('/authors/filter/{id}', [BookController::class, 'autFilter'])->name('
 Route::get('/mode/changeMode', [ViewController::class, 'changeMode'])->name('mode#changeMode');
 
 
+
 //Filter By Ajax
 Route::get('/pagination', [FilterController::class, 'fetchData']);
 
